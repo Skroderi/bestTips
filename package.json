@@ -36,14 +36,6 @@
   "devDependencies": {
     "@storybook/addon-actions": "^5.1.9",
     "@storybook/addon-links": "^5.1.9",
-    "@storybook/react": "^5.1.9",
-    "husky": "^3.0.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm test",
-      "pre-push": "npm test",
-      "...": "..."
-    }
+    "@storybook/react": "^5.1.9"
   }
 }
