@@ -17,8 +17,6 @@ const StyledHeader = styled.h1`
   text-align: left;
 `;
 
-const StyledInnerWrapper = styled.div``;
-
 const LeftSideBar = () => {
   return (
     <StyledLeftSideBar>
