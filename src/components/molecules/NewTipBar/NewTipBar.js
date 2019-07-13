@@ -5,6 +5,9 @@ import Input from "components/atoms/Input/Input";
 import Button from "components/atoms/Button/LoginButton";
 
 const StyledWrapper = styled.div`
+  position: fixed;
+  top: 130px;
+  right: 0;
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -13,7 +16,9 @@ const StyledWrapper = styled.div`
   height: 100vh;
   background-color: white;
   border-left: 10px solid black;
-  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+  box-shadow: -20px 0 25px rgba(0, 0, 0, 0.3);
+  transform: translate(${({ isActive }) => (isActive ? "0%" : "120%")});
+  transition: transform 0.25s ease-in-out;
 `;
 const Heading = styled.h3`
   font-size: 20px;
@@ -54,9 +59,9 @@ const StyledButton = styled(Button)`
   background-color: black;
   color: #ecc500;
 `;
-const NewTipBar = () => {
+const NewTipBar = ({ isActive }) => {
   return (
-    <StyledWrapper>
+    <StyledWrapper isActive={isActive}>
       <h1>ADD TIP</h1>
       <Heading>Category:</Heading>
       <Select required />

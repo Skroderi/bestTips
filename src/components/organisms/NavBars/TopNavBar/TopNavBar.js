@@ -12,54 +12,17 @@ const StyledTopNavBar = styled.div`
   left: 0%;
   height: 130px;
   width: 100%;
-  background: rgba(210, 255, 82, 1);
-  background: -moz-linear-gradient(
-    top,
-    rgba(210, 255, 82, 1) 0%,
-    rgba(77, 189, 68, 1) 73%,
-    rgba(77, 189, 68, 1) 74%
-  );
-  background: -webkit-gradient(
-    left top,
-    left bottom,
-    color-stop(0%, rgba(210, 255, 82, 1)),
-    color-stop(73%, rgba(77, 189, 68, 1)),
-    color-stop(74%, rgba(77, 189, 68, 1))
-  );
-  background: -webkit-linear-gradient(
-    top,
-    rgba(210, 255, 82, 1) 0%,
-    rgba(77, 189, 68, 1) 73%,
-    rgba(77, 189, 68, 1) 74%
-  );
-  background: -o-linear-gradient(
-    top,
-    rgba(210, 255, 82, 1) 0%,
-    rgba(77, 189, 68, 1) 73%,
-    rgba(77, 189, 68, 1) 74%
-  );
-  background: -ms-linear-gradient(
-    top,
-    rgba(210, 255, 82, 1) 0%,
-    rgba(77, 189, 68, 1) 73%,
-    rgba(77, 189, 68, 1) 74%
-  );
-  background: linear-gradient(
-    to bottom,
-    rgba(210, 255, 82, 1) 0%,
-    rgba(77, 189, 68, 1) 73%,
-    rgba(77, 189, 68, 1) 74%
-  );
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d2ff52', endColorstr='#4dbd44', GradientType=0 );
+  background: black;
 `;
 const StyledNavList = styled.ul`
   display: flex;
   /* margin-right: 30vw; */
   list-style-type: none;
 `;
-const TopNavBar = () => {
+
+const TopNavBar = ({ login }) => {
   return (
-    <StyledTopNavBar>
+    <StyledTopNavBar login={login}>
       <Logo />
       <StyledNavList>
         <li>
@@ -72,7 +35,7 @@ const TopNavBar = () => {
           <NavItem>Tenis Tips</NavItem>
         </li>
       </StyledNavList>
-      <NavItem>Login/Register</NavItem>
+      <NavItem onClick={login}>Login/Register</NavItem>
     </StyledTopNavBar>
   );
 };

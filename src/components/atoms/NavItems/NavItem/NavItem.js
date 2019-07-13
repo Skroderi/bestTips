@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const NavItem = styled.a`
-  color: black;
+  color: white;
   margin: 10 20px;
   font-size: 30px;
   padding: 10px 20px;
@@ -9,7 +9,7 @@ const NavItem = styled.a`
   transition: 0.3s;
   cursor: pointer;
   &:hover {
-    background: white;
+    border: 3px solid white;
   }
 `;
 
