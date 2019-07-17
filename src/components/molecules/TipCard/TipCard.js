@@ -4,29 +4,31 @@ import footballIcon from "assets/icons/football.svg";
 import { ThumbsUp } from "styled-icons/fa-solid/ThumbsUp";
 import { ThumbsDown } from "styled-icons/fa-solid/ThumbsDown";
 
-const StyledTr = styled.tr`
-  display: flex;
-  align-items: center;
-  width: 100%;
-  max-width: 800px;
-  border: 2px solid black;
-  justify-content: space-between;
-  padding: 5px 0px;
+const StyledWrapper = styled.tr`
+  margin: 20px 0;
 `;
 
-const StyledCategoryTip = styled.div`
-  width: 30px;
-  height: 30px;
+const StyledCategoryTip = styled.td`
+  width: 50px;
+  height: 50px;
   background-image: url(${footballIcon});
-  margin-left: 10px;
+  background-repeat: no-repeat;
+  background-size: 70% 70%;
+  margin: 0 auto;
+  background-position: 50% 50%;
 `;
 
-const StyledTeamsContainer = styled.div``;
+const StyledTeamsContainer = styled.td`
+  font-size: 22px;
+  font-weight: bold;
+`;
 
 const StyledDate = styled.div`
   display: block;
+  font-size: 18px;
+  font-weight: 500;
 `;
-const StyledVoteContainer = styled.div`
+const StyledVoteContainer = styled.td`
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -52,9 +54,12 @@ const StyledThumbContainer = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const StyledAuthor = styled.a`
-  display: block;
-  margin-right: 10px;
+
+const StyledOdd = styled.td`
+  font-weight: bold;
+`;
+const StyledAuthor = styled.td`
+  font-weight: bold;
 `;
 const Vote = styled.span`
   font-size: 18px;
@@ -75,28 +80,45 @@ const ResultVote = styled.div`
   color: green;
   margin-top: 5px;
 `;
-const TipCard = () => {
+const TipCard = props => {
+  const {
+    firstTeam,
+    secondTeam,
+    date,
+    author,
+    betOn,
+    category,
+    odd,
+    likes,
+    unLikes,
+    probability,
+    time
+  } = props.tip;
   return (
-    <StyledTr>
+    <StyledWrapper>
       <StyledCategoryTip />
       <StyledTeamsContainer>
-        Team1 vs Team2
+        {firstTeam} - {secondTeam}
         <StyledDate>
-          <i>21.05.2012 21:00</i>
+          <i>
+            {date} {time}
+          </i>
         </StyledDate>
       </StyledTeamsContainer>
-      <span>1.84</span>
+      <StyledOdd>{odd}</StyledOdd>
       <StyledVoteContainer>
         <StyledThumbContainer>
-          <Vote>10</Vote>
+          <Vote>{likes}</Vote>
           <GreenThumb />
           <RedThumb />
-          <Vote red>2</Vote>
+          <Vote red>{unLikes}</Vote>
         </StyledThumbContainer>
-        <ResultVote>80%</ResultVote>
+        <ResultVote>{probability}</ResultVote>
       </StyledVoteContainer>
-      <StyledAuthor href="/">Skroderi</StyledAuthor>
-    </StyledTr>
+      <StyledAuthor>
+        <a href="/">{author}</a>
+      </StyledAuthor>
+    </StyledWrapper>
   );
 };
 

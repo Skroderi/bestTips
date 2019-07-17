@@ -4,6 +4,7 @@ import LeftSideBar from "components/organisms/NavBars/LeftSideBar/LeftSideBar";
 import NewTipBar from "components/molecules/NewTipBar/NewTipBar";
 import ButtonIcon from "components/atoms/ButtonIcon/ButtonIcon";
 import plus from "assets/icons/plus.svg";
+import TableTemplate from "templates/TableTemplate";
 
 class MainTamplate extends Component {
   state = {
@@ -34,6 +35,7 @@ class MainTamplate extends Component {
         <TopNavBar login={this.login} />
         <NewTipBar isActive={isActive} />
         <LeftSideBar isLoginBarVisible={loginActive} />
+        <TableTemplate />
         <ButtonIcon
           icon={plus}
           onClick={this.handleNewTipBarToggle}
