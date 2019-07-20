@@ -105,6 +105,7 @@ const TipCard = props => {
           </i>
         </StyledDate>
       </StyledTeamsContainer>
+      <td>{betOn}</td>
       <StyledOdd>{odd}</StyledOdd>
       <StyledVoteContainer>
         <StyledThumbContainer>

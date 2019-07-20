@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Select from "components/atoms/Select/Select";
 import Input from "components/atoms/Input/Input";
 import Button from "components/atoms/Button/LoginButton";
+import { connect } from "react-redux";
+import { addTip } from "actions/actions";
 
 const StyledWrapper = styled.div`
   position: fixed;
@@ -59,7 +61,14 @@ const StyledButton = styled(Button)`
   background-color: black;
   color: #ecc500;
 `;
-const NewTipBar = ({ isActive }) => {
+const NewTipBar = (
+  { isActive, addTip },
+  category,
+  firstTeam,
+  secondTeam,
+  odd,
+  author
+) => {
   return (
     <StyledWrapper isActive={isActive}>
       <h1>ADD TIP</h1>
@@ -82,9 +91,27 @@ const NewTipBar = ({ isActive }) => {
         <Input hour />
       </DateWrapper>
 
-      <StyledButton>ADD TIP</StyledButton>
+      <StyledButton
+        onClick={() =>
+          addTip({
+            category: "football",
+            firstTeam: "barca",
+            secondTeam: "betis",
+            odd: "3.5",
+            author: "lolololek"
+          })
+        }
+      >
+        ADD TIP
+      </StyledButton>
     </StyledWrapper>
   );
 };
-
-export default NewTipBar;
+const mapDispatchToProps = dispatch => ({
+  addTip: (category, firstTeam, secondTeam, odd, author) =>
+    dispatch(addTip(category, firstTeam, secondTeam, odd, author))
+});
+export default connect(
+  null,
+  mapDispatchToProps
+)(NewTipBar);

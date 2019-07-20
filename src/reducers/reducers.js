@@ -56,8 +56,17 @@ const initialState = {
 };
 
 const rootReducer = (state = initialState, action) => {
-  console.log(action);
-  return state;
+  switch (action.type) {
+    case "ADD_TIP":
+      console.log("reducer");
+
+      return {
+        tips: [...state.tips, action.payload.tip]
+      };
+
+    default:
+      return state;
+  }
 };
 
 export default rootReducer;
