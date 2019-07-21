@@ -5,6 +5,8 @@ import Input from "components/atoms/Input/Input";
 import Button from "components/atoms/Button/LoginButton";
 import { connect } from "react-redux";
 import { addTip } from "actions/actions";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
 const StyledWrapper = styled.div`
   position: fixed;
@@ -61,50 +63,106 @@ const StyledButton = styled(Button)`
   background-color: black;
   color: #ecc500;
 `;
-const NewTipBar = (
-  { isActive, addTip },
-  category,
-  firstTeam,
-  secondTeam,
-  odd,
-  author
-) => {
-  return (
-    <StyledWrapper isActive={isActive}>
-      <h1>ADD TIP</h1>
-      <Heading>Category:</Heading>
-      <Select required />
-      <Heading>Opponents:</Heading>
-      <InnerTeamsWrapper>
-        <Input team /> <Paragraph> VS </Paragraph> <Input team />
-      </InnerTeamsWrapper>
-      <BetTypeWrapper>
-        <Heading>Bet on:</Heading>
-        <Input team />
-        <Heading>Odd:</Heading>
-        <Input odd type="number" min="1" />
-      </BetTypeWrapper>
-      <DateWrapper>
-        <Heading>Date:</Heading>
-        <Input type="date" date />
-        <Heading>Time:</Heading>
-        <Input hour />
-      </DateWrapper>
 
-      <StyledButton
-        onClick={() =>
-          addTip({
-            category: "football",
-            firstTeam: "barca",
-            secondTeam: "betis",
-            odd: "3.5",
-            author: "lolololek"
-          })
-        }
-      >
-        ADD TIP
-      </StyledButton>
-    </StyledWrapper>
+const StyledSelect = styled(Field)`
+  margin: 0 auto;
+  width: 200px;
+  height: 30px;
+  background-color: hsl(0, 0%, 96%);
+`;
+
+const SignupSchema = Yup.object().shape({
+  category: Yup.string().required("Category is required!"),
+  firstTeam: Yup.string().required("Required"),
+  secondTeam: Yup.string().required("Required"),
+  betOn: Yup.string().required("Required"),
+  odd: Yup.string().required("Required"),
+  date: Yup.string().required("Required"),
+  time: Yup.string().required("Required")
+});
+const StyledErrorMessage = styled(ErrorMessage)`
+  color: red;
+  font-weight: bold;
+`;
+
+const NewTipBar = ({ isActive, addTip }) => {
+  return (
+    <Formik
+      initialValues={{
+        category: "football",
+        firstTeam: "",
+        secondTeam: "",
+        betOn: "",
+        odd: "",
+        date: "",
+        time: ""
+      }}
+      validationSchema={SignupSchema}
+      onSubmit={values => {
+        // same shape as initial values
+        console.log(values);
+      }}
+    >
+      {({ errors, touched }) => (
+        <Form>
+          <StyledWrapper isActive={isActive}>
+            <h1>ADD TIP</h1>
+            <Heading>Category:</Heading>
+            <StyledSelect
+              component="select"
+              name="category"
+              placeholder="Favorite Color"
+            >
+              <option value="football" selected>
+                Football
+              </option>
+              <option value="tenis">Tenis</option>
+              <option value="hockey">Hockey</option>
+            </StyledSelect>
+            <Heading>Opponents:</Heading>
+            <InnerTeamsWrapper>
+              <Field name="firstTeam" />
+              <Paragraph> VS </Paragraph>
+              <Field name="secondTeam" />
+            </InnerTeamsWrapper>
+            <StyledErrorMessage name="firstTeam" component="div" />
+            <StyledErrorMessage name="secondTeam" component="div" />
+            <BetTypeWrapper>
+              <Heading>Bet on:</Heading>
+              <Field type="betOn" name="betOn" />
+              <StyledErrorMessage name="betOn" component="div" />
+              <Heading>Odd:</Heading>
+              <Field odd min="1" type="odd" name="odd" />
+              <StyledErrorMessage name="odd" component="div" />
+            </BetTypeWrapper>
+            <DateWrapper>
+              <Heading>Date:</Heading>
+              <Field date type="date" name="date" />
+              <StyledErrorMessage name="date" component="div" />
+              <Heading>Time:</Heading>
+              <Field hour type="time" name="time" />
+              <StyledErrorMessage name="time" component="div" />
+            </DateWrapper>
+
+            <StyledButton
+              type="submit"
+
+              // onClick={() =>
+              //   addTip({
+              //     category: "football",
+              //     firstTeam: "barca",
+              //     secondTeam: "betis",
+              //     odd: "3.5",
+              //     author: "lolololek"
+              //   })
+              // }
+            >
+              ADD TIP
+            </StyledButton>
+          </StyledWrapper>
+        </Form>
+      )}
+    </Formik>
   );
 };
 const mapDispatchToProps = dispatch => ({
