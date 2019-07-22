@@ -7,6 +7,8 @@ const Table = styled.table`
   border: 2px solid black;
   text-align: center;
   margin: 250px auto;
+  border-spacing: 0;
+  /* border-radius: 20px; */
 `;
 
 export default Table;

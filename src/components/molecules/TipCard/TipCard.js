@@ -1,6 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import footballIcon from "assets/icons/football.svg";
+// import footballIcon from "assets/icons/football.svg";
+import { theme } from "theme/mainTheme";
 import { ThumbsUp } from "styled-icons/fa-solid/ThumbsUp";
 import { ThumbsDown } from "styled-icons/fa-solid/ThumbsDown";
 
@@ -10,10 +11,9 @@ const StyledWrapper = styled.tr`
 
 const StyledCategoryTip = styled.td`
   width: 50px;
-  height: 50px;
-  background-image: url(${footballIcon});
+  background-image: url(${({ category }) => theme.icons[category]});
   background-repeat: no-repeat;
-  background-size: 70% 70%;
+  background-size: 50% 50%;
   margin: 0 auto;
   background-position: 50% 50%;
 `;
@@ -32,6 +32,7 @@ const StyledVoteContainer = styled.td`
   display: flex;
   align-items: center;
   flex-direction: column;
+  margin: 15px 0;
 `;
 
 const GreenThumb = styled(ThumbsUp)`
@@ -55,8 +56,9 @@ const StyledThumbContainer = styled.div`
   align-items: center;
 `;
 
-const StyledOdd = styled.td`
+const StyledParagraph = styled.td`
   font-weight: bold;
+  font-size: 18px;
 `;
 const StyledAuthor = styled.td`
   font-weight: bold;
@@ -96,7 +98,7 @@ const TipCard = props => {
   } = props.tip;
   return (
     <StyledWrapper>
-      <StyledCategoryTip />
+      <StyledCategoryTip category={category} />
       <StyledTeamsContainer>
         {firstTeam} - {secondTeam}
         <StyledDate>
@@ -105,8 +107,8 @@ const TipCard = props => {
           </i>
         </StyledDate>
       </StyledTeamsContainer>
-      <td>{betOn}</td>
-      <StyledOdd>{odd}</StyledOdd>
+      <StyledParagraph>{betOn}</StyledParagraph>
+      <StyledParagraph>{odd}</StyledParagraph>
       <StyledVoteContainer>
         <StyledThumbContainer>
           <Vote>{likes}</Vote>
@@ -116,9 +118,9 @@ const TipCard = props => {
         </StyledThumbContainer>
         <ResultVote>{probability}</ResultVote>
       </StyledVoteContainer>
-      <StyledAuthor>
+      <StyledParagraph>
         <a href="/">{author}</a>
-      </StyledAuthor>
+      </StyledParagraph>
     </StyledWrapper>
   );
 };

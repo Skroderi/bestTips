@@ -1,14 +1,26 @@
 import React from "react";
+import styled from "styled-components";
+
+const StyledTr = styled.tr`
+  background: black;
+  border: 30px solid black;
+`;
+
+const StyledTh = styled.th`
+  padding: 20px;
+  color: hsl(49, 100%, 58%);
+`;
+
 const Threads = () => {
   return (
-    <tr>
-      <th>CATEGORY</th>
-      <th>MATCH</th>
-      <th>BET ON</th>
-      <th>ODD</th>
-      <th>VOTES</th>
-      <th>AUTHOR</th>
-    </tr>
+    <StyledTr>
+      <StyledTh>CATEGORY</StyledTh>
+      <StyledTh>MATCH</StyledTh>
+      <StyledTh>BET ON</StyledTh>
+      <StyledTh>ODD</StyledTh>
+      <StyledTh>VOTES</StyledTh>
+      <StyledTh>AUTHOR</StyledTh>
+    </StyledTr>
   );
 };
 

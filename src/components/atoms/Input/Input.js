@@ -39,12 +39,22 @@ const Input = styled.input`
     ${props =>
       props.odd &&
       css`
-        width: 45px;
+        width: 100px;
         padding: 8px 8px;
         border-radius: 0px;
         background-image: none;
         text-indent: 0px;
       `}
+
+      ${props =>
+        props.betOn &&
+        css`
+          width: 100px;
+          padding: 8px 8px;
+          border-radius: 0px;
+          background-image: none;
+          text-indent: 0px;
+        `}
     ${props =>
       props.date &&
       css`
@@ -54,18 +64,16 @@ const Input = styled.input`
         background-image: url(${calendar});
         background-size: 20px;
         text-indent: 20px;
-        margin: 0 auto;
       `}
       ${props =>
-        props.hour &&
+        props.time &&
         css`
-          width: 80px;
-          padding: 8px 8px;
+          width: 110px;
+          padding: 8px 0px;
           border-radius: 0px;
           background-image: url(${clock});
           background-size: 20px;
           text-indent: 20px;
-          margin: 0 auto;
         `}
 `;
 
