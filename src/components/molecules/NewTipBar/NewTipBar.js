@@ -74,15 +74,6 @@ const StyledSelect = styled(Field)`
   background-color: hsl(0, 0%, 96%);
 `;
 
-const SignupSchema = Yup.object().shape({
-  category: Yup.string().required("Category is required!"),
-  firstTeam: Yup.string().required("Required"),
-  secondTeam: Yup.string().required("Required"),
-  betOn: Yup.string().required("Required"),
-  odd: Yup.number().required("Required"),
-  date: Yup.date().required("Required"),
-  time: Yup.string().required("Required")
-});
 const StyledErrorMessage = styled(ErrorMessage)`
   color: red;
   font-weight: bold;
@@ -161,28 +152,36 @@ const Input = styled(Field)`
         `}
 `;
 
-let initialValues = {
-  category: "football",
-  firstTeam: "",
-  secondTeam: "",
-  betOn: "",
-  odd: "",
-  date: "",
-  time: "",
-  likes: 0,
-  unLikes: 0,
-  author: "random",
-  probability: "no votes"
-};
-
+const SignupSchema = Yup.object().shape({
+  category: Yup.string().required("Category is required!"),
+  firstTeam: Yup.string().required("Required"),
+  secondTeam: Yup.string().required("Required"),
+  betOn: Yup.string().required("Required"),
+  odd: Yup.number().required("Required"),
+  date: Yup.date().required("Required"),
+  time: Yup.string().required("Required")
+});
 const NewTipBar = ({ isActive, addTip, handleNewTipBarToggle }) => {
   return (
     <Formik
-      initialValues={initialValues}
+      initialValues={{
+        category: "football",
+        firstTeam: "",
+        secondTeam: "",
+        betOn: "",
+        odd: "",
+        date: "",
+        time: "",
+        likes: 0,
+        unLikes: 0,
+        author: "random",
+        probability: "no votes"
+      }}
       validationSchema={SignupSchema}
-      onSubmit={values => {
+      onSubmit={(values, { resetForm }) => {
         addTip(values);
         handleNewTipBarToggle();
+        resetForm();
       }}
     >
       <Form>
