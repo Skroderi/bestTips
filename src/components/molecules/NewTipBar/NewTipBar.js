@@ -161,25 +161,28 @@ const Input = styled(Field)`
         `}
 `;
 
-const NewTipBar = ({ isActive, addTip }) => {
+let initialValues = {
+  category: "football",
+  firstTeam: "",
+  secondTeam: "",
+  betOn: "",
+  odd: "",
+  date: "",
+  time: "",
+  likes: 0,
+  unLikes: 0,
+  author: "random",
+  probability: "no votes"
+};
+
+const NewTipBar = ({ isActive, addTip, handleNewTipBarToggle }) => {
   return (
     <Formik
-      initialValues={{
-        category: "football",
-        firstTeam: "",
-        secondTeam: "",
-        betOn: "",
-        odd: "",
-        date: "",
-        time: "",
-        likes: 0,
-        unLikes: 0,
-        author: "random",
-        probability: "no votes"
-      }}
+      initialValues={initialValues}
       validationSchema={SignupSchema}
       onSubmit={values => {
         addTip(values);
+        handleNewTipBarToggle();
       }}
     >
       <Form>

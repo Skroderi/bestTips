@@ -33,7 +33,10 @@ class MainTamplate extends Component {
     return (
       <div>
         <TopNavBar login={this.login} />
-        <NewTipBar isActive={isActive} />
+        <NewTipBar
+          isActive={isActive}
+          handleNewTipBarToggle={this.handleNewTipBarToggle}
+        />
         <LeftSideBar isLoginBarVisible={loginActive} />
         <ButtonIcon
           icon={plus}
