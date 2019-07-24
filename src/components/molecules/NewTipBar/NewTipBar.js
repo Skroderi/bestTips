@@ -1,7 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import Select from "components/atoms/Select/Select";
-// import Input from "components/atoms/Input/Input";
 import Button from "components/atoms/Button/LoginButton";
 import { connect } from "react-redux";
 import { addTip } from "actions/actions";

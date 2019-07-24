@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Logo from "components/atoms/NavItems/Logo/Logo";
 import NavItem from "components/atoms/NavItems/NavItem/NavItem";
+import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 
 const StyledTopNavBar = styled.div`
   position: fixed;
@@ -26,13 +27,24 @@ const TopNavBar = ({ login }) => {
       <Logo />
       <StyledNavList>
         <li>
-          <NavItem>All Tips</NavItem>
+          <NavItem as={NavLink} exact to="/" activeClassName="active">
+            All Tips
+          </NavItem>
         </li>
         <li>
-          <NavItem>Footbal Tips</NavItem>
+          <NavItem as={NavLink} to="/football" activeClassName="active">
+            Footbal Tips
+          </NavItem>
         </li>
         <li>
-          <NavItem>Tenis Tips</NavItem>
+          <NavItem as={NavLink} to="/tennis" activeClassName="active">
+            Tenis Tips
+          </NavItem>
+        </li>
+        <li>
+          <NavItem as={NavLink} to="/hockey" activeClassName="active">
+            Hockey Tips
+          </NavItem>
         </li>
       </StyledNavList>
       <NavItem onClick={login}>Login/Register</NavItem>

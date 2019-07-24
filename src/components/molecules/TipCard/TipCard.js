@@ -1,7 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
-// import footballIcon from "assets/icons/football.svg";
-import { theme } from "theme/mainTheme";
+// import { theme } from "theme/mainTheme";
 import { ThumbsUp } from "styled-icons/fa-solid/ThumbsUp";
 import { ThumbsDown } from "styled-icons/fa-solid/ThumbsDown";
 
@@ -11,7 +10,7 @@ const StyledWrapper = styled.tr`
 
 const StyledCategoryTip = styled.td`
   width: 50px;
-  background-image: url(${({ category }) => theme.icons[category]});
+  background-image: url(${({ theme, category }) => theme.icons[category]});
   background-repeat: no-repeat;
   background-size: 50% 50%;
   margin: 0 auto;

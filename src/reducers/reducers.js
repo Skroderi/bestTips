@@ -14,6 +14,19 @@ const initialState = {
       author: "Bociu"
     },
     {
+      category: "tennis",
+      firstTeam: "Federer R.",
+      secondTeam: "Djokovic N.",
+      date: "05.10.2019",
+      time: "13:00",
+      betOn: "1",
+      odd: 2.2,
+      likes: 10,
+      unLikes: 2,
+      probability: "80%",
+      author: "Bociu"
+    },
+    {
       category: "football",
       firstTeam: "Atletico Madryt",
       secondTeam: "Barcelona",
@@ -34,6 +47,19 @@ const initialState = {
       time: "18:00",
       betOn: "1",
       odd: 2.05,
+      likes: 10,
+      unLikes: 2,
+      probability: "80%",
+      author: "Bociu"
+    },
+    {
+      category: "hockey",
+      firstTeam: "Nashville Predators",
+      secondTeam: "Dallas Stars",
+      date: "24.04.2019",
+      time: "02:00",
+      betOn: "2",
+      odd: 2.8,
       likes: 10,
       unLikes: 2,
       probability: "80%",

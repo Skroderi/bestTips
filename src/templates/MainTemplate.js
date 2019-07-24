@@ -35,7 +35,6 @@ class MainTamplate extends Component {
         <TopNavBar login={this.login} />
         <NewTipBar isActive={isActive} />
         <LeftSideBar isLoginBarVisible={loginActive} />
-        <AllTips />
         <ButtonIcon
           icon={plus}
           onClick={this.handleNewTipBarToggle}
