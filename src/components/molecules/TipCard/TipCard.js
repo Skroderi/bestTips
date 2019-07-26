@@ -61,9 +61,7 @@ const StyledParagraph = styled.td`
   font-weight: bold;
   font-size: 18px;
 `;
-const StyledAuthor = styled.td`
-  font-weight: bold;
-`;
+
 const Vote = styled.span`
   font-size: 18px;
   font-weight: bold;
@@ -104,7 +102,7 @@ const TipCard = props => {
         {firstTeam} - {secondTeam}
         <StyledDate>
           <i>
-            {date} {time}
+            {date} - {time}
           </i>
         </StyledDate>
       </StyledTeamsContainer>

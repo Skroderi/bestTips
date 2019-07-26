@@ -13,15 +13,12 @@ class MainTamplate extends Component {
   };
 
   handleNewTipBarToggle = () => {
-    console.log("asd");
-
     this.setState(prevState => ({
       isActive: !prevState.isActive
     }));
   };
-  login = () => {
-    console.log("login");
 
+  login = () => {
     this.setState(prevState => ({
       loginActive: !prevState.loginActive
     }));

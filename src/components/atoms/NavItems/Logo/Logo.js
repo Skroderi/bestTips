@@ -15,11 +15,7 @@ const StyledLogo = styled.a`
 `;
 
 const Logo = () => {
-  return (
-    <a href="/">
-      <StyledLogo />
-    </a>
-  );
+  return <StyledLogo href="/" />;
 };
 
 export default Logo;

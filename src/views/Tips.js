@@ -6,18 +6,18 @@ import ThreadsTable from "templates/ThreadsTable";
 import MainTamplate from "../templates/MainTemplate";
 
 const Tips = ({ tips, match }) => {
-  // tips.
-  console.log(match);
-
   return (
     <div>
       <MainTamplate />
       <Table>
-        <ThreadsTable />
-        {tips.map((tip, id) => {
-          if (tip.category === match.params.id)
-            return <TipCard tip={tip} key={id} />;
-        })}
+        <tbody>
+          <ThreadsTable />
+          {tips
+            .filter(tip => tip.category === match.params.id)
+            .map((tip, id) => {
+              return <TipCard tip={tip} key={id} />;
+            })}
+        </tbody>
       </Table>
     </div>
   );

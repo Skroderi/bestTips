@@ -10,10 +10,12 @@ const AllTips = ({ tips }) => {
     <div>
       <MainTamplate />
       <Table>
-        <ThreadsTable />
-        {tips.map((tip, id) => (
-          <TipCard tip={tip} key={id} />
-        ))}
+        <tbody>
+          <ThreadsTable />
+          {tips.map((tip, id) => (
+            <TipCard tip={tip} key={id} />
+          ))}
+        </tbody>
       </Table>
     </div>
   );

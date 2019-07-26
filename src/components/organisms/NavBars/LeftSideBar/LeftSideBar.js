@@ -15,15 +15,6 @@ const LeftSideBarIn = keyframes`
   }
 `;
 
-const LeftSideBarOut = keyframes`
-  0% {
-    transform:translate(0%)
-  }
-  100% {
-    transform:translate(-120%)
-  }
-`;
-
 const StyledLeftSideBar = styled.div`
   position: fixed;
   top: 130px;

@@ -47,7 +47,7 @@ const Input = styled.input`
       `}
 
       ${props =>
-        props.betOn &&
+        props.bet &&
         css`
           width: 100px;
           padding: 8px 8px;
@@ -56,7 +56,7 @@ const Input = styled.input`
           text-indent: 0px;
         `}
     ${props =>
-      props.date &&
+      props.datediv &&
       css`
         width: 160px;
         padding: 8px 8px;

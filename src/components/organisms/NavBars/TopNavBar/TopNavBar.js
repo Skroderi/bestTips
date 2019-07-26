@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Logo from "components/atoms/NavItems/Logo/Logo";
 import NavItem from "components/atoms/NavItems/NavItem/NavItem";
-import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const StyledTopNavBar = styled.div`
   position: fixed;
