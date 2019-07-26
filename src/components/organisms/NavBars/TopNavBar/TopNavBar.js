@@ -32,17 +32,17 @@ const TopNavBar = ({ login }) => {
           </NavItem>
         </li>
         <li>
-          <NavItem as={NavLink} to="/football" activeClassName="active">
-            Footbal Tips
+          <NavItem as={NavLink} to="/tips/football" activeClassName="active">
+            Football Tips
           </NavItem>
         </li>
         <li>
-          <NavItem as={NavLink} to="/tennis" activeClassName="active">
-            Tenis Tips
+          <NavItem as={NavLink} to="/tips/tennis" activeClassName="active">
+            Tennis Tips
           </NavItem>
         </li>
         <li>
-          <NavItem as={NavLink} to="/hockey" activeClassName="active">
+          <NavItem as={NavLink} to="/tips/hockey" activeClassName="active">
             Hockey Tips
           </NavItem>
         </li>

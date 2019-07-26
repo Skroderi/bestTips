@@ -4,7 +4,7 @@ import LeftSideBar from "components/organisms/NavBars/LeftSideBar/LeftSideBar";
 import NewTipBar from "components/molecules/NewTipBar/NewTipBar";
 import ButtonIcon from "components/atoms/ButtonIcon/ButtonIcon";
 import plus from "assets/icons/plus.svg";
-import AllTips from "views/AllTips";
+import { StyledButton, StyledButtonsDiv } from "components/atoms/Button/Button";
 
 class MainTamplate extends Component {
   state = {
@@ -38,6 +38,10 @@ class MainTamplate extends Component {
           handleNewTipBarToggle={this.handleNewTipBarToggle}
         />
         <LeftSideBar isLoginBarVisible={loginActive} />
+        <StyledButtonsDiv>
+          <StyledButton>Incoming</StyledButton>
+          <StyledButton>History</StyledButton>
+        </StyledButtonsDiv>
         <ButtonIcon
           icon={plus}
           onClick={this.handleNewTipBarToggle}

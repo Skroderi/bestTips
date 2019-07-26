@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const NavItem = styled.a`
+const NavItem = styled.p`
   color: white;
   margin: 10 20px;
   font-size: 30px;
