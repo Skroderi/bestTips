@@ -78,6 +78,47 @@ const initialState = {
       probability: "80%",
       author: "Bociu"
     }
+  ],
+  historyTips: [
+    {
+      category: "football",
+      firstTeam: "history1",
+      secondTeam: "history2",
+      date: "21.08.2019",
+      time: "21:00",
+      betOn: "1",
+      odd: 1.85,
+      likes: 10,
+      unLikes: 2,
+      probability: "80%",
+      author: "Bociu"
+    },
+    {
+      category: "tennis",
+      firstTeam: "history tenis test1",
+      secondTeam: "history2",
+      date: "21.08.2019",
+      time: "21:00",
+      betOn: "1",
+      odd: 1.85,
+      likes: 10,
+      unLikes: 2,
+      probability: "80%",
+      author: "Bociu"
+    },
+    {
+      category: "hockey",
+      firstTeam: "history1 hockey",
+      secondTeam: "history2",
+      date: "21.08.2019",
+      time: "21:00",
+      betOn: "1",
+      odd: 1.85,
+      likes: 10,
+      unLikes: 2,
+      probability: "80%",
+      author: "Bociu"
+    }
   ]
 };
 

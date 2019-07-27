@@ -6,9 +6,13 @@ import ThreadsTable from "templates/ThreadsTable";
 import MainTamplate from "../templates/MainTemplate";
 
 const Tips = ({ tips, match }) => {
+  console.log(match);
+
+  console.log(match.params.id);
+
   return (
     <div>
-      <MainTamplate />
+      <MainTamplate id={match.params.id} />
       <Table>
         <tbody>
           <ThreadsTable />

@@ -4,7 +4,7 @@ import LeftSideBar from "components/organisms/NavBars/LeftSideBar/LeftSideBar";
 import NewTipBar from "components/molecules/NewTipBar/NewTipBar";
 import ButtonIcon from "components/atoms/ButtonIcon/ButtonIcon";
 import plus from "assets/icons/plus.svg";
-import { StyledButton, StyledButtonsDiv } from "components/atoms/Button/Button";
+import Buttons from "components/atoms/Button/Buttons";
 
 class MainTamplate extends Component {
   state = {
@@ -26,6 +26,8 @@ class MainTamplate extends Component {
 
   render() {
     const { isActive, loginActive } = this.state;
+    const id = this.props.id;
+    // console.log(url);
 
     return (
       <div>
@@ -35,10 +37,7 @@ class MainTamplate extends Component {
           handleNewTipBarToggle={this.handleNewTipBarToggle}
         />
         <LeftSideBar isLoginBarVisible={loginActive} />
-        <StyledButtonsDiv>
-          <StyledButton>Incoming</StyledButton>
-          <StyledButton>History</StyledButton>
-        </StyledButtonsDiv>
+        <Buttons id={id} />
         <ButtonIcon
           icon={plus}
           onClick={this.handleNewTipBarToggle}

@@ -5,20 +5,22 @@ import TipCard from "components/molecules/TipCard/TipCard";
 import ThreadsTable from "templates/ThreadsTable";
 import MainTamplate from "../templates/MainTemplate";
 
-const FootballTips = ({ tips }) => {
-  // tips.
+const AllTipsHistory = ({ historyTips, match }) => {
+  console.log(match);
+
   return (
     <div>
-      <MainTamplate />
+      <MainTamplate id={match.params.id} />
       <Table>
-        <ThreadsTable />
-        {tips.map((tip, id) => {
-          if (tip.category === "football")
+        <tbody>
+          <ThreadsTable />
+          {historyTips.map((tip, id) => {
             return <TipCard tip={tip} key={id} />;
-        })}
+          })}
+        </tbody>
       </Table>
     </div>
   );
 };
-const mapStateToProps = ({ tips }) => ({ tips });
-export default connect(mapStateToProps)(FootballTips);
+const mapStateToProps = ({ historyTips }) => ({ historyTips });
+export default connect(mapStateToProps)(AllTipsHistory);

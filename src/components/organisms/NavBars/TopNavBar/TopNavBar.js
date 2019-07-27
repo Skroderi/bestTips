@@ -14,6 +14,7 @@ const StyledTopNavBar = styled.div`
   height: 130px;
   width: 100%;
   background: black;
+  z-index: 999;
 `;
 const StyledNavList = styled.ul`
   display: flex;
@@ -27,7 +28,7 @@ const TopNavBar = ({ login }) => {
       <Logo />
       <StyledNavList>
         <li>
-          <NavItem as={NavLink} exact to="/" activeClassName="active">
+          <NavItem as={NavLink} exact to="/tips" activeClassName="active">
             All Tips
           </NavItem>
         </li>

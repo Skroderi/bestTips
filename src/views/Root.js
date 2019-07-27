@@ -7,6 +7,8 @@ import GlobalStye from "theme/GlobalStyle";
 import { theme } from "theme/mainTheme";
 import AllTips from "views/AllTips";
 import Tips from "./Tips";
+import History from "./History";
+import AllTipsHistory from "./AllTipsHistory";
 
 function Root() {
   return (
@@ -17,10 +19,10 @@ function Root() {
           <Switch>
             <Route exact path="/" render={() => <Redirect to="tips" />} />
             <Route exact path="/tips" component={AllTips} />
+            <Route exact path="/tips/history" component={AllTipsHistory} />
             {/* <Route path="/tips/football" component={FootballTips} /> */}
-            <Route path="/tips/:id" component={Tips} />
-            {/* <Route path="/tennis" component={TennisTips} />
-            <Route path="/hockey" component={HockeyTips} /> */}
+            <Route exact path="/tips/:id" component={Tips} />
+            <Route path="/tips/:id/history" component={History} />
           </Switch>
         </ThemeProvider>
       </Provider>
