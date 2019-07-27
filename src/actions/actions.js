@@ -1,11 +1,4 @@
-export const addTip = (
-  tipContext,
-  category,
-  firstTeam,
-  secondTeam,
-  odd,
-  author
-) => {
+export const addTip = tipContext => {
   const getId = () => `_${(Math.random(), toString(36).substr(2, 9))}`;
   console.log("dziala");
 
