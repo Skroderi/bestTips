@@ -5,9 +5,7 @@ import TipCard from "components/molecules/TipCard/TipCard";
 import ThreadsTable from "templates/ThreadsTable";
 import MainTamplate from "../templates/MainTemplate";
 
-const AllTips = ({ tips, match }) => {
-  console.log(match);
-
+const AllTips = ({ tips }) => {
   return (
     <div>
       <MainTamplate />

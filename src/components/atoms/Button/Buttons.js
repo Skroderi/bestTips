@@ -17,7 +17,7 @@ export const StyledButton = styled.button`
   background-color: white;
   border: 3px solid black;
   color: black;
-  margin: 0 20px;
+  margin: 35px 30px 0 0;
   text-decoration: none;
   text-transform: uppercase;
 
@@ -27,7 +27,7 @@ export const StyledButton = styled.button`
   }
 `;
 const Buttons = props => {
-  const { id, path } = props;
+  const { id } = props;
   return (
     <StyledButtonsDiv>
       <StyledButton exact as={NavLink} to={`/tips/${id ? id : ""}`}>

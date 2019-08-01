@@ -1,20 +1,30 @@
+// const calculateProbability = () => {
+//   const likes = initialState.tips[0].likes;
+//   const unLikes = 5;
+//   const result = (unLikes * 100) / likes;
+//   console.log(result + "%");
+//   return result + "%";
+// };
+
 const initialState = {
   tips: [
     {
       category: "football",
+      id: 0,
       firstTeam: "Arsenal",
       secondTeam: "Chelsea",
       date: "21.08.2019",
       time: "21:00",
       betOn: "1",
       odd: 1.85,
-      likes: 10,
-      unLikes: 2,
-      probability: "80%",
+      likes: 0,
+      unLikes: 3,
+      probability: null,
       author: "Bociu"
     },
     {
       category: "tennis",
+      id: 2,
       firstTeam: "Federer R.",
       secondTeam: "Djokovic N.",
       date: "05.10.2019",
@@ -126,9 +136,26 @@ const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case "ADD_TIP":
       console.log("reducer");
-
       return {
         tips: [...state.tips, action.payload.tip]
+      };
+    case "VOTE":
+      console.log("VOTE");
+
+      return {
+        ...state,
+        tips: state.tips.map((tip, index) => {
+          // Find the tip with the matching id
+          if (tip.id === action.payload.id) {
+            // Return a new object
+            return {
+              ...tip, // copy the existing tip
+              likes: tip.likes + 1
+            };
+          }
+          // Leave every other tip unchanged
+          return tip;
+        })
       };
 
     default:

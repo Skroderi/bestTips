@@ -2,7 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
-// import { theme } from "theme/mainTheme";
+import { connect } from "react-redux";
+import { vote } from "actions/actions";
 import { ThumbsUp } from "styled-icons/fa-solid/ThumbsUp";
 import { ThumbsDown } from "styled-icons/fa-solid/ThumbsDown";
 
@@ -81,6 +82,7 @@ const ResultVote = styled.div`
   color: green;
   margin-top: 5px;
 `;
+
 const TipCard = props => {
   const {
     firstTeam,
@@ -93,8 +95,11 @@ const TipCard = props => {
     likes,
     unLikes,
     probability,
-    time
+    time,
+    id
   } = props.tip;
+  console.log(props.vote);
+
   return (
     <StyledWrapper>
       <StyledCategoryTip category={category} />
@@ -111,7 +116,7 @@ const TipCard = props => {
       <StyledVoteContainer>
         <StyledThumbContainer>
           <Vote>{likes}</Vote>
-          <GreenThumb />
+          <GreenThumb onClick={() => props.vote(id)} />
           <RedThumb />
           <Vote red>{unLikes}</Vote>
         </StyledThumbContainer>
@@ -128,4 +133,11 @@ TipCard.propTypes = {
   category: PropTypes.oneOf(["football", "tennis", "hockey"])
 };
 
-export default TipCard;
+const mapDispatchToProps = dispatch => ({
+  vote: id => dispatch(vote(id))
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(TipCard);
