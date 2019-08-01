@@ -17,8 +17,8 @@ const initialState = {
       time: "21:00",
       betOn: "1",
       odd: 1.85,
-      likes: 0,
-      unLikes: 3,
+      likes: 2,
+      unLikes: 10,
       probability: null,
       author: "Bociu"
     },
@@ -38,6 +38,7 @@ const initialState = {
     },
     {
       category: "football",
+      id: 3,
       firstTeam: "Atletico Madryt",
       secondTeam: "Barcelona",
       date: "21.08.2019",
@@ -51,6 +52,7 @@ const initialState = {
     },
     {
       category: "football",
+      id: 4,
       firstTeam: "Liverpool",
       secondTeam: "Chelsea",
       date: "21.02.2019",
@@ -64,6 +66,7 @@ const initialState = {
     },
     {
       category: "hockey",
+      id: 5,
       firstTeam: "Nashville Predators",
       secondTeam: "Dallas Stars",
       date: "24.04.2019",
@@ -77,6 +80,7 @@ const initialState = {
     },
     {
       category: "football",
+      id: 6,
       firstTeam: "Arsenal",
       secondTeam: "Chelsea",
       date: "21.08.2019",
@@ -98,8 +102,8 @@ const initialState = {
       time: "21:00",
       betOn: "1",
       odd: 1.85,
-      likes: 10,
-      unLikes: 2,
+      likes: 5,
+      unLikes: 5,
       probability: "80%",
       author: "Bociu"
     },
@@ -124,8 +128,8 @@ const initialState = {
       time: "21:00",
       betOn: "1",
       odd: 1.85,
-      likes: 10,
-      unLikes: 2,
+      likes: 2,
+      unLikes: 10,
       probability: "80%",
       author: "Bociu"
     }
@@ -150,7 +154,12 @@ const rootReducer = (state = initialState, action) => {
             // Return a new object
             return {
               ...tip, // copy the existing tip
-              likes: tip.likes + 1
+              likes: tip.likes + 1,
+              probability:
+                (
+                  ((tip.likes + 1) / (tip.likes + 1 + tip.unLikes)) *
+                  100
+                ).toFixed(0) + "%"
             };
           }
           // Leave every other tip unchanged
