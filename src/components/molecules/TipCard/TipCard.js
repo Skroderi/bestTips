@@ -37,15 +37,15 @@ const StyledVoteContainer = styled.td`
   margin: 15px 0;
 `;
 
-const GreenThumb = styled(ThumbsUp)`
-  color: green;
+const UpThumb = styled(ThumbsUp)`
+  color: grey;
   width: 30px;
   height: 30px;
   margin: 0px 5px;
   cursor: pointer;
 `;
-const RedThumb = styled(ThumbsDown)`
-  color: red;
+const DownThumb = styled(ThumbsDown)`
+  color: grey;
   width: 30px;
   height: 30px;
   margin: 0px 5px;
@@ -98,6 +98,8 @@ const TipCard = (props, action) => {
     time,
     id
   } = props.tip;
+  // console.log(voted);
+  let { voted } = props.tip;
 
   return (
     <StyledWrapper>
@@ -115,8 +117,15 @@ const TipCard = (props, action) => {
       <StyledVoteContainer>
         <StyledThumbContainer>
           <Vote>{likes}</Vote>
-          <GreenThumb onClick={() => props.vote(id, (action = "like"))} />
-          <RedThumb onClick={() => props.vote(id, (action = "unLike"))} />
+          <UpThumb
+            onClick={!voted ? () => props.vote(id, (action = "like")) : ""}
+            style={!voted ? { color: "green" } : { color: "grey" }}
+          />
+          <DownThumb
+            onClick={!voted ? () => props.vote(id, (action = "unLike")) : ""}
+            style={!voted ? { color: "red" } : { color: "grey" }}
+          />
+
           <Vote red>{unLikes}</Vote>
         </StyledThumbContainer>
         <ResultVote>{probability}</ResultVote>

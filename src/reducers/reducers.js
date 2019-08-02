@@ -10,8 +10,9 @@ const initialState = {
       betOn: "1",
       odd: 1.85,
       likes: 2,
-      unLikes: 10,
-      probability: null,
+      unLikes: 2,
+      probability: "50%",
+      voted: false,
       author: "Bociu"
     },
     {
@@ -151,7 +152,8 @@ const rootReducer = (state = initialState, action) => {
                     (
                       ((tip.likes + 1) / (tip.likes + 1 + tip.unLikes)) *
                       100
-                    ).toFixed(0) + "%"
+                    ).toFixed(0) + "%",
+                  voted: true
                 };
               case "unLike":
                 return {
@@ -160,7 +162,8 @@ const rootReducer = (state = initialState, action) => {
                   probability:
                     ((tip.likes / (tip.likes + 1 + tip.unLikes)) * 100).toFixed(
                       0
-                    ) + "%"
+                    ) + "%",
+                  voted: true
                 };
               default:
                 return {
