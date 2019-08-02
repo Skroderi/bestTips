@@ -1,6 +1,4 @@
 export const addTip = tipContext => {
-  console.log(tipContext);
-
   //generate random id
   const getId = () => `_${(Math.random(), toString(36).substr(2, 9))}`;
 
@@ -15,10 +13,9 @@ export const addTip = tipContext => {
   };
 };
 
-export const vote = id => {
-  console.log(id);
+export const vote = (id, action) => {
   return {
     type: "VOTE",
-    payload: { id: id }
+    payload: { id: id, operation: action }
   };
 };

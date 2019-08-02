@@ -1,11 +1,3 @@
-// const calculateProbability = () => {
-//   const likes = initialState.tips[0].likes;
-//   const unLikes = 5;
-//   const result = (unLikes * 100) / likes;
-//   console.log(result + "%");
-//   return result + "%";
-// };
-
 const initialState = {
   tips: [
     {
@@ -144,23 +136,37 @@ const rootReducer = (state = initialState, action) => {
         tips: [...state.tips, action.payload.tip]
       };
     case "VOTE":
-      console.log("VOTE");
-
       return {
         ...state,
         tips: state.tips.map((tip, index) => {
           // Find the tip with the matching id
           if (tip.id === action.payload.id) {
             // Return a new object
-            return {
-              ...tip, // copy the existing tip
-              likes: tip.likes + 1,
-              probability:
-                (
-                  ((tip.likes + 1) / (tip.likes + 1 + tip.unLikes)) *
-                  100
-                ).toFixed(0) + "%"
-            };
+            switch (action.payload.operation) {
+              case "like":
+                return {
+                  ...tip, // copy the existing tip
+                  likes: tip.likes + 1,
+                  probability:
+                    (
+                      ((tip.likes + 1) / (tip.likes + 1 + tip.unLikes)) *
+                      100
+                    ).toFixed(0) + "%"
+                };
+              case "unLike":
+                return {
+                  ...tip, // copy the existing tip
+                  unLikes: tip.unLikes + 1,
+                  probability:
+                    ((tip.likes / (tip.likes + 1 + tip.unLikes)) * 100).toFixed(
+                      0
+                    ) + "%"
+                };
+              default:
+                return {
+                  ...tip
+                };
+            }
           }
           // Leave every other tip unchanged
           return tip;
