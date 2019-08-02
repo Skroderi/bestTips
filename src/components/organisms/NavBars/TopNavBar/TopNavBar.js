@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import Logo from "components/atoms/NavItems/Logo/Logo";
 import NavItem from "components/atoms/NavItems/NavItem/NavItem";
@@ -51,6 +52,10 @@ const TopNavBar = ({ login }) => {
       <NavItem onClick={login}>Login/Register</NavItem>
     </StyledTopNavBar>
   );
+};
+
+TopNavBar.propTypes = {
+  login: PropTypes.func.isRequired
 };
 
 export default TopNavBar;

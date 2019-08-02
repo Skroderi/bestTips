@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Table from "templates/Table";
 import { connect } from "react-redux";
 import TipCard from "components/molecules/TipCard/TipCard";
@@ -6,8 +7,6 @@ import ThreadsTable from "templates/ThreadsTable";
 import MainTamplate from "../templates/MainTemplate";
 
 const History = ({ historyTips, match }) => {
-  console.log(match);
-
   return (
     <div>
       <MainTamplate id={match.params.id} />
@@ -25,4 +24,10 @@ const History = ({ historyTips, match }) => {
   );
 };
 const mapStateToProps = ({ historyTips }) => ({ historyTips });
+
+History.propTypes = {
+  historyTips: PropTypes.array.isRequired,
+  match: PropTypes.object.isRequired
+};
+
 export default connect(mapStateToProps)(History);

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Table from "templates/Table";
 import { connect } from "react-redux";
 import TipCard from "components/molecules/TipCard/TipCard";
@@ -7,6 +8,7 @@ import MainTamplate from "../templates/MainTemplate";
 
 const AllTipsHistory = ({ historyTips, match }) => {
   console.log(match);
+  console.log(historyTips);
 
   return (
     <div>
@@ -22,5 +24,12 @@ const AllTipsHistory = ({ historyTips, match }) => {
     </div>
   );
 };
+
 const mapStateToProps = ({ historyTips }) => ({ historyTips });
+
+AllTipsHistory.propTypes = {
+  historyTips: PropTypes.array.isRequired,
+  match: PropTypes.object.isRequired
+};
+
 export default connect(mapStateToProps)(AllTipsHistory);

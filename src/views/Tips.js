@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Table from "templates/Table";
 import { connect } from "react-redux";
 import TipCard from "components/molecules/TipCard/TipCard";
@@ -6,10 +7,6 @@ import ThreadsTable from "templates/ThreadsTable";
 import MainTamplate from "../templates/MainTemplate";
 
 const Tips = ({ tips, match }) => {
-  console.log(match);
-
-  console.log(match.params.id);
-
   return (
     <div>
       <MainTamplate id={match.params.id} />
@@ -27,4 +24,10 @@ const Tips = ({ tips, match }) => {
   );
 };
 const mapStateToProps = ({ tips }) => ({ tips });
+
+Tips.propTypes = {
+  tips: PropTypes.array.isRequired,
+  match: PropTypes.object.isRequired
+};
+
 export default connect(mapStateToProps)(Tips);

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled, { keyframes, css } from "styled-components";
 import LoginButton from "components/atoms/Button/LoginButton";
 import Input from "components/atoms/Input/Input";
@@ -83,6 +84,10 @@ const LeftSideBar = ({ isLoginBarVisible }) => {
       </p>
     </StyledLeftSideBar>
   );
+};
+
+LeftSideBar.propTypes = {
+  isLoginBarVisible: PropTypes.bool.isRequired
 };
 
 export default LeftSideBar;

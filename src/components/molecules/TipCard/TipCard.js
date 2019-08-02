@@ -118,11 +118,11 @@ const TipCard = (props, action) => {
         <StyledThumbContainer>
           <Vote>{likes}</Vote>
           <UpThumb
-            onClick={!voted ? () => props.vote(id, (action = "like")) : ""}
+            onClick={!voted ? () => props.vote(id, (action = "like")) : null}
             style={!voted ? { color: "green" } : { color: "grey" }}
           />
           <DownThumb
-            onClick={!voted ? () => props.vote(id, (action = "unLike")) : ""}
+            onClick={!voted ? () => props.vote(id, (action = "unLike")) : null}
             style={!voted ? { color: "red" } : { color: "grey" }}
           />
 
@@ -138,7 +138,8 @@ const TipCard = (props, action) => {
 };
 
 TipCard.propTypes = {
-  category: PropTypes.oneOf(["football", "tennis", "hockey"])
+  category: PropTypes.oneOf(["football", "tennis", "hockey"]),
+  tip: PropTypes.object.isRequired
 };
 
 const mapDispatchToProps = dispatch => ({

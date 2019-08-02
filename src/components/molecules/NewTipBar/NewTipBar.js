@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import Button from "components/atoms/Button/LoginButton";
 import { connect } from "react-redux";
@@ -194,6 +195,13 @@ const mapDispatchToProps = dispatch => ({
   addTip: (category, firstTeam, secondTeam, odd, author) =>
     dispatch(addTip(category, firstTeam, secondTeam, odd, author))
 });
+
+NewTipBar.propTypes = {
+  isActive: PropTypes.bool.isRequired,
+  addTip: PropTypes.func.isRequired,
+  handleNewTipBarToggle: PropTypes.func.isRequired
+};
+
 export default connect(
   null,
   mapDispatchToProps
