@@ -83,7 +83,7 @@ const ResultVote = styled.div`
   margin-top: 5px;
 `;
 
-const TipCard = (props, action) => {
+const TipCard = ({ tip, vote }, action) => {
   const {
     firstTeam,
     secondTeam,
@@ -97,9 +97,9 @@ const TipCard = (props, action) => {
     probability,
     time,
     id
-  } = props.tip;
+  } = tip;
   // console.log(voted);
-  let { voted } = props.tip;
+  let { voted } = tip;
 
   return (
     <StyledWrapper>
@@ -118,11 +118,11 @@ const TipCard = (props, action) => {
         <StyledThumbContainer>
           <Vote>{likes}</Vote>
           <UpThumb
-            onClick={!voted ? () => props.vote(id, (action = "like")) : null}
+            onClick={!voted ? () => vote(id, (action = "like")) : null}
             style={!voted ? { color: "green" } : { color: "grey" }}
           />
           <DownThumb
-            onClick={!voted ? () => props.vote(id, (action = "unLike")) : null}
+            onClick={!voted ? () => vote(id, (action = "unLike")) : null}
             style={!voted ? { color: "red" } : { color: "grey" }}
           />
 
@@ -138,8 +138,9 @@ const TipCard = (props, action) => {
 };
 
 TipCard.propTypes = {
-  category: PropTypes.oneOf(["football", "tennis", "hockey"]),
-  tip: PropTypes.object.isRequired
+  tip: PropTypes.object.isRequired,
+  vote: PropTypes.func.isRequired,
+  action: PropTypes.string
 };
 
 const mapDispatchToProps = dispatch => ({

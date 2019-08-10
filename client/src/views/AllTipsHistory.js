@@ -7,9 +7,6 @@ import ThreadsTable from "templates/ThreadsTable";
 import MainTamplate from "../templates/MainTemplate";
 
 const AllTipsHistory = ({ historyTips, match }) => {
-  console.log(match);
-  console.log(historyTips);
-
   return (
     <div>
       <MainTamplate id={match.params.id} />
