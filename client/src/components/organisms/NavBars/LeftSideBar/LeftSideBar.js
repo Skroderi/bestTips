@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled, { keyframes, css } from "styled-components";
-import LoginButton from "components/atoms/Button/LoginButton";
-import Input from "components/atoms/Input/Input";
 import Login from "components/molecules/Auth/Login";
 import Register from "components/molecules/Auth/Register";
 

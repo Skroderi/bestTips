@@ -2,27 +2,117 @@ import React from "react";
 import styled from "styled-components";
 import LoginButton from "components/atoms/Button/LoginButton";
 import Input from "components/atoms/Input/Input";
+import { Formik, Form, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
-const StyledHeader = styled.h1`
-  margin: 0;
-  text-align: left;
-`;
+import axios from "axios";
+
 const StyledInput = styled(Input)`
   margin: 12px 0px;
 `;
+const StyledErrorMessage = styled(ErrorMessage)`
+  color: red;
+  font-weight: bold;
+`;
+
+const SignupSchema = Yup.object().shape({
+  name: Yup.string()
+    .min(3, "Too Short!")
+    .required("name is required!"),
+  email: Yup.string()
+    .email("Invalid email")
+    .required("Email is required"),
+  password: Yup.string()
+    .min(5, "Password must have at least 5 characters")
+    .required("Password is required"),
+  passwordConfirm: Yup.string()
+    .oneOf([Yup.ref("password")], "Passwords don't match")
+    .required("Password confirm is required")
+});
+
 const Register = () => {
   return (
-    <>
-      <StyledInput placeholder="Nickname" />
-      <StyledInput placeholder="Email" />
-      <StyledInput placeholder="Password" password />
-      <StyledInput placeholder="Repeat password" password />
-      <LoginButton>Register</LoginButton>
-      <p>
-        Already have account? <a href="/">Log In here!</a>
-      </p>
-    </>
+    <Formik
+      initialValues={{
+        name: "",
+        email: "",
+        password: "",
+        passwordConfirm: ""
+      }}
+      validationSchema={SignupSchema}
+      onSubmit={async (values, { resetForm }) => {
+        console.log(values);
+
+        //////////////////////////////// USER REGISTRATION ////////////////////////////
+        // const { email, name, password } = values;
+        // const newUser = {
+        //   name,
+        //   email,
+        //   password
+        // };
+        // try {
+        //   const config = {
+        //     headers: {
+        //       "Content-type": "Application/json"
+        //     }
+        //   };
+        //   const body = JSON.stringify(newUser);
+
+        //   const res = await axios.post("/api/users", body, config);
+        //   console.log(res.data);
+        // } catch (err) {
+        //   console.error(err.response.data);
+        // }
+        ////////////////////////////////////////////////////////////////////////////////////
+
+        // resetForm();
+      }}
+    >
+      {({ handleChange, handleBlur }) => (
+        <Form>
+          <StyledInput
+            placeholder="name"
+            name="name"
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+          <StyledErrorMessage name="name" component="div" />
+          <StyledInput
+            placeholder="Email"
+            name="email"
+            type="email"
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+          <StyledErrorMessage name="email" component="div" />
+
+          <StyledInput
+            placeholder="Password"
+            name="password"
+            password
+            type="password"
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+          <StyledErrorMessage name="password" component="div" />
+
+          <StyledInput
+            placeholder="Repeat password"
+            name="passwordConfirm"
+            password
+            type="password"
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+          <StyledErrorMessage name="passwordConfirm" component="div" />
+
+          <LoginButton type="submit">Register</LoginButton>
+          <p>
+            Already have an account? <a href="/">Sign In!</a>
+          </p>
+        </Form>
+      )}
+    </Formik>
   );
 };
-
 export default Register;
