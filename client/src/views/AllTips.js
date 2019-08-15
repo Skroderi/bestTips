@@ -12,7 +12,7 @@ const AllTips = ({ tips }) => {
       <Table>
         <tbody>
           <ThreadsTable />
-          {tips.map((tip, id) => (
+          {tips.tips.map((tip, id) => (
             <TipCard tip={tip} key={id} />
           ))}
         </tbody>

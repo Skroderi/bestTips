@@ -12,10 +12,10 @@ const AllTipsHistory = ({ historyTips, match }) => {
       <MainTamplate id={match.params.id} />
       <Table>
         <tbody>
-          <ThreadsTable />
+          {/* <ThreadsTable />
           {historyTips.map((tip, id) => {
             return <TipCard tip={tip} key={id} />;
-          })}
+          })} */}
         </tbody>
       </Table>
     </div>

@@ -1,9 +1,15 @@
-import { createStore } from "redux";
-import tipsApp from "reducers/reducers";
-/* eslint-disable no-underscore-dangle */
-export const store = createStore(
-  tipsApp /* preloadedState, */,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+import { createStore, applyMiddleware, compose } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
+import thunk from "redux-thunk";
+import rootReducer from "../reducers";
+
+const initialState = {};
+const middleware = [thunk];
+
+const store = createStore(
+  rootReducer,
+  initialState,
+  composeWithDevTools(applyMiddleware(...middleware))
 );
-/* eslint-enable */
+
 export default store;

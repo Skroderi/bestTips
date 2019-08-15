@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import { Provider } from "react-redux";
 import store from "store/store";
 import { ThemeProvider } from "styled-components";
 import GlobalStye from "theme/GlobalStyle";
@@ -9,6 +8,8 @@ import AllTips from "views/AllTips";
 import Tips from "./Tips";
 import History from "./History";
 import AllTipsHistory from "./AllTipsHistory";
+//Redux
+import { Provider } from "react-redux";
 
 function Root() {
   return (

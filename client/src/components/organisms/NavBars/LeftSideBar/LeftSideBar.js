@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import styled, { keyframes, css } from "styled-components";
 import Login from "components/molecules/Auth/Login";
 import Register from "components/molecules/Auth/Register";
+import Alert from 'components/atoms/Alert'
 
 const LeftSideBarIn = keyframes`
   0% {
@@ -113,8 +114,14 @@ const LeftSideBar = ({ isLoginBarVisible }) => {
       toggleFirstBtn(false);
     }
   };
+const loginAfterRegister = ()=>{
+      toggleFirstBtn(true);
+      toggleSecondBtn(false);
+}
+  
   return (
     <StyledLeftSideBar isLoginBarVisible={isLoginBarVisible}>
+    <Alert/>
       <StyledButtons>
         <SwitchButton
           onClick={() => toggleButton()}
@@ -131,7 +138,7 @@ const LeftSideBar = ({ isLoginBarVisible }) => {
           Sign Up
         </SwitchButton>
       </StyledButtons>
-      {firstButton ? <Login /> : <Register />}
+      {firstButton ? <Login /> : <Register loginAfterRegister={loginAfterRegister}/>}
     </StyledLeftSideBar>
   );
 };

@@ -4,8 +4,11 @@ import LoginButton from "components/atoms/Button/LoginButton";
 import Input from "components/atoms/Input/Input";
 import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-
 import axios from "axios";
+import { connect } from "react-redux";
+import { setAlert } from "../../../actions/alert";
+import { register } from "../../../actions/auth";
+import PropTypes from "prop-types";
 
 const StyledInput = styled(Input)`
   margin: 12px 0px;
@@ -30,7 +33,7 @@ const SignupSchema = Yup.object().shape({
     .required("Password confirm is required")
 });
 
-const Register = () => {
+const Register = ({ setAlert, loginAfterRegister, register }) => {
   return (
     <Formik
       initialValues={{
@@ -41,7 +44,15 @@ const Register = () => {
       }}
       validationSchema={SignupSchema}
       onSubmit={async (values, { resetForm }) => {
-        console.log(values);
+        const { email, name, password } = values;
+        const newUser = {
+          name,
+          email,
+          password
+        };
+
+        console.log(newUser);
+        register({ newUser, loginAfterRegister });
 
         //////////////////////////////// USER REGISTRATION ////////////////////////////
         // const { email, name, password } = values;
@@ -115,4 +126,12 @@ const Register = () => {
     </Formik>
   );
 };
-export default Register;
+Register.propTypes = {
+  setAlert: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired
+};
+
+export default connect(
+  null,
+  { setAlert, register }
+)(Register);

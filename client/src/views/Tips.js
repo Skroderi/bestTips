@@ -13,11 +13,11 @@ const Tips = ({ tips, match }) => {
       <Table>
         <tbody>
           <ThreadsTable />
-          {tips
+          {/* {tips
             .filter(tip => tip.category === match.params.id)
             .map((tip, id) => {
               return <TipCard tip={tip} key={id} />;
-            })}
+            })} */}
         </tbody>
       </Table>
     </div>
