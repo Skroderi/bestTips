@@ -10,6 +10,11 @@ import { setAlert } from "../../../actions/alert";
 import { register } from "../../../actions/auth";
 import PropTypes from "prop-types";
 
+const StyledForm = styled(Form)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 const StyledInput = styled(Input)`
   margin: 12px 0px;
 `;
@@ -80,7 +85,7 @@ const Register = ({ setAlert, loginAfterRegister, register }) => {
       }}
     >
       {({ handleChange, handleBlur }) => (
-        <Form>
+        <StyledForm>
           <StyledInput
             placeholder="name"
             name="name"
@@ -121,7 +126,7 @@ const Register = ({ setAlert, loginAfterRegister, register }) => {
           <p>
             Already have an account? <a href="/">Sign In!</a>
           </p>
-        </Form>
+        </StyledForm>
       )}
     </Formik>
   );

@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import store from "store/store";
 import { ThemeProvider } from "styled-components";
 import GlobalStye from "theme/GlobalStyle";
 import { theme } from "theme/mainTheme";
@@ -10,8 +9,17 @@ import History from "./History";
 import AllTipsHistory from "./AllTipsHistory";
 //Redux
 import { Provider } from "react-redux";
+import store from "store/store";
+import { loadUser } from "../actions/auth";
+import setAuthToken from "../utlis/setAuthToken";
 
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
 function Root() {
+  useEffect(() => {
+    store.dispatch(loadUser());
+  }, []);
   return (
     <BrowserRouter>
       <Provider store={store}>
