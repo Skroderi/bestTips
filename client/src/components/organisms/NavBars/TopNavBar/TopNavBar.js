@@ -1,9 +1,13 @@
-import React from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import Logo from "components/atoms/NavItems/Logo/Logo";
 import NavItem from "components/atoms/NavItems/NavItem/NavItem";
 import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
+import { logout } from "../../../../actions/auth";
+import { LogOut } from "styled-icons/boxicons-regular/LogOut";
+import { User } from "styled-icons/boxicons-regular/User";
 
 const StyledTopNavBar = styled.div`
   position: fixed;
@@ -23,7 +27,14 @@ const StyledNavList = styled.ul`
   list-style-type: none;
 `;
 
-const TopNavBar = ({ login }) => {
+const TopNavBar = ({ login, auth: { isAuthenticated, loading } }) => {
+  const authLinks = (
+    <NavItem onClick={login}>
+      <User size="40" /> My Profile
+    </NavItem>
+  );
+  const guestLinks = <NavItem onClick={login}>Login / Register</NavItem>;
+
   return (
     <StyledTopNavBar login={login}>
       <Logo />
@@ -49,13 +60,22 @@ const TopNavBar = ({ login }) => {
           </NavItem>
         </li>
       </StyledNavList>
-      <NavItem onClick={login}>Login/Register</NavItem>
+      {!loading && (
+        <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
+      )}
     </StyledTopNavBar>
   );
 };
 
 TopNavBar.propTypes = {
-  login: PropTypes.func.isRequired
+  login: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
 };
+const mapStateToProps = state => ({
+  auth: state.auth
+});
 
-export default TopNavBar;
+export default connect(
+  mapStateToProps,
+  { logout }
+)(TopNavBar);

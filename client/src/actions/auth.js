@@ -6,7 +6,8 @@ import {
   USER_LOADED,
   AUTH_ERROR,
   LOGIN_FAIL,
-  LOGIN_SUCCESS
+  LOGIN_SUCCESS,
+  LOGOUT
 } from "./types";
 import setAuthToken from "../utlis/setAuthToken";
 
@@ -47,7 +48,6 @@ export const register = ({ newUser, loginAfterRegister }) => async dispatch => {
     });
     loginAfterRegister();
     dispatch(setAlert("Account created, Sign in now!", "succes"));
-    dispatch(loadUser());
     console.log(res.data);
   } catch (err) {
     const errors = err.response.data.errors;
@@ -92,4 +92,10 @@ export const login = (email, password) => async dispatch => {
     });
     console.error(err.response.data);
   }
+};
+
+// LOGOUT / CLEAR PROFILE
+
+export const logout = () => dispatch => {
+  dispatch({ type: LOGOUT });
 };

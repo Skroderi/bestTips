@@ -20,6 +20,7 @@ function Root() {
   useEffect(() => {
     store.dispatch(loadUser());
   }, []);
+
   return (
     <BrowserRouter>
       <Provider store={store}>

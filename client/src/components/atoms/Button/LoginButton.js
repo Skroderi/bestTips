@@ -8,8 +8,7 @@ const LoginButton = styled.button`
   border-radius: 20px;
   text-align: center;
   text-transform: uppercase;
+  margin: 10px 0px 10px 0px;
 `;
-
-
 
 export default LoginButton;
