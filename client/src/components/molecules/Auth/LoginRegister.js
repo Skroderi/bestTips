@@ -10,14 +10,14 @@ const SwitchButton = styled.button`
   text-align: left;
   border: none;
   background: none;
-  color: white;
+  color: ${({ theme }) => theme.colors.white};
   font-weight: bold;
   padding: 15px 25px;
   transition: 0.2s ease-in-out;
   cursor: pointer;
 
   &.active {
-    background: #04da97;
+    background: ${({ theme }) => theme.colors.lightBlue};
   }
   ${props =>
     props.left &&
@@ -33,7 +33,7 @@ const SwitchButton = styled.button`
     `}
 `;
 const StyledButtons = styled.div`
-  border: 4px solid #04da97;
+  border: 4px solid ${({ theme }) => theme.colors.lightBlue};
   border-radius: 30px;
   margin-bottom: 15px;
 `;

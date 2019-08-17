@@ -31,7 +31,7 @@ const Login = ({ login, isAuthenticated }) => {
   // }
 
   return (
-    <form onSubmit={e => onSubmit(e)}>
+    <form autoComplete="off" onSubmit={e => onSubmit(e)}>
       <StyledInput
         type="email"
         placeholder="Email Address"
@@ -39,6 +39,7 @@ const Login = ({ login, isAuthenticated }) => {
         value={email}
         onChange={e => onChange(e)}
         required
+        mail
       />
       <StyledInput
         placeholder="password"

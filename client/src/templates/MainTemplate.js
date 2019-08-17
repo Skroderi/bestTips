@@ -1,12 +1,17 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import TopNavBar from "components/organisms/NavBars/TopNavBar/TopNavBar";
 import LeftSideBar from "components/organisms/NavBars/LeftSideBar/LeftSideBar";
 import NewTipBar from "components/molecules/NewTipBar/NewTipBar";
-import ButtonIcon from "components/atoms/ButtonIcon/ButtonIcon";
+import AddTipButton from "components/atoms/AddTipButton/AddTipButton";
 import plus from "assets/icons/plus.svg";
 import Buttons from "components/atoms/Button/Buttons";
+import { connect } from "react-redux";
 
 class MainTamplate extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   state = {
     isActive: false,
     loginActive: false
@@ -25,27 +30,44 @@ class MainTamplate extends Component {
   };
 
   render() {
+    console.log(this.props);
     const { isActive, loginActive } = this.state;
     const id = this.props.id;
-    // console.log(url);
 
+    const {
+      auth: { isAuthenticated, loading }
+    } = this.props;
+
+    const AuthComponents = () => {
+      return (
+        <>
+          <AddTipButton
+            icon={plus}
+            onClick={this.handleNewTipBarToggle}
+            isActive={isActive}
+          />
+          <NewTipBar
+            isActive={isActive}
+            handleNewTipBarToggle={this.handleNewTipBarToggle}
+          />
+        </>
+      );
+    };
     return (
       <div>
         <TopNavBar login={this.login} />
-        <NewTipBar
-          isActive={isActive}
-          handleNewTipBarToggle={this.handleNewTipBarToggle}
-        />
         <LeftSideBar isLoginBarVisible={loginActive} />
         <Buttons id={id} />
-        <ButtonIcon
-          icon={plus}
-          onClick={this.handleNewTipBarToggle}
-          isActive={isActive}
-        />
+        {!loading && (
+          <Fragment>{isAuthenticated ? <AuthComponents /> : null}</Fragment>
+        )}
       </div>
     );
   }
 }
 
-export default MainTamplate;
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps)(MainTamplate);

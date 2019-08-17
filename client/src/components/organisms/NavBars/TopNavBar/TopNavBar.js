@@ -18,12 +18,11 @@ const StyledTopNavBar = styled.div`
   left: 0%;
   height: 130px;
   width: 100%;
-  background: black;
+  background: ${({ theme }) => theme.colors.black};
   z-index: 999;
 `;
 const StyledNavList = styled.ul`
   display: flex;
-  /* margin-right: 30vw; */
   list-style-type: none;
 `;
 

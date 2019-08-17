@@ -19,7 +19,7 @@ const StyledInput = styled(Input)`
   margin: 12px 0px;
 `;
 const StyledErrorMessage = styled(ErrorMessage)`
-  color: red;
+  color: ${({ theme }) => theme.colors.red};
   font-weight: bold;
 `;
 
@@ -85,12 +85,13 @@ const Register = ({ setAlert, loginAfterRegister, register }) => {
       }}
     >
       {({ handleChange, handleBlur }) => (
-        <StyledForm>
+        <StyledForm autoComplete="off">
           <StyledInput
             placeholder="name"
             name="name"
             onChange={handleChange}
             onBlur={handleBlur}
+            sign
           />
           <StyledErrorMessage name="name" component="div" />
           <StyledInput
@@ -99,6 +100,7 @@ const Register = ({ setAlert, loginAfterRegister, register }) => {
             type="email"
             onChange={handleChange}
             onBlur={handleBlur}
+            mail
           />
           <StyledErrorMessage name="email" component="div" />
 

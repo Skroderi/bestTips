@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const StyledTr = styled.tr`
-  background: black;
+  background: ${({ theme }) => theme.colors.black};
   border: 30px solid black;
 `;
 

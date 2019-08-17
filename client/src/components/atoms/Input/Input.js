@@ -3,12 +3,12 @@ import lockIcon from "assets/icons/lock.svg";
 import signInIcon from "assets/icons/sign.svg";
 import calendar from "assets/icons/calendar.svg";
 import clock from "assets/icons/clock.svg";
+import mail from "assets/icons/mail.svg";
 
 const Input = styled.input`
   display: block;
   width: 240px;
   padding: 15px 30px;
-  background-image: url(${signInIcon});
   background-size: 17px 17px;
   background-position: 4% 50%;
   background-repeat: no-repeat;
@@ -25,7 +25,16 @@ const Input = styled.input`
     css`
       background-image: url(${lockIcon});
     `}
-
+    ${props =>
+      props.sign &&
+      css`
+        background-image: url(${signInIcon});
+      `}
+      ${props =>
+        props.mail &&
+        css`
+          background-image: url(${mail});
+        `}
   ${props =>
     props.team &&
     css`
@@ -75,6 +84,6 @@ const Input = styled.input`
           background-size: 20px;
           text-indent: 20px;
         `}
+        
 `;
-
 export default Input;

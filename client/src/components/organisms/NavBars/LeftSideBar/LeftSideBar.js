@@ -27,7 +27,7 @@ const StyledLeftSideBar = styled.div`
   justify-content: center;
   width: 400px;
   height: 100vh;
-  color: white;
+  color: ${({ theme }) => theme.colors.white};
   box-shadow: 10px 0px 15px rgba(0, 0, 0, 0.3);
   transform: translate(-120%);
   animation: ${({ isLoginBarVisible }) =>
@@ -35,9 +35,8 @@ const StyledLeftSideBar = styled.div`
       ? css`
           ${LeftSideBarIn} 0.7s ease-in-out
         `
-      : ``};
+      : null};
   animation-fill-mode: forwards;
-
   background: rgba(14, 11, 14, 1);
   background: -moz-linear-gradient(
     top,

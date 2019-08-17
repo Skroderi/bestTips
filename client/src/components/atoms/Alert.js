@@ -9,9 +9,8 @@ const StyledAlert = styled.div`
   padding: 1.5rem;
   margin: 1rem 0;
   opacity: 0.9;
-  color: #333;
   background: ${({ color }) => (color === "fail" ? "red" : "green")};
-  color: #fff;
+  color: ${({ theme }) => theme.colors.white};
   border-radius: 20px;
 `;
 

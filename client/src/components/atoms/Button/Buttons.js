@@ -14,15 +14,15 @@ export const StyledButton = styled.button`
   font-size: 20px;
   font-weight: bold;
   cursor: pointer;
-  background-color: white;
-  border: 3px solid black;
-  color: black;
+  background-color: ${({ theme }) => theme.colors.white};
+  border: 3px solid ${({ theme }) => theme.colors.black};
+  color: ${({ theme }) => theme.colors.black};
   margin: 35px 30px 0 0;
   text-decoration: none;
   text-transform: uppercase;
 
   &.active {
-    box-shadow: 0 0 15px red;
+    box-shadow: 0 0 15px ${({ theme }) => theme.colors.red};
     transform: scale(1.1);
   }
 `;
