@@ -18,7 +18,7 @@ const AddTipButton = styled.button`
   transform: rotate(${({ isActive }) => (isActive ? "225deg" : "0deg")});
   transition: transform 0.3s ease-in-out;
   cursor: pointer;
-  z-index: 999;
+  z-index: 9999;
 `;
 
 export default AddTipButton;

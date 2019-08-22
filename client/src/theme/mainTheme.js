@@ -5,6 +5,7 @@ import tennis from "assets/icons/tennisIcon.svg";
 export const theme = {
   light: 300,
   bold: 600,
+  topNavHeight: '70px',
   icons: {
     football,
     hockey,
@@ -24,6 +25,11 @@ export const theme = {
     m: "2.1rem",
     l: "2.4rem",
     xl: "4rem"
+  },
+  media: {
+    semitablet: "@media (min-width: 420px)",
+    tablet: "@media (min-width: 768px)",
+    desktop: "@media (min-width: 1024px)"
   },
   card: `1px 2px 4px #04da97, 1px 2px 4px #04da97`
 };

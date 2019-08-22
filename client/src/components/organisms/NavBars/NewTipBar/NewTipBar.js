@@ -10,23 +10,34 @@ import Input from "components/atoms/Input/Input";
 
 const StyledWrapper = styled.div`
   position: fixed;
-  top: 130px;
+  top: 70px;
   right: 0;
   display: flex;
   flex-direction: column;
   text-align: center;
   align-items: center;
-  width: 400px;
-  height: 100vh;
+  width: 100vw;
+  height: calc(100vh - 70px);
+  padding: 10px;
   background-color: white;
+  font-weight: ${({ theme }) => theme.bold};
   border-left: 10px solid black;
   box-shadow: -20px 0 25px rgba(0, 0, 0, 0.3);
   transform: translate(${({ isActive }) => (isActive ? "0%" : "120%")});
   transition: transform 0.25s ease-in-out;
+  overflow-y: auto;
+  ${({ theme }) => theme.media.tablet} {
+    width: 350px;
+  }
 `;
-const Heading = styled.h3`
-  font-size: 20px;
+const MainHeading = styled.p`
+  font-size: 18px;
   margin: 15px 0px 5px 0px;
+`;
+
+const Heading = styled.p`
+  font-size: 12x;
+  margin: 10px 0px 5px 0px;
 `;
 
 const InnerTeamsWrapper = styled.div`
@@ -54,8 +65,8 @@ const DateWrapper = styled.div`
 `;
 
 const StyledButton = styled(Button)`
-  padding: 15px;
-  margin: 30px;
+  padding: 12px;
+  margin: 20px;
   font-weight: bold;
   font-size: 18px;
   background-color: black;
@@ -70,8 +81,11 @@ const StyledSelect = styled(Field)`
 `;
 
 const StyledErrorMessage = styled(ErrorMessage)`
-  color: red;
-  font-weight: bold;
+  max-width: 90%;
+  font-size: 12px;
+  font-weight: ${({ theme }) => theme.bold};
+  text-align: center;
+  color: ${({ theme }) => theme.colors.red};
 `;
 
 const SignupSchema = Yup.object().shape({
@@ -107,9 +121,9 @@ const NewTipBar = ({ isActive, addTip, handleNewTipBarToggle }) => {
       }}
     >
       {({ handleChange, handleBlur }) => (
-        <Form>
-          <StyledWrapper isActive={isActive}>
-            <h1>ADD TIP</h1>
+        <StyledWrapper isActive={isActive}>
+          <Form>
+            <MainHeading>ADD TIP</MainHeading>
             <Heading>Category:</Heading>
             <StyledSelect component="select" name="category">
               <option value="football" defaultValue>
@@ -164,6 +178,7 @@ const NewTipBar = ({ isActive, addTip, handleNewTipBarToggle }) => {
               />
               <StyledErrorMessage name="odd" component="div" />
             </BetTypeWrapper>
+
             <DateWrapper>
               <Heading>Date:</Heading>
               <Input
@@ -185,8 +200,8 @@ const NewTipBar = ({ isActive, addTip, handleNewTipBarToggle }) => {
               <StyledErrorMessage name="time" component="div" />
             </DateWrapper>
             <StyledButton type="submit">ADD TIP</StyledButton>
-          </StyledWrapper>
-        </Form>
+          </Form>
+        </StyledWrapper>
       )}
     </Formik>
   );

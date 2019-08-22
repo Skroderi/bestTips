@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import NavProfile from "../../../molecules/NavProfile/NavProfile";
-import LoginRegister from "../../../molecules/Auth/LoginRegister";
+import Auth from "../../../molecules/Auth/Auth";
 import styled, { keyframes, css } from "styled-components";
 
 const LeftSideBarIn = keyframes`
@@ -19,17 +19,18 @@ const LeftSideBarIn = keyframes`
 
 const StyledLeftSideBar = styled.div`
   position: fixed;
-  top: 130px;
+  top: ${({ theme }) => theme.topNavHeight};
   left: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 400px;
+  width: 100vw;
   height: 100vh;
   color: ${({ theme }) => theme.colors.white};
   box-shadow: 10px 0px 15px rgba(0, 0, 0, 0.3);
   transform: translate(-120%);
+  z-index: 10000;
   animation: ${({ isLoginBarVisible }) =>
     isLoginBarVisible
       ? css`
@@ -56,17 +57,32 @@ const StyledLeftSideBar = styled.div`
     rgba(67, 68, 64, 1) 76%,
     rgba(67, 68, 64, 1) 100%
   );
+  ${({ theme }) => theme.media.tablet} {
+    width: 300px;
+  }
+`;
+
+const StyledWrapper = styled.div`
+  position: relative;
+  width: 300px;
+  height: 100vh;
+  padding: 20px;
 `;
 
 const LeftSideBar = ({
   isLoginBarVisible,
+  toggleLeftSideBar,
   auth: { isAuthenticated, loading }
 }) => {
   return (
     <StyledLeftSideBar isLoginBarVisible={isLoginBarVisible}>
       {!loading && (
         <Fragment>
-          {isAuthenticated ? <NavProfile /> : <LoginRegister />}
+          {isAuthenticated ? (
+            <NavProfile toggleLeftSideBar={toggleLeftSideBar} />
+          ) : (
+            <Auth />
+          )}
         </Fragment>
       )}
     </StyledLeftSideBar>

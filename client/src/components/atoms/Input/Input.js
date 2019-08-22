@@ -7,15 +7,16 @@ import mail from "assets/icons/mail.svg";
 
 const Input = styled.input`
   display: block;
-  width: 240px;
-  padding: 15px 30px;
+  width: 75%;
+  padding: 12px 30px;
   background-size: 17px 17px;
   background-position: 4% 50%;
   background-repeat: no-repeat;
   border-radius: 20px;
   border: none;
-  text-indent: 20px;
+  text-indent: 15px;
   background-color: hsl(0,0%,96%);
+  font-size:10px;
   ::placeholder {
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -38,7 +39,7 @@ const Input = styled.input`
   ${props =>
     props.team &&
     css`
-      width: 120px;
+      width: 110px;
       padding: 8px 8px;
       border-radius: 0px;
       background-image: none;

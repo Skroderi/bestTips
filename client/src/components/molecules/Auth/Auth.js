@@ -1,18 +1,17 @@
 import React, { useState } from "react";
-
 import Login from "components/molecules/Auth/Login";
 import Register from "components/molecules/Auth/Register";
 import styled, { css } from "styled-components";
-import Alert from "components/atoms/Alert";
+import Alert from "components/atoms/Alert/Alert";
 
 const SwitchButton = styled.button`
-  font-size: 25px;
+  font-size: 18px;
   text-align: left;
   border: none;
   background: none;
   color: ${({ theme }) => theme.colors.white};
   font-weight: bold;
-  padding: 15px 25px;
+  padding: 10px 20px;
   transition: 0.2s ease-in-out;
   cursor: pointer;
 
@@ -33,12 +32,22 @@ const SwitchButton = styled.button`
     `}
 `;
 const StyledButtons = styled.div`
+  display: inline-block;
   border: 4px solid ${({ theme }) => theme.colors.lightBlue};
   border-radius: 30px;
   margin-bottom: 15px;
 `;
-
-const LoginRegister = () => {
+const InnerWrapper = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+`;
+const Auth = () => {
   const [firstButton, toggleFirstBtn] = useState(true);
   const [secondButton, toggleSecondBtn] = useState(false);
 
@@ -57,7 +66,7 @@ const LoginRegister = () => {
   };
 
   return (
-    <>
+    <InnerWrapper>
       <Alert />
       <StyledButtons>
         <SwitchButton
@@ -80,8 +89,8 @@ const LoginRegister = () => {
       ) : (
         <Register loginAfterRegister={loginAfterRegister} />
       )}
-    </>
+    </InnerWrapper>
   );
 };
 
-export default LoginRegister;
+export default Auth;

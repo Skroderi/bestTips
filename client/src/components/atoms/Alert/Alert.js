@@ -4,10 +4,8 @@ import { connect } from "react-redux";
 import styled, { css } from "styled-components";
 
 const StyledAlert = styled.div`
-  font-size: 18px;
-  font-weight: bold;
-  padding: 1.5rem;
-  margin: 1rem 0;
+  font-size: 15px;
+  padding: 1.1rem;
   opacity: 0.9;
   background: ${({ color }) => (color === "fail" ? "red" : "green")};
   color: ${({ theme }) => theme.colors.white};

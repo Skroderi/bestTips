@@ -1,17 +1,18 @@
 import React, { Component, Fragment } from "react";
 import TopNavBar from "components/organisms/NavBars/TopNavBar/TopNavBar";
 import LeftSideBar from "components/organisms/NavBars/LeftSideBar/LeftSideBar";
-import NewTipBar from "components/molecules/NewTipBar/NewTipBar";
+import NewTipBar from "components/organisms/NavBars/NewTipBar/NewTipBar";
 import AddTipButton from "components/atoms/AddTipButton/AddTipButton";
 import plus from "assets/icons/plus.svg";
 import Buttons from "components/atoms/Button/Buttons";
 import { connect } from "react-redux";
+import styled from "styled-components";
+import { ThemeProvider } from "styled-components";
+import store from "store/store";
+import { theme } from "theme/mainTheme";
+import GlobalStye from "theme/GlobalStyle";
 
-class MainTamplate extends Component {
-  constructor(props) {
-    super(props);
-  }
-
+class UserPageTemplate extends Component {
   state = {
     isActive: false,
     loginActive: false
@@ -23,16 +24,16 @@ class MainTamplate extends Component {
     }));
   };
 
-  login = () => {
+  toggleLeftSideBar = () => {
     this.setState(prevState => ({
       loginActive: !prevState.loginActive
     }));
   };
 
   render() {
-    console.log(this.props);
     const { isActive, loginActive } = this.state;
     const id = this.props.id;
+    const { children } = this.props;
 
     const {
       auth: { isAuthenticated, loading }
@@ -53,15 +54,19 @@ class MainTamplate extends Component {
         </>
       );
     };
+
     return (
-      <div>
-        <TopNavBar login={this.login} />
-        <LeftSideBar isLoginBarVisible={loginActive} />
-        <Buttons id={id} />
+      <>
+        <TopNavBar toggleLeftSideBar={this.toggleLeftSideBar} />
+        <LeftSideBar
+          isLoginBarVisible={loginActive}
+          toggleLeftSideBar={this.toggleLeftSideBar}
+        />
         {!loading && (
           <Fragment>{isAuthenticated ? <AuthComponents /> : null}</Fragment>
         )}
-      </div>
+        {children}
+      </>
     );
   }
 }
@@ -70,4 +75,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps)(MainTamplate);
+export default connect(mapStateToProps)(UserPageTemplate);

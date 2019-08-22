@@ -11,17 +11,22 @@ import { logout } from "../../../actions/auth";
 
 const StyledWrapper = styled.div`
   display: flex;
+  position: absolute;
+  top: 40px;
   flex-direction: column;
   align-items: center;
   align-self: center;
   width: 80%;
+
+  ${({ theme }) => theme.media.tablet} {
+    position: static;
+  }
 `;
 const StyledNavList = styled.ul`
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 100%;
-  padding: 20px;
   list-style-type: none;
 `;
 
@@ -36,8 +41,8 @@ const StyledNavLink = styled(NavLink)`
   justify-content: center;
   align-items: center;
   grid-gap: 0px;
-  font-size: 25px;
-  padding: 10px 15px;
+  font-size: 20px;
+  padding: 7px 12px;
   color: ${({ theme }) => theme.colors.white};
   width: 100%;
   transition: 0.3s ease-in-out;
@@ -52,10 +57,13 @@ const StyledNavLink = styled(NavLink)`
 `;
 const Image = styled.img`
   border-radius: 50%;
-  width: 50%;
+  width: 30%;
+  ${({ theme }) => theme.media.tablet} {
+    width: 50%;
+  }
 `;
 
-const NavProfile = ({ logout, user }) => {
+const NavProfile = ({ logout, user, toggleLeftSideBar }) => {
   // console.log(user);
 
   return (
@@ -64,23 +72,27 @@ const NavProfile = ({ logout, user }) => {
       <h2>Hi {user ? user.name : null}</h2>
       <StyledNavList>
         <StyledNavItem>
-          <StyledNavLink to="/" activeClassName="active">
-            <Dashboard size="45" /> Home
+          <StyledNavLink
+            to="/"
+            onClick={toggleLeftSideBar}
+            activeClassName="active"
+          >
+            <Dashboard size="35" /> Home
           </StyledNavLink>
         </StyledNavItem>
         <StyledNavItem>
           <StyledNavLink activeClassName="active">
-            <Profile size="45" /> My tips
+            <Profile size="35" /> My tips
           </StyledNavLink>
         </StyledNavItem>
         <StyledNavItem>
           <StyledNavLink activeClassName="active">
-            <Stats size="45" /> Statistic
+            <Stats size="35" /> Statistic
           </StyledNavLink>
         </StyledNavItem>
         <StyledNavItem>
           <StyledNavLink onClick={logout}>
-            <LogOut size="45" /> Logout
+            <LogOut size="35" /> Logout
           </StyledNavLink>
         </StyledNavItem>
       </StyledNavList>

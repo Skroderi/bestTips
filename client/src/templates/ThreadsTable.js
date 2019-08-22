@@ -11,7 +11,7 @@ const StyledTh = styled.th`
   color: hsl(49, 100%, 58%);
 `;
 
-const Threads = () => {
+const ThreadsTable = () => {
   return (
     <StyledTr>
       <StyledTh>CATEGORY</StyledTh>
@@ -24,4 +24,4 @@ const Threads = () => {
   );
 };
 
-export default Threads;
+export default ThreadsTable;

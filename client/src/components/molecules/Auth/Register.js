@@ -14,19 +14,25 @@ const StyledForm = styled(Form)`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 80%;
 `;
 const StyledInput = styled(Input)`
   margin: 12px 0px;
+  width: 100%;
+  max-width: 200px;
 `;
 const StyledErrorMessage = styled(ErrorMessage)`
+  max-width: 90%;
+  font-size: 12px;
+  font-weight: ${({ theme }) => theme.bold};
+  text-align: center;
   color: ${({ theme }) => theme.colors.red};
-  font-weight: bold;
 `;
 
 const SignupSchema = Yup.object().shape({
   name: Yup.string()
     .min(3, "Too Short!")
-    .required("name is required!"),
+    .required("Name is required!"),
   email: Yup.string()
     .email("Invalid email")
     .required("Email is required"),
@@ -38,7 +44,7 @@ const SignupSchema = Yup.object().shape({
     .required("Password confirm is required")
 });
 
-const Register = ({ setAlert, loginAfterRegister, register }) => {
+const Register = ({ setAlert, loginAfterRegister, register, switchFunc }) => {
   return (
     <Formik
       initialValues={{
@@ -125,9 +131,6 @@ const Register = ({ setAlert, loginAfterRegister, register }) => {
           <StyledErrorMessage name="passwordConfirm" component="div" />
 
           <LoginButton type="submit">Register</LoginButton>
-          <p>
-            Already have an account? <a href="/">Sign In!</a>
-          </p>
         </StyledForm>
       )}
     </Formik>
