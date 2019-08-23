@@ -6,65 +6,64 @@ import { connect } from "react-redux";
 import { vote } from "actions/actions";
 import { ThumbsUp } from "styled-icons/fa-solid/ThumbsUp";
 import { ThumbsDown } from "styled-icons/fa-solid/ThumbsDown";
+import MediaQuery from "react-responsive";
 
-const StyledWrapper = styled.tr`
-  margin: 20px 0;
-`;
+// const StyledWrapper = styled.tr`
+//   margin: 20px 0;
+// `;
 
-const StyledCategoryTip = styled.td`
-  width: 50px;
+const StyledCategoryTip = styled.div`
+  width: 35px;
+  height: 35px;
   background-image: url(${({ theme, category }) => theme.icons[category]});
   background-repeat: no-repeat;
-  background-size: 50% 50%;
-  margin: 0 auto;
+  background-size: 35px;
   background-position: 50% 50%;
+  margin: 0 auto;
 `;
 
-const StyledTeamsContainer = styled.td`
-  font-size: 22px;
+const StyledTeamsContainer = styled.div`
+  font-size: 18px;
   font-weight: bold;
 `;
 
 const StyledDate = styled.div`
   display: block;
-  font-size: 18px;
+  font-size: 12px;
   font-weight: 500;
 `;
-const StyledVoteContainer = styled.td`
+const StyledVoteContainer = styled.div`
   display: flex;
   align-items: center;
-  flex-direction: column;
-  margin: 15px 0;
+  margin: 5px 0;
 `;
 
 const UpThumb = styled(ThumbsUp)`
   color: grey;
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   margin: 0px 5px;
   cursor: pointer;
 `;
 const DownThumb = styled(ThumbsDown)`
   color: grey;
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   margin: 0px 5px;
   cursor: pointer;
 `;
 
 const StyledThumbContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin: 0 auto;
 `;
 
-const StyledParagraph = styled.td`
+const StyledParagraph = styled.div`
   font-weight: bold;
-  font-size: 18px;
+  font-size: 14px;
 `;
 
 const Vote = styled.span`
-  font-size: 18px;
+  font-size: 14px;
   font-weight: bold;
   color: green;
   margin: 0px 5px;
@@ -77,10 +76,25 @@ const Vote = styled.span`
 
 const ResultVote = styled.div`
   display: block;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
   color: green;
-  margin-top: 5px;
+`;
+const StyledMatch = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px 0;
+`;
+const StyledDiv = styled.div`
+  display: flex;
+  width: 50%;
+  justify-content: space-between;
+  margin: 5px 0;
+`;
+const WrapperStyledDiv = styled.div`
+  text-align: center;
+  font-weight: bold;
 `;
 
 const TipCard = ({ tip, vote }, action) => {
@@ -101,39 +115,109 @@ const TipCard = ({ tip, vote }, action) => {
   // console.log(voted);
   let { voted } = tip;
 
-  return (
-    <StyledWrapper>
-      <StyledCategoryTip category={category} />
-      <StyledTeamsContainer>
-        {firstTeam} - {secondTeam}
-        <StyledDate>
-          <i>
-            {date} - {time}
-          </i>
-        </StyledDate>
-      </StyledTeamsContainer>
-      <StyledParagraph>{betOn}</StyledParagraph>
-      <StyledParagraph>{odd}</StyledParagraph>
-      <StyledVoteContainer>
-        <StyledThumbContainer>
-          <Vote>{likes}</Vote>
-          <UpThumb
-            onClick={!voted ? () => vote(id, (action = "like")) : null}
-            style={!voted ? { color: "green" } : { color: "grey" }}
-          />
-          <DownThumb
-            onClick={!voted ? () => vote(id, (action = "unLike")) : null}
-            style={!voted ? { color: "red" } : { color: "grey" }}
-          />
+  const MobileTipCard = () => {
+    return (
+      <MediaQuery query="(max-device-width: 500px)">
+        <td>
+          <StyledCategoryTip category={category} />
+        </td>
+        <td>
+          <StyledMatch>
+            <StyledTeamsContainer>
+              {firstTeam} - {secondTeam}
+              <StyledDate>
+                <i>
+                  {date} - {time}
+                </i>
+              </StyledDate>
+            </StyledTeamsContainer>
+            <StyledDiv>
+              <WrapperStyledDiv>
+                BET: <StyledParagraph>{betOn}</StyledParagraph>
+              </WrapperStyledDiv>
+              <WrapperStyledDiv>
+                ODD: <StyledParagraph> {odd}</StyledParagraph>
+              </WrapperStyledDiv>
+            </StyledDiv>
+            <ResultVote>{probability}</ResultVote>
+            <StyledVoteContainer>
+              <StyledThumbContainer>
+                <Vote>{likes}</Vote>
+                <UpThumb
+                  onClick={!voted ? () => vote(id, (action = "like")) : null}
+                  style={!voted ? { color: "green" } : { color: "grey" }}
+                />
+                <DownThumb
+                  onClick={!voted ? () => vote(id, (action = "unLike")) : null}
+                  style={!voted ? { color: "red" } : { color: "grey" }}
+                />
 
-          <Vote red>{unLikes}</Vote>
-        </StyledThumbContainer>
-        <ResultVote>{probability}</ResultVote>
-      </StyledVoteContainer>
-      <StyledParagraph>
-        <Link to={"/user/" + author}>{author}</Link>
-      </StyledParagraph>
-    </StyledWrapper>
+                <Vote red>{unLikes}</Vote>
+              </StyledThumbContainer>
+            </StyledVoteContainer>
+            <StyledParagraph>
+              <Link to={"/user/" + author}>{author}</Link>
+            </StyledParagraph>
+          </StyledMatch>
+        </td>
+      </MediaQuery>
+    );
+  };
+
+  const DeskoptTipCard = () => {
+    return (
+      <MediaQuery query="(min-device-width: 501px)">
+        <td>
+          <StyledCategoryTip category={category} />
+        </td>
+        <td>
+          <StyledTeamsContainer>
+            {firstTeam} - {secondTeam}
+            <StyledDate>
+              <i>
+                {date} - {time}
+              </i>
+            </StyledDate>
+          </StyledTeamsContainer>
+        </td>
+        <td>
+          <StyledParagraph>{betOn}</StyledParagraph>
+        </td>
+        <td>
+          <StyledParagraph>{odd}</StyledParagraph>
+        </td>
+        <td>
+          <StyledVoteContainer>
+            <StyledThumbContainer>
+              <Vote>{likes}</Vote>
+              <UpThumb
+                onClick={!voted ? () => vote(id, (action = "like")) : null}
+                style={!voted ? { color: "green" } : { color: "grey" }}
+              />
+              <DownThumb
+                onClick={!voted ? () => vote(id, (action = "unLike")) : null}
+                style={!voted ? { color: "red" } : { color: "grey" }}
+              />
+
+              <Vote red>{unLikes}</Vote>
+            </StyledThumbContainer>
+          </StyledVoteContainer>
+          <ResultVote>{probability}</ResultVote>
+        </td>
+        <td>
+          <StyledParagraph>
+            <Link to={"/user/" + author}>{author}</Link>
+          </StyledParagraph>
+        </td>
+      </MediaQuery>
+    );
+  };
+
+  return (
+    <tr>
+      <MobileTipCard />
+      <DeskoptTipCard />
+    </tr>
   );
 };
 

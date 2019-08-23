@@ -3,18 +3,22 @@ import TableTemplate from "templates/TableTemplate";
 import { connect } from "react-redux";
 import TipCard from "components/molecules/TipCard/TipCard";
 import ThreadsTable from "templates/ThreadsTable";
+import styled from "styled-components";
+
+const Styledtbody = styled.tbody`
+  width: 200px;
+`;
 
 const AllTips = ({ tips }) => {
   return (
-    // <TableTemplate>
-    //   <tbody>
-    //     <ThreadsTable />
-    //     {tips.tips.map((tip, id) => (
-    //       <TipCard tip={tip} key={id} />
-    //     ))}
-    //   </tbody>
-    // </TableTemplate>
-    <div>adasd</div>
+    <TableTemplate>
+      <Styledtbody>
+        <ThreadsTable />
+        {tips.tips.map((tip, id) => (
+          <TipCard tip={tip} key={id} />
+        ))}
+      </Styledtbody>
+    </TableTemplate>
   );
 };
 const mapStateToProps = ({ tips }) => ({ tips });
