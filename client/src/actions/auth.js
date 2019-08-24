@@ -16,7 +16,6 @@ export const loadUser = () => async dispatch => {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   }
-
   try {
     const res = await axios.get("/api/auth");
     dispatch({
@@ -64,8 +63,6 @@ export const register = ({ newUser, loginAfterRegister }) => async dispatch => {
 
 // LOGIN USER
 export const login = (email, password) => async dispatch => {
-  // console.log(props);
-
   const config = {
     headers: {
       "Content-type": "Application/json"

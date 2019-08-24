@@ -1,17 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import MediaQuery from "react-responsive";
 import PropTypes from "prop-types";
-import styled, { css } from "styled-components";
-import { connect } from "react-redux";
-import { vote } from "actions/actions";
 import { ThumbsUp } from "styled-icons/fa-solid/ThumbsUp";
 import { ThumbsDown } from "styled-icons/fa-solid/ThumbsDown";
-import MediaQuery from "react-responsive";
-import MobileTipCard from "./MobileTipCard";
-import DeskoptTipCard from "./DeskoptTipCard";
-// const StyledWrapper = styled.tr`
-//   margin: 20px 0;
-// `;
+import styled, { css } from "styled-components";
+import { Link } from "react-router-dom";
 
 const StyledCategoryTip = styled.div`
   width: 35px;
@@ -98,26 +91,75 @@ const WrapperStyledDiv = styled.div`
   font-weight: bold;
 `;
 
-const TipCard = ({ tip, vote }, action) => {
+const DeskoptTipCard = ({ tip, vote, action }) => {
+  const {
+    firstTeam,
+    secondTeam,
+    date,
+    author,
+    betOn,
+    category,
+    odd,
+    likes,
+    unLikes,
+    probability,
+    time,
+    id
+  } = tip;
+  let { voted } = tip;
+
   return (
-    <tr>
-      <MobileTipCard tip={tip} vote={vote} />
-      <DeskoptTipCard tip={tip} vote={vote} />
-    </tr>
+    <MediaQuery query="(min-device-width: 501px)">
+      <td>
+        <StyledCategoryTip category={category} />
+      </td>
+      <td>
+        <StyledTeamsContainer>
+          {firstTeam} - {secondTeam}
+          <StyledDate>
+            <i>
+              {date} - {time}
+            </i>
+          </StyledDate>
+        </StyledTeamsContainer>
+      </td>
+      <td>
+        <StyledParagraph>{betOn}</StyledParagraph>
+      </td>
+      <td>
+        <StyledParagraph>{odd}</StyledParagraph>
+      </td>
+      <td>
+        <StyledVoteContainer>
+          <StyledThumbContainer>
+            <Vote>{likes}</Vote>
+            <UpThumb
+              onClick={!voted ? () => vote(id, (action = "like")) : null}
+              style={!voted ? { color: "green" } : { color: "grey" }}
+            />
+            <DownThumb
+              onClick={!voted ? () => vote(id, (action = "unLike")) : null}
+              style={!voted ? { color: "red" } : { color: "grey" }}
+            />
+
+            <Vote red>{unLikes}</Vote>
+          </StyledThumbContainer>
+        </StyledVoteContainer>
+        <ResultVote>{probability}</ResultVote>
+      </td>
+      <td>
+        <StyledParagraph>
+          <Link to={"/user/" + author}>{author}</Link>
+        </StyledParagraph>
+      </td>
+    </MediaQuery>
   );
 };
 
-TipCard.propTypes = {
+DeskoptTipCard.propTypes = {
   tip: PropTypes.object.isRequired,
   vote: PropTypes.func.isRequired,
   action: PropTypes.string
 };
 
-const mapDispatchToProps = dispatch => ({
-  vote: (id, action) => dispatch(vote(id, action))
-});
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(TipCard);
+export default DeskoptTipCard;

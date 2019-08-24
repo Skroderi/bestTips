@@ -12,15 +12,15 @@ import { logout } from "../../../actions/auth";
 const StyledWrapper = styled.div`
   display: flex;
   position: absolute;
-  top: 40px;
+  top: 5vh;
   flex-direction: column;
   align-items: center;
   align-self: center;
   width: 80%;
-
+/* 
   ${({ theme }) => theme.media.tablet} {
     position: static;
-  }
+  } */
 `;
 const StyledNavList = styled.ul`
   display: flex;

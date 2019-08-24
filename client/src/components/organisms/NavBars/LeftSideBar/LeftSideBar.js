@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import NavProfile from "../../../molecules/NavProfile/NavProfile";
 import Auth from "../../../molecules/Auth/Auth";
 import styled, { keyframes, css } from "styled-components";
+import Spinner from "components/atoms/Spinner/Spinner";
 
 const LeftSideBarIn = keyframes`
   0% {
@@ -26,11 +27,12 @@ const StyledLeftSideBar = styled.div`
   align-items: center;
   justify-content: center;
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 70px);
   color: ${({ theme }) => theme.colors.white};
   box-shadow: 10px 0px 15px rgba(0, 0, 0, 0.3);
   transform: translate(-120%);
   z-index: 10000;
+  overflow: auto;
   animation: ${({ isLoginBarVisible }) =>
     isLoginBarVisible
       ? css`
@@ -62,13 +64,6 @@ const StyledLeftSideBar = styled.div`
   }
 `;
 
-const StyledWrapper = styled.div`
-  position: relative;
-  width: 300px;
-  height: 100vh;
-  padding: 20px;
-`;
-
 const LeftSideBar = ({
   isLoginBarVisible,
   toggleLeftSideBar,
@@ -76,7 +71,9 @@ const LeftSideBar = ({
 }) => {
   return (
     <StyledLeftSideBar isLoginBarVisible={isLoginBarVisible}>
-      {!loading && (
+      {loading ? (
+        <Spinner />
+      ) : (
         <Fragment>
           {isAuthenticated ? (
             <NavProfile toggleLeftSideBar={toggleLeftSideBar} />
@@ -85,12 +82,23 @@ const LeftSideBar = ({
           )}
         </Fragment>
       )}
+
+      {/* {!loading && (
+        <Fragment>
+          {isAuthenticated ? (
+            <NavProfile toggleLeftSideBar={toggleLeftSideBar} />
+          ) : (
+            <Auth />
+          )}
+        </Fragment>
+      )} */}
     </StyledLeftSideBar>
   );
 };
 
 LeftSideBar.propTypes = {
   isLoginBarVisible: PropTypes.bool.isRequired,
+  toggleLeftSideBar: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
 };
 

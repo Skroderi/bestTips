@@ -2,10 +2,8 @@ import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import Logo from "components/atoms/Logo/Logo";
-import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../../../../actions/auth";
-import { LogOut } from "styled-icons/boxicons-regular/LogOut";
 import { User } from "styled-icons/boxicons-regular/User";
 
 const StyledTopNavBar = styled.div`
@@ -80,15 +78,13 @@ const TopNavBar = ({
           </NavItem>
         </li> */}
       </StyledNavList>
-      {!loading && (
-        <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
-      )}
+      <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
     </StyledTopNavBar>
   );
 };
 
 TopNavBar.propTypes = {
-  login: PropTypes.func.isRequired,
+  toggleLeftSideBar: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
 };
 const mapStateToProps = state => ({
