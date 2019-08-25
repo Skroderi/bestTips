@@ -14,9 +14,9 @@ const AllTips = ({ tips }) => {
     <TableTemplate>
       <Styledtbody>
         <ThreadsTable />
-        {tips.tips.map((tip, id) => (
+        {/* {tips.current.map((tip, id) => (
           <TipCard tip={tip} key={id} />
-        ))}
+        ))} */}
       </Styledtbody>
     </TableTemplate>
   );

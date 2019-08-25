@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import Button from "components/atoms/Button/LoginButton";
 import { connect } from "react-redux";
-import { addTip } from "actions/actions";
+import { addTip } from "actions/tip";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Input from "components/atoms/Input/Input";
@@ -207,8 +207,7 @@ const NewTipBar = ({ isActive, addTip, handleNewTipBarToggle }) => {
   );
 };
 const mapDispatchToProps = dispatch => ({
-  addTip: (category, firstTeam, secondTeam, odd, author) =>
-    dispatch(addTip(category, firstTeam, secondTeam, odd, author))
+  addTip: values => dispatch(addTip(values))
 });
 
 NewTipBar.propTypes = {

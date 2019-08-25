@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 import { connect } from "react-redux";
-import { vote } from "actions/actions";
+import { vote } from "actions/tip";
 import { ThumbsUp } from "styled-icons/fa-solid/ThumbsUp";
 import { ThumbsDown } from "styled-icons/fa-solid/ThumbsDown";
 import MediaQuery from "react-responsive";
