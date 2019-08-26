@@ -3,8 +3,6 @@ import axios from "axios";
 import { ADD_TIP, GET_TIPS, LOGOUT } from "./types";
 
 export const addTip = tipContext => async dispatch => {
-  console.log(tipContext);
-
   try {
     const config = {
       headers: {
@@ -16,7 +14,6 @@ export const addTip = tipContext => async dispatch => {
       type: ADD_TIP,
       payload: res.data
     });
-    console.log(res.data);
   } catch (err) {
     console.error(err);
   }
@@ -29,7 +26,6 @@ export const getTips = () => async dispatch => {
       type: GET_TIPS,
       payload: res.data
     });
-    console.log(res.data);
   } catch (err) {
     console.error(err);
   }

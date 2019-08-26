@@ -97,7 +97,12 @@ const SignupSchema = Yup.object().shape({
   date: Yup.date().required("Required"),
   time: Yup.string().required("Required")
 });
-const NewTipBar = ({ isActive, addTip, handleNewTipBarToggle }) => {
+const NewTipBar = ({
+  isActive,
+  addTip,
+  handleNewTipBarToggle,
+  auth: { user }
+}) => {
   return (
     <Formik
       initialValues={{
@@ -110,7 +115,7 @@ const NewTipBar = ({ isActive, addTip, handleNewTipBarToggle }) => {
         time: "",
         likes: 0,
         unLikes: 0,
-        author: "random",
+        author: user.name,
         probability: "no votes"
       }}
       validationSchema={SignupSchema}
@@ -210,6 +215,10 @@ const mapDispatchToProps = dispatch => ({
   addTip: values => dispatch(addTip(values))
 });
 
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
 NewTipBar.propTypes = {
   isActive: PropTypes.bool.isRequired,
   addTip: PropTypes.func.isRequired,
@@ -217,6 +226,6 @@ NewTipBar.propTypes = {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(NewTipBar);
