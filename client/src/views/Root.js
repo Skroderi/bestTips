@@ -22,7 +22,8 @@ if (localStorage.token) {
 function Root() {
   useEffect(() => {
     store.dispatch(loadUser());
-  }, []);
+  });
+  console.log(store);
 
   return (
     <Provider store={store}>

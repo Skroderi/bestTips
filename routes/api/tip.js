@@ -69,4 +69,36 @@ router.post(
   }
 );
 
+// @route GET api/tip
+// @desc Get all tip
+// @access Public
+
+router.get("/", async (req, res) => {
+  try {
+    const tips = await Tip.find();
+    res.json(tips);
+  } catch (err) {
+    console.err(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route GET api/tip/user/:user_id
+// @desc Get tips by user ID
+// @access Public
+
+router.get("/user/:user_id", async (req, res) => {
+  try {
+    const tip = await Tip.find({ user: req.params.user_id });
+    if (!tip) return res.status(400).json({ msg: "User dont have any tips." });
+    res.json(tip);
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind == "ObjectId") {
+      return res.status(400).json({ msg: "Profile not found" });
+    }
+    res.status(500).send("Server Error");
+  }
+});
+
 module.exports = router;

@@ -1,4 +1,4 @@
-import { ADD_TIP } from "../actions/types";
+import { ADD_TIP, GET_TIPS } from "../actions/types";
 
 const initialState = {
   current: [],
@@ -7,14 +7,18 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
   const { type, payload } = action;
-  console.log(payload);
-
   switch (type) {
     case ADD_TIP:
       return {
         ...state,
+        current: [payload, ...state.current]
+      };
+    case GET_TIPS:
+      return {
+        ...state,
         current: payload
       };
+
     case "VOTE":
       return {
         ...state,

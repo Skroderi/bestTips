@@ -1,25 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import TableTemplate from "templates/TableTemplate";
 import { connect } from "react-redux";
 import TipCard from "components/molecules/TipCard/TipCard";
 import ThreadsTable from "templates/ThreadsTable";
 import styled from "styled-components";
-
+import { getTips } from "../actions/tip";
 const Styledtbody = styled.tbody`
   width: 200px;
 `;
 
-const AllTips = ({ tips }) => {
+const AllTips = ({ getTips, tips }) => {
+  useEffect(() => {
+    getTips();
+  }, []);
   return (
     <TableTemplate>
       <Styledtbody>
         <ThreadsTable />
-        {/* {tips.current.map((tip, id) => (
+        {tips.current.map((tip, id) => (
           <TipCard tip={tip} key={id} />
-        ))} */}
+        ))}
       </Styledtbody>
     </TableTemplate>
   );
 };
-const mapStateToProps = ({ tips }) => ({ tips });
-export default connect(mapStateToProps)(AllTips);
+const mapStateToProps = state => ({
+  tips: state.tips
+});
+export default connect(
+  mapStateToProps,
+  { getTips }
+)(AllTips);
