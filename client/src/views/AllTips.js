@@ -5,6 +5,7 @@ import TipCard from "components/molecules/TipCard/TipCard";
 import ThreadsTable from "templates/ThreadsTable";
 import styled from "styled-components";
 import { getTips } from "../actions/tip";
+
 const Styledtbody = styled.tbody`
   width: 200px;
 `;

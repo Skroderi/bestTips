@@ -101,4 +101,24 @@ router.get("/user/:user_id", async (req, res) => {
   }
 });
 
+// @route PUT api/tip/tip_id
+// @desc Update tip, if user click on win,return,lose
+// @access Private
+
+router.put("/:tip_id", async (req, res) => {
+  try {
+    const tip = await Tip.findOneAndUpdate(
+      { _id: req.params.tip_id },
+      { current: false, status: req.body.status }
+    );
+    res.json(tip);
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind == "ObjectId") {
+      return res.status(400).json({ msg: "Profile not found" });
+    }
+    res.status(500).send("Server Error");
+  }
+});
+
 module.exports = router;

@@ -116,7 +116,9 @@ const NewTipBar = ({
         likes: 0,
         unLikes: 0,
         author: user.name,
-        probability: "no votes"
+        probability: "no votes",
+        status: "pending",
+        current: true
       }}
       validationSchema={SignupSchema}
       onSubmit={(values, { resetForm }) => {

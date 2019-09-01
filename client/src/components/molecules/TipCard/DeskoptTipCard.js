@@ -5,7 +5,37 @@ import { ThumbsUp } from "styled-icons/fa-solid/ThumbsUp";
 import { ThumbsDown } from "styled-icons/fa-solid/ThumbsDown";
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
+import { updateTip } from "../../../actions/tip";
+import { Check } from "styled-icons/boxicons-regular/Check";
+import { Equals } from "styled-icons/typicons/Equals";
+import { Cross } from "styled-icons/icomoon/Cross";
+import { connect } from "react-redux";
+const StyledCheck = styled(Check)`
+  color: green;
+  border-radius: 50%;
+  border: 1px solid;
+  cursor: pointer;
+`;
 
+const StyledEquals = styled(Equals)`
+  color: orange;
+  border-radius: 50%;
+  border: 1px solid;
+  margin: 0 2px;
+  cursor: pointer;
+`;
+
+const StyledCross = styled(Cross)`
+  color: red;
+  border-radius: 50%;
+  border: 1px solid;
+  padding: 1px;
+  cursor: pointer;
+`;
+
+const StyledActions = styled.div`
+  display: block;
+`;
 const StyledCategoryTip = styled.div`
   width: 35px;
   height: 35px;
@@ -91,7 +121,7 @@ const WrapperStyledDiv = styled.div`
   font-weight: bold;
 `;
 
-const DeskoptTipCard = ({ tip, vote, action }) => {
+const DeskoptTipCard = ({ tip, vote, action, status, updateTip }) => {
   const {
     firstTeam,
     secondTeam,
@@ -104,7 +134,7 @@ const DeskoptTipCard = ({ tip, vote, action }) => {
     unLikes,
     probability,
     time,
-    id
+    _id
   } = tip;
   let { voted } = tip;
 
@@ -134,12 +164,12 @@ const DeskoptTipCard = ({ tip, vote, action }) => {
           <StyledThumbContainer>
             <Vote>{likes}</Vote>
             <UpThumb
-              onClick={!voted ? () => vote(id, (action = "like")) : null}
-              style={!voted ? { color: "green" } : { color: "grey" }}
+            // onClick={!voted ? () => vote(id, (action = "like")) : null}
+            // style={!voted ? { color: "green" } : { color: "grey" }}
             />
             <DownThumb
-              onClick={!voted ? () => vote(id, (action = "unLike")) : null}
-              style={!voted ? { color: "red" } : { color: "grey" }}
+            // onClick={!voted ? () => vote(id, (action = "unLike")) : null}
+            // style={!voted ? { color: "red" } : { color: "grey" }}
             />
 
             <Vote red>{unLikes}</Vote>
@@ -151,6 +181,20 @@ const DeskoptTipCard = ({ tip, vote, action }) => {
         <StyledParagraph>
           <Link to={"/user/" + author}>{author}</Link>
         </StyledParagraph>
+        <StyledActions>
+          <StyledCheck
+            size="20"
+            onClick={() => updateTip(_id, (status = "win"))}
+          />
+          <StyledEquals
+            size="20"
+            onClick={() => updateTip(_id, (status = "return"))}
+          />
+          <StyledCross
+            size="20"
+            onClick={() => updateTip(_id, (status = "lose"))}
+          />
+        </StyledActions>
       </td>
     </MediaQuery>
   );
@@ -162,4 +206,7 @@ DeskoptTipCard.propTypes = {
   action: PropTypes.string
 };
 
-export default DeskoptTipCard;
+export default connect(
+  null,
+  { updateTip }
+)(DeskoptTipCard);

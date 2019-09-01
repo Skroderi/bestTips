@@ -9,3 +9,4 @@ export const LOGIN_FAIL = "LOGIN_FAIL";
 export const LOGOUT = "LOGOUT";
 export const ADD_TIP = "ADD_TIP";
 export const GET_TIPS = "GET_TIPS";
+export const UPDATE_TIP = "UPDATE_TIP";
