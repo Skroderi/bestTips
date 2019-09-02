@@ -27,7 +27,6 @@ router.post(
 
     const {
       category,
-      id,
       firstTeam,
       secondTeam,
       date,
@@ -38,7 +37,9 @@ router.post(
       unLikes,
       probability,
       voted,
-      author
+      author,
+      current,
+      status
     } = req.body;
 
     //Build tip object
@@ -56,6 +57,8 @@ router.post(
     if (probability) tipFields.probability = probability;
     if (voted) tipFields.voted = voted;
     if (author) tipFields.author = author;
+    if (status) tipFields.status = status;
+    if (current) tipFields.current = current;
 
     // Create
     try {
@@ -109,9 +112,11 @@ router.put("/:tip_id", async (req, res) => {
   try {
     const tip = await Tip.findOneAndUpdate(
       { _id: req.params.tip_id },
-      { current: false, status: req.body.status }
+      { current: false, status: req.body.status },
+      { new: true }
     );
-    res.json(tip);
+    await res.json(tip);
+    await console.log(tip);
   } catch (err) {
     console.error(err.message);
     if (err.kind == "ObjectId") {

@@ -5,11 +5,16 @@ import tennis from "assets/icons/tennisIcon.svg";
 export const theme = {
   light: 300,
   bold: 600,
-  topNavHeight: '70px',
+  topNavHeight: "70px",
   icons: {
     football,
     hockey,
     tennis
+  },
+  tipStatus: {
+    win: "hsl(122, 96%, 49%, .8) ",
+    lose: "hsl(3, 100%, 48%, .8)",
+    return: "hsl(60, 96%, 55%, .8)"
   },
   colors: {
     white: "#ffffff",

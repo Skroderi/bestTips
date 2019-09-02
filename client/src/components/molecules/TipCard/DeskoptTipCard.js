@@ -10,6 +10,7 @@ import { Check } from "styled-icons/boxicons-regular/Check";
 import { Equals } from "styled-icons/typicons/Equals";
 import { Cross } from "styled-icons/icomoon/Cross";
 import { connect } from "react-redux";
+
 const StyledCheck = styled(Check)`
   color: green;
   border-radius: 50%;
@@ -121,7 +122,7 @@ const WrapperStyledDiv = styled.div`
   font-weight: bold;
 `;
 
-const DeskoptTipCard = ({ tip, vote, action, status, updateTip }) => {
+const DeskoptTipCard = ({ tip, vote, action, status, updateTip, auth }) => {
   const {
     firstTeam,
     secondTeam,
@@ -134,7 +135,9 @@ const DeskoptTipCard = ({ tip, vote, action, status, updateTip }) => {
     unLikes,
     probability,
     time,
-    _id
+    _id,
+    user,
+    current
   } = tip;
   let { voted } = tip;
 
@@ -181,20 +184,25 @@ const DeskoptTipCard = ({ tip, vote, action, status, updateTip }) => {
         <StyledParagraph>
           <Link to={"/user/" + author}>{author}</Link>
         </StyledParagraph>
-        <StyledActions>
-          <StyledCheck
-            size="20"
-            onClick={() => updateTip(_id, (status = "win"))}
-          />
-          <StyledEquals
-            size="20"
-            onClick={() => updateTip(_id, (status = "return"))}
-          />
-          <StyledCross
-            size="20"
-            onClick={() => updateTip(_id, (status = "lose"))}
-          />
-        </StyledActions>
+        {auth.isAuthenticated &&
+        auth.user._id !== null &&
+        auth.user._id === user &&
+        current ? (
+          <StyledActions>
+            <StyledCheck
+              size="20"
+              onClick={() => updateTip(_id, (status = "win"))}
+            />
+            <StyledEquals
+              size="20"
+              onClick={() => updateTip(_id, (status = "return"))}
+            />
+            <StyledCross
+              size="20"
+              onClick={() => updateTip(_id, (status = "lose"))}
+            />
+          </StyledActions>
+        ) : null}
       </td>
     </MediaQuery>
   );
@@ -206,7 +214,11 @@ DeskoptTipCard.propTypes = {
   action: PropTypes.string
 };
 
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
 export default connect(
-  null,
+  mapStateToProps,
   { updateTip }
 )(DeskoptTipCard);

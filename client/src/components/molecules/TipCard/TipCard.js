@@ -98,12 +98,16 @@ const WrapperStyledDiv = styled.div`
   font-weight: bold;
 `;
 
+const StyledThread = styled.tr`
+  background: ${({ theme, tip }) => theme.tipStatus[tip.status]};
+`;
+
 const TipCard = ({ tip, vote }, action) => {
   return (
-    <tr>
+    <StyledThread tip={tip}>
       <MobileTipCard tip={tip} vote={vote} />
       <DeskoptTipCard tip={tip} vote={vote} />
-    </tr>
+    </StyledThread>
   );
 };
 

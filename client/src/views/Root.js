@@ -1,13 +1,7 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Layout from "../templates/Layout";
-import { ThemeProvider } from "styled-components";
-import GlobalStye from "theme/GlobalStyle";
-import { theme } from "theme/mainTheme";
-import AllTips from "views/AllTips";
-import Tips from "./Tips";
-import History from "./History";
-import AllTipsHistory from "./AllTipsHistory";
+import Tips from "views/Tips";
 import UserPageTemplate from "../templates/UserPageTemplate";
 
 //Redux
@@ -33,11 +27,7 @@ function Root() {
             <UserPageTemplate />
             <Switch>
               <Route exact path="/" render={() => <Redirect to="tips" />} />
-              <Route exact path="/tips" component={AllTips} />
-              <Route exact path="/tips/history" component={AllTipsHistory} />
-              {/* <Route path="/tips/football" component={FootballTips} /> */}
-              <Route exact path="/tips/:id" component={Tips} />
-              <Route path="/tips/:id/history" component={History} />
+              <Route exact path="/tips" component={Tips} />
             </Switch>
           </>
         </Layout>

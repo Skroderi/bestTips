@@ -22,6 +22,7 @@ export const addTip = tipContext => async dispatch => {
 export const getTips = () => async dispatch => {
   try {
     const res = await axios.get("api/tip");
+
     dispatch({
       type: GET_TIPS,
       payload: res.data
@@ -37,15 +38,15 @@ export const updateTip = (id, status) => async dispatch => {
   };
   try {
     const res = await axios.put(`api/tip/${id}`, item);
-    console.log(res.data);
-    console.log(status);
-    // console.log(status);
     dispatch({
-      type: UPDATE_TIP
+      type: UPDATE_TIP,
+      payload: res.data
     });
   } catch (err) {
     console.error(err);
   }
+
+  getTips();
 };
 
 export const vote = (id, action) => {

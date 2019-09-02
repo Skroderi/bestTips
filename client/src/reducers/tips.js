@@ -1,4 +1,4 @@
-import { ADD_TIP, GET_TIPS, GET_TIP } from "../actions/types";
+import { ADD_TIP, GET_TIPS, GET_TIP, UPDATE_TIP } from "../actions/types";
 
 const initialState = {
   current: [],
@@ -12,6 +12,20 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         current: [payload, ...state.current]
+      };
+    case UPDATE_TIP:
+      return {
+        ...state,
+        current: state.current.map((tip, index) => {
+          if (tip._id === payload._id) {
+            return {
+              ...tip,
+              status: payload.status,
+              current: payload.current
+            };
+          }
+          return tip;
+        })
       };
     case GET_TIPS:
       return {

@@ -2,13 +2,13 @@ import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import TipCard from "components/molecules/TipCard/TipCard";
 
-const History = ({ tips, category }) => {
+const Incoming = ({ tips, category }) => {
   return (
     <Fragment>
       {category === "all" ? (
         <Fragment>
           {tips.current
-            .filter(tip => tip.current === false)
+            .filter(tip => tip.current === true)
             .map((tip, id) => {
               return <TipCard tip={tip} key={id} />;
             })}
@@ -16,7 +16,7 @@ const History = ({ tips, category }) => {
       ) : (
         <Fragment>
           {tips.current
-            .filter(tip => tip.category === category && tip.current === false)
+            .filter(tip => tip.category === category && tip.current === true)
             .map((tip, id) => {
               return <TipCard tip={tip} key={id} />;
             })}
@@ -26,9 +26,9 @@ const History = ({ tips, category }) => {
   );
 };
 
-History.propTypes = {
+Incoming.propTypes = {
   tips: PropTypes.object.isRequired,
   category: PropTypes.string.isRequired
 };
 
-export default History;
+export default Incoming;
