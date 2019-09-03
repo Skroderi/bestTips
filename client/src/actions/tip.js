@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { ADD_TIP, GET_TIPS, LOGOUT, UPDATE_TIP } from "./types";
+import { ADD_TIP, GET_TIPS, LOGOUT, UPDATE_TIP, GET_USERTIPS } from "./types";
 
 export const addTip = tipContext => async dispatch => {
   try {
@@ -21,10 +21,24 @@ export const addTip = tipContext => async dispatch => {
 
 export const getTips = () => async dispatch => {
   try {
-    const res = await axios.get("api/tip");
+    const res = await axios.get("/api/tip");
 
     dispatch({
       type: GET_TIPS,
+      payload: res.data
+    });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const getUserTips = userName => async dispatch => {
+  try {
+    const res = await axios.get(`/api/tip/user/${userName}`);
+    console.log(res.data);
+
+    dispatch({
+      type: GET_USERTIPS,
       payload: res.data
     });
   } catch (err) {

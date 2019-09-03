@@ -7,8 +7,6 @@ import store from "store/store";
 import { theme } from "theme/mainTheme";
 const MainWrapper = styled.div`
   position: relative;
-  height: 100vh;
-  width: 100vw;
 `;
 const Layout = ({ children }) => {
   return (

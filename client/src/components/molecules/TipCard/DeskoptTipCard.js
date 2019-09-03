@@ -61,6 +61,7 @@ const StyledVoteContainer = styled.div`
   display: flex;
   align-items: center;
   margin: 5px 0;
+  min-width: 70px;
 `;
 
 const UpThumb = styled(ThumbsUp)`

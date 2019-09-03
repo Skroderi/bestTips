@@ -11,17 +11,17 @@ const Styledtbody = styled.tbody`
   width: 200px;
 `;
 const MainWrapper = styled.div`
-  margin-top: 90px;
   width: 90vw;
+  margin-top: 150px;
+  margin-left: auto;
+  margin-right: auto;
   max-width: 800px;
-  margin: 0 auto;
 `;
 const StyledSelect = styled.select`
   text-transform: uppercase;
   padding: 10px;
   margin: 5px;
   border: none;
-  margin-top: 200px;
   background-color: white;
   border: 2px solid black;
 `;

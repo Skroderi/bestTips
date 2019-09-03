@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Layout from "../templates/Layout";
 import Tips from "views/Tips";
+import UserTips from "views/UserTips";
 import UserPageTemplate from "../templates/UserPageTemplate";
 
 //Redux
@@ -28,6 +29,7 @@ function Root() {
             <Switch>
               <Route exact path="/" render={() => <Redirect to="tips" />} />
               <Route exact path="/tips" component={Tips} />
+              <Route exact path="/:id/tips" component={UserTips} />
             </Switch>
           </>
         </Layout>

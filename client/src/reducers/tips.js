@@ -1,4 +1,10 @@
-import { ADD_TIP, GET_TIPS, GET_TIP, UPDATE_TIP } from "../actions/types";
+import {
+  ADD_TIP,
+  GET_TIPS,
+  GET_TIP,
+  UPDATE_TIP,
+  GET_USERTIPS
+} from "../actions/types";
 
 const initialState = {
   current: [],
@@ -30,7 +36,13 @@ const rootReducer = (state = initialState, action) => {
     case GET_TIPS:
       return {
         ...state,
-        current: payload
+        current: payload,
+        usertips: []
+      };
+    case GET_USERTIPS:
+      return {
+        ...state,
+        usertips: payload
       };
     case "VOTE":
       return {

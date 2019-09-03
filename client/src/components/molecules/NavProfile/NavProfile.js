@@ -81,7 +81,11 @@ const NavProfile = ({ logout, user, toggleLeftSideBar }) => {
           </StyledNavLink>
         </StyledNavItem>
         <StyledNavItem>
-          <StyledNavLink activeClassName="active">
+          <StyledNavLink
+            to={`/${user.name}/tips`}
+            onClick={toggleLeftSideBar}
+            activeClassName="active"
+          >
             <Profile size="35" /> My tips
           </StyledNavLink>
         </StyledNavItem>
