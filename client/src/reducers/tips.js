@@ -8,7 +8,11 @@ import {
 
 const initialState = {
   current: [],
-  history: []
+  loading: true,
+  userTips: {
+    tips: [],
+    loading: true
+  }
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -37,12 +41,16 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         current: payload,
-        usertips: []
+        loading: false
+        // usertips: []
       };
     case GET_USERTIPS:
       return {
         ...state,
-        usertips: payload
+        userTips: {
+          tips: payload,
+          loading: false
+        }
       };
     case "VOTE":
       return {

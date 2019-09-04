@@ -29,7 +29,11 @@ function Root() {
             <Switch>
               <Route exact path="/" render={() => <Redirect to="tips" />} />
               <Route exact path="/tips" component={Tips} />
-              <Route exact path="/:id/tips" component={UserTips} />
+              <Route
+                exact
+                path="/:id/tips"
+                render={props => <UserTips {...props} />}
+              />
             </Switch>
           </>
         </Layout>

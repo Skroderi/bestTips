@@ -164,21 +164,24 @@ const DeskoptTipCard = ({ tip, vote, action, status, updateTip, auth }) => {
         <StyledParagraph>{odd}</StyledParagraph>
       </td>
       <td>
-        <StyledVoteContainer>
-          <StyledThumbContainer>
-            <Vote>{likes}</Vote>
-            <UpThumb
-            // onClick={!voted ? () => vote(id, (action = "like")) : null}
-            // style={!voted ? { color: "green" } : { color: "grey" }}
-            />
-            <DownThumb
-            // onClick={!voted ? () => vote(id, (action = "unLike")) : null}
-            // style={!voted ? { color: "red" } : { color: "grey" }}
-            />
+        {current ? (
+          <StyledVoteContainer>
+            <StyledThumbContainer>
+              <Vote>{likes}</Vote>
+              <UpThumb
+              // onClick={!voted ? () => vote(id, (action = "like")) : null}
+              // style={!voted ? { color: "green" } : { color: "grey" }}
+              />
+              <DownThumb
+              // onClick={!voted ? () => vote(id, (action = "unLike")) : null}
+              // style={!voted ? { color: "red" } : { color: "grey" }}
+              />
 
-            <Vote red>{unLikes}</Vote>
-          </StyledThumbContainer>
-        </StyledVoteContainer>
+              <Vote red>{unLikes}</Vote>
+            </StyledThumbContainer>
+          </StyledVoteContainer>
+        ) : null}
+
         <ResultVote>{probability}</ResultVote>
       </td>
       <td>

@@ -166,21 +166,26 @@ const MobileTipCard = ({ tip, vote, action, status, updateTip, auth }) => {
             </WrapperStyledDiv>
           </StyledDiv>
           <ResultVote>{probability}</ResultVote>
-          <StyledVoteContainer>
-            <StyledThumbContainer>
-              <Vote>{likes}</Vote>
-              <UpThumb
-              // onClick={!voted ? () => vote(id, (action = "like")) : null}
-              // style={!voted ? { color: "green" } : { color: "grey" }}
-              />
-              <DownThumb
-              // onClick={!voted ? () => vote(id, (action = "unLike")) : null}
-              // style={!voted ? { color: "red" } : { color: "grey" }}
-              />
 
-              <Vote red>{unLikes}</Vote>
-            </StyledThumbContainer>
-          </StyledVoteContainer>
+          {current ? (
+            <StyledVoteContainer>
+              {" "}
+              <StyledThumbContainer>
+                <Vote>{likes}</Vote>
+                <UpThumb
+                // onClick={!voted ? () => vote(id, (action = "like")) : null}
+                // style={!voted ? { color: "green" } : { color: "grey" }}
+                />
+                <DownThumb
+                // onClick={!voted ? () => vote(id, (action = "unLike")) : null}
+                // style={!voted ? { color: "red" } : { color: "grey" }}
+                />
+
+                <Vote red>{unLikes}</Vote>
+              </StyledThumbContainer>{" "}
+            </StyledVoteContainer>
+          ) : null}
+
           <StyledParagraph>
             <Link to={"/user/" + author}>{author}</Link>
             {auth.isAuthenticated &&

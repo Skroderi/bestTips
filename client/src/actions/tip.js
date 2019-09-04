@@ -9,7 +9,7 @@ export const addTip = tipContext => async dispatch => {
         "Content-Type": "application/json"
       }
     };
-    const res = await axios.post("api/tip", tipContext, config);
+    const res = await axios.post("/api/tip", tipContext, config);
     dispatch({
       type: ADD_TIP,
       payload: res.data
@@ -51,7 +51,7 @@ export const updateTip = (id, status) => async dispatch => {
     status: status
   };
   try {
-    const res = await axios.put(`api/tip/${id}`, item);
+    const res = await axios.put(`/api/tip/${id}`, item);
     dispatch({
       type: UPDATE_TIP,
       payload: res.data
