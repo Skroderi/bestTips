@@ -189,6 +189,7 @@ const DeskoptTipCard = ({ tip, vote, action, status, updateTip, auth }) => {
           <Link to={"/user/" + author}>{author}</Link>
         </StyledParagraph>
         {auth.isAuthenticated &&
+        !auth.loading &&
         auth.user._id !== null &&
         auth.user._id === user &&
         current ? (

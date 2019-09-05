@@ -189,7 +189,7 @@ const MobileTipCard = ({ tip, vote, action, status, updateTip, auth }) => {
           <StyledParagraph>
             <Link to={"/user/" + author}>{author}</Link>
             {auth.isAuthenticated &&
-            auth.user._id !== null &&
+            auth.user !== null &&
             auth.user._id === user &&
             current ? (
               <StyledActions>

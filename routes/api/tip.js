@@ -86,8 +86,8 @@ router.get("/", async (req, res) => {
   }
 });
 
-// @route GET api/tip/user/:user_id
-// @desc Get tips by user ID
+// @route GET api/tip/user/:user_Name
+// @desc Get tips by user Name
 // @access Public
 
 router.get("/user/:user_Name", async (req, res) => {
@@ -95,6 +95,7 @@ router.get("/user/:user_Name", async (req, res) => {
     const tips = await Tip.find({ author: req.params.user_Name });
     if (!tips) return res.status(400).json({ msg: "User dont have any tips." });
     res.json(tips);
+    console.log(tips);
   } catch (err) {
     console.error(err.message);
     if (err.kind == "ObjectId") {

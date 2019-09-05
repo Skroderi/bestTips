@@ -81,17 +81,13 @@ const NavProfile = ({ logout, user, toggleLeftSideBar }) => {
           </StyledNavLink>
         </StyledNavItem>
         <StyledNavItem>
-          <StyledNavLink
-            to={`/${user.name}/tips`}
-            onClick={toggleLeftSideBar}
-            activeClassName="active"
-          >
+          <StyledNavLink to={`/${user.name}/tips`} activeClassName="active">
             <Profile size="35" /> My tips
           </StyledNavLink>
         </StyledNavItem>
         <StyledNavItem>
-          <StyledNavLink activeClassName="active">
-            <Stats size="35" /> Statistic
+          <StyledNavLink to={`/${user.name}/stats`} activeClassName="active">
+            <Stats size="35" /> Statistics
           </StyledNavLink>
         </StyledNavItem>
         <StyledNavItem>

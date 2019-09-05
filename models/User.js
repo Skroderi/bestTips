@@ -21,6 +21,12 @@ const UserSchema = new mongoose.Schema({
   date: {
     type: Date,
     default: new Date(Date.now()).toLocaleString()
+  },
+  stats: {
+    win: Number,
+    return: Number,
+    lose: Number,
+    profit: Number
   }
 });
 

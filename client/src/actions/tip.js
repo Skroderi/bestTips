@@ -36,7 +36,6 @@ export const getUserTips = userName => async dispatch => {
   try {
     const res = await axios.get(`/api/tip/user/${userName}`);
     console.log(res.data);
-
     dispatch({
       type: GET_USERTIPS,
       payload: res.data
@@ -45,7 +44,19 @@ export const getUserTips = userName => async dispatch => {
     console.error(err);
   }
 };
+// export const getUser = userName => async dispatch => {
+//   try {
+//     const res = await axios.get(`/api/users/${userName}`);
+//     console.log(res.data);
 
+//     dispatch({
+//       // type: GET_USERTIPS,
+//       payload: res.data
+//     });
+//   } catch (err) {
+//     console.error(err);
+//   }
+// };
 export const updateTip = (id, status) => async dispatch => {
   const item = {
     status: status

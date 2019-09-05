@@ -58,7 +58,13 @@ router.post(
         name,
         email,
         avatar,
-        password
+        password,
+        stats: {
+          win: 0,
+          return: 0,
+          lose: 0,
+          profit: 0
+        }
       });
 
       ///////// 3. Encrypt password ////////////////
@@ -96,4 +102,22 @@ router.post(
     }
   }
 );
+
+// @route Get api/users
+// @desc Get user
+// @access Public
+
+router.get("/:user_Name", async (req, res) => {
+  try {
+    const user = await User.find({ name: req.params.user_Name }).select(
+      "-password"
+    ); // return user without password
+    res.json(user);
+    console.log(user);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).sed("Server Error");
+  }
+});
+
 module.exports = router;

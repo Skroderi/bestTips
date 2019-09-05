@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Layout from "../templates/Layout";
 import Tips from "views/Tips";
 import UserTips from "views/UserTips";
+import Statistics from "views/Statistics";
 import UserPageTemplate from "../templates/UserPageTemplate";
 
 //Redux
@@ -29,11 +30,8 @@ function Root() {
             <Switch>
               <Route exact path="/" render={() => <Redirect to="tips" />} />
               <Route exact path="/tips" component={Tips} />
-              <Route
-                exact
-                path="/:id/tips"
-                render={props => <UserTips {...props} />}
-              />
+              <Route exact path="/:id/tips" component={UserTips} />
+              <Route exact path="/:id/stats" component={Statistics} />
             </Switch>
           </>
         </Layout>
