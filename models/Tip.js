@@ -10,7 +10,7 @@ const TipSchema = new Schema({
   id: String,
   firstTeam: String,
   secondTeam: String,
-  date: Date,
+  date: String,
   time: String,
   betOn: String,
   odd: Number,

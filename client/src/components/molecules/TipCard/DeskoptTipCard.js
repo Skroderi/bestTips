@@ -10,6 +10,7 @@ import { Check } from "styled-icons/boxicons-regular/Check";
 import { Equals } from "styled-icons/typicons/Equals";
 import { Cross } from "styled-icons/icomoon/Cross";
 import { connect } from "react-redux";
+import Moment from "react-moment";
 
 const StyledCheck = styled(Check)`
   color: green;
@@ -152,7 +153,7 @@ const DeskoptTipCard = ({ tip, vote, action, status, updateTip, auth }) => {
           {firstTeam} - {secondTeam}
           <StyledDate>
             <i>
-              {date} - {time}
+              <Moment format="DD/MM/YYYY">{date}</Moment> - {time}
             </i>
           </StyledDate>
         </StyledTeamsContainer>

@@ -45,7 +45,7 @@ const Statistics = props => {
     tip => tip.author === userName && tip.status === "win"
   );
   const returns = userTips.filter(
-    tip => tip.author === userName && tip.status === "returns"
+    tip => tip.author === userName && tip.status === "return"
   );
   const lose = userTips.filter(
     tip => tip.author === userName && tip.status === "lose"

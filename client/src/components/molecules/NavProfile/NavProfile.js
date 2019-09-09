@@ -73,7 +73,7 @@ const NavProfile = ({ logout, user, toggleLeftSideBar }) => {
       <StyledNavList>
         <StyledNavItem>
           <StyledNavLink
-            to="/"
+            exact to="/tips"
             onClick={toggleLeftSideBar}
             activeClassName="active"
           >

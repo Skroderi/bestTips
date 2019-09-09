@@ -103,6 +103,8 @@ const NewTipBar = ({
   handleNewTipBarToggle,
   auth: { user }
 }) => {
+  const minDate = new Date().toISOString().slice(0, 10);
+
   return (
     <Formik
       initialValues={{
@@ -191,6 +193,7 @@ const NewTipBar = ({
               <Input
                 type="date"
                 name="date"
+                min={minDate}
                 datediv
                 onChange={handleChange}
                 onBlur={handleBlur}
