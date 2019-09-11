@@ -1,6 +1,14 @@
 import axios from "axios";
 
-import { ADD_TIP, GET_TIPS, LOGOUT, UPDATE_TIP, GET_USERTIPS } from "./types";
+import {
+  ADD_TIP,
+  GET_TIPS,
+  LOGOUT,
+  UPDATE_TIP,
+  GET_USERTIPS,
+  UPDATE_LIKES,
+  UPDATE_UNLIKES
+} from "./types";
 
 export const addTip = tipContext => async dispatch => {
   try {
@@ -79,4 +87,32 @@ export const vote = (id, action) => {
     type: "VOTE",
     payload: { id: id, operation: action }
   };
+};
+
+// ADD like
+
+export const addLike = id => async dispatch => {
+  try {
+    const res = await axios.put(`/api/tip/like/${id}`);
+    dispatch({
+      type: UPDATE_LIKES,
+      payload: { id, likes: res.data }
+    });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+// UnLike
+
+export const unLike = id => async dispatch => {
+  try {
+    const res = await axios.put(`/api/tip/unlike/${id}`);
+    dispatch({
+      type: UPDATE_UNLIKES,
+      payload: { id, unLikes: res.data }
+    });
+  } catch (err) {
+    console.error(err);
+  }
 };

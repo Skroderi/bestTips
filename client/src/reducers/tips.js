@@ -3,7 +3,9 @@ import {
   GET_TIPS,
   GET_TIP,
   UPDATE_TIP,
-  GET_USERTIPS
+  GET_USERTIPS,
+  UPDATE_LIKES,
+  UPDATE_UNLIKES
 } from "../actions/types";
 
 const initialState = {
@@ -36,6 +38,38 @@ const rootReducer = (state = initialState, action) => {
           }
           return tip;
         })
+      };
+    case UPDATE_LIKES:
+      console.log(payload);
+      return {
+        ...state,
+        current: state.current.map(tip =>
+          tip._id === payload.id
+            ? {
+                ...tip,
+                votes: {
+                  likes: payload.likes,
+                  unLikes: tip.votes.unLikes
+                }
+              }
+            : tip
+        )
+      };
+    case UPDATE_UNLIKES:
+      console.log(payload);
+      return {
+        ...state,
+        current: state.current.map(tip =>
+          tip._id === payload.id
+            ? {
+                ...tip,
+                votes: {
+                  likes: tip.votes.likes,
+                  unLikes: payload.unLikes
+                }
+              }
+            : tip
+        )
       };
     case GET_TIPS:
       return {

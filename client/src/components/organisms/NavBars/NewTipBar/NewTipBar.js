@@ -115,10 +115,12 @@ const NewTipBar = ({
         odd: "",
         date: "",
         time: "",
-        likes: 0,
-        unLikes: 0,
+        votes: {
+          likes: [],
+          unLikes: []
+        },
         author: user.name,
-        probability: "no votes",
+        probability: "",
         status: "pending",
         current: true
       }}

@@ -36,7 +36,7 @@ router.post(
       likes,
       unLikes,
       probability,
-      voted,
+      votes,
       author,
       current,
       status
@@ -55,7 +55,7 @@ router.post(
     if (likes) tipFields.likes = likes;
     if (unLikes) tipFields.unLikes = unLikes;
     if (probability) tipFields.probability = probability;
-    if (voted) tipFields.voted = voted;
+    if (votes) tipFields.votes = votes;
     if (author) tipFields.author = author;
     if (status) tipFields.status = status;
     if (current) tipFields.current = current;
@@ -95,7 +95,6 @@ router.get("/user/:user_Name", async (req, res) => {
     const tips = await Tip.find({ author: req.params.user_Name });
     if (!tips) return res.status(400).json({ msg: "User dont have any tips." });
     res.json(tips);
-    console.log(tips);
   } catch (err) {
     console.error(err.message);
     if (err.kind == "ObjectId") {
@@ -117,12 +116,72 @@ router.put("/:tip_id", async (req, res) => {
       { new: true }
     );
     await res.json(tip);
-    await console.log(tip);
   } catch (err) {
     console.error(err.message);
     if (err.kind == "ObjectId") {
       return res.status(400).json({ msg: "Profile not found" });
     }
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route    PUT api/tips/like/:id
+// @desc     Like a tip
+// @access   Private
+router.put("/like/:id", auth, async (req, res) => {
+  try {
+    const tip = await Tip.findById(req.params.id);
+
+    // Check if the tip has already been liked
+    if (
+      tip.votes.likes.filter(like => like.user.toString() === req.user.id)
+        .length > 0 ||
+      tip.votes.unLikes.filter(like => like.user.toString() === req.user.id)
+        .length > 0
+    ) {
+      return res.status(400).json({ msg: "tip already liked" });
+    }
+
+    tip.votes.likes.unshift({ user: req.user.id });
+
+    await tip.save();
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route    PUT api/tips/unlike/:id
+// @desc     Like a tip
+// @access   Private
+router.put("/unlike/:id", auth, async (req, res) => {
+  try {
+    const tip = await Tip.findById(req.params.id);
+
+    // Check if the tip has already been liked
+    if (
+      tip.votes.likes.filter(like => like.user.toString() === req.user.id)
+        .length > 0 ||
+      tip.votes.unLikes.filter(like => like.user.toString() === req.user.id)
+        .length > 0
+    ) {
+      return res.status(400).json({ msg: "tip has not yet been liked" });
+    }
+
+    // Get remove index
+    // const removeIndex = post.likes
+    //   .map(like => like.user.toString())
+    //   .indexOf(req.user.id);
+
+    // post.likes.splice(removeIndex, 1);
+
+    tip.votes.unLikes.unshift({ user: req.user.id });
+
+    await tip.save();
+
+    res.json(tip.votes.unLikes);
+  } catch (err) {
+    console.error(err.message);
     res.status(500).send("Server Error");
   }
 });

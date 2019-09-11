@@ -11,3 +11,5 @@ export const ADD_TIP = "ADD_TIP";
 export const GET_TIPS = "GET_TIPS";
 export const GET_USERTIPS = "GET_USERTIPS";
 export const UPDATE_TIP = "UPDATE_TIP";
+export const UPDATE_LIKES = "UPDATE_LIKES";
+export const UPDATE_UNLIKES = "UPDATE_UNLIKES";

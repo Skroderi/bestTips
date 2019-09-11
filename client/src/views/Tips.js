@@ -15,7 +15,7 @@ const MainWrapper = styled.div`
   margin-top: 150px;
   margin-left: auto;
   margin-right: auto;
-  max-width: 800px;
+  max-width: 670px;
 `;
 const StyledSelect = styled.select`
   text-transform: uppercase;

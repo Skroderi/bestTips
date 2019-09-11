@@ -27,17 +27,17 @@ const NavItem = styled.p`
   color: white;
   margin: 10 20px;
   font-size: 16px;
-  padding: 10px 20px;
+  padding: 8px;
   border-radius: 15px;
   transition: 0.3s;
   text-decoration: none;
   margin: 0 10px;
   cursor: pointer;
   &:hover {
-    border: 3px solid white;
+    border: 2px solid white;
   }
   &.active {
-    border: 3px solid white;
+    border: 2px solid white;
   }
 `;
 const TopNavBar = ({

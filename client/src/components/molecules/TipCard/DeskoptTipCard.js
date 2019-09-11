@@ -6,6 +6,8 @@ import { ThumbsDown } from "styled-icons/fa-solid/ThumbsDown";
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 import { updateTip } from "../../../actions/tip";
+import { addLike } from "../../../actions/tip";
+import { unLike } from "../../../actions/tip";
 import { Check } from "styled-icons/boxicons-regular/Check";
 import { Equals } from "styled-icons/typicons/Equals";
 import { Cross } from "styled-icons/icomoon/Cross";
@@ -124,7 +126,16 @@ const WrapperStyledDiv = styled.div`
   font-weight: bold;
 `;
 
-const DeskoptTipCard = ({ tip, vote, action, status, updateTip, auth }) => {
+const DeskoptTipCard = ({
+  tip,
+  vote,
+  action,
+  status,
+  updateTip,
+  auth,
+  addLike,
+  unLike
+}) => {
   const {
     firstTeam,
     secondTeam,
@@ -133,15 +144,25 @@ const DeskoptTipCard = ({ tip, vote, action, status, updateTip, auth }) => {
     betOn,
     category,
     odd,
-    likes,
-    unLikes,
     probability,
     time,
     _id,
     user,
-    current
+    current,
+    votes
   } = tip;
-  let { voted } = tip;
+  console.log(auth.user._id);
+
+  const voted =
+    (!auth.loading &&
+      tip.votes.likes.filter(like => like.user.toString() === auth.user._id)
+        .length > 0) ||
+    tip.votes.unLikes.filter(like => like.user.toString() === auth.user._id)
+      .length > 0
+      ? true
+      : false;
+
+  console.log(voted);
 
   return (
     <MediaQuery query="(min-device-width: 501px)">
@@ -168,17 +189,24 @@ const DeskoptTipCard = ({ tip, vote, action, status, updateTip, auth }) => {
         {current ? (
           <StyledVoteContainer>
             <StyledThumbContainer>
-              <Vote>{likes}</Vote>
+              <Vote>{votes.likes.length}</Vote>
               <UpThumb
-              // onClick={!voted ? () => vote(id, (action = "like")) : null}
-              // style={!voted ? { color: "green" } : { color: "grey" }}
+                onClick={() => addLike(_id)}
+                style={
+                  !voted
+                    ? { color: "green" }
+                    : { color: "grey", cursor: "auto" }
+                }
               />
               <DownThumb
-              // onClick={!voted ? () => vote(id, (action = "unLike")) : null}
-              // style={!voted ? { color: "red" } : { color: "grey" }}
+                onClick={() => unLike(_id)}
+                // onClick={!voted ? () => vote(id, (action = "unLike")) : null}
+                style={
+                  !voted ? { color: "red" } : { color: "grey", cursor: "auto" }
+                }
               />
 
-              <Vote red>{unLikes}</Vote>
+              <Vote red>{votes.unLikes.length}</Vote>
             </StyledThumbContainer>
           </StyledVoteContainer>
         ) : null}
@@ -217,7 +245,9 @@ const DeskoptTipCard = ({ tip, vote, action, status, updateTip, auth }) => {
 DeskoptTipCard.propTypes = {
   tip: PropTypes.object.isRequired,
   vote: PropTypes.func.isRequired,
-  action: PropTypes.string
+  action: PropTypes.string,
+  addLike: PropTypes.func.isRequired,
+  unLike: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -226,5 +256,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { updateTip }
+  { updateTip, addLike, unLike }
 )(DeskoptTipCard);

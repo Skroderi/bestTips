@@ -17,7 +17,10 @@ const TipSchema = new Schema({
   likes: Number,
   unLikes: Number,
   probability: String,
-  voted: Boolean,
+  votes: {
+    likes: Array,
+    unLikes: Array
+  },
   author: String,
   current: Boolean,
   status: String
