@@ -6,10 +6,13 @@ import { ThumbsDown } from "styled-icons/fa-solid/ThumbsDown";
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 import { updateTip } from "../../../actions/tip";
+import { addLike } from "../../../actions/tip";
+import { unLike } from "../../../actions/tip";
 import { Check } from "styled-icons/boxicons-regular/Check";
 import { Equals } from "styled-icons/typicons/Equals";
 import { Cross } from "styled-icons/icomoon/Cross";
 import { connect } from "react-redux";
+import Moment from "react-moment";
 
 const StyledCheck = styled(Check)`
   color: green;
@@ -123,7 +126,7 @@ const WrapperStyledDiv = styled.div`
   font-weight: bold;
 `;
 
-const MobileTipCard = ({ tip, vote, action, status, updateTip, auth }) => {
+const MobileTipCard = ({ tip, updateTip, status, auth, addLike, unLike }) => {
   const {
     firstTeam,
     secondTeam,
@@ -132,15 +135,26 @@ const MobileTipCard = ({ tip, vote, action, status, updateTip, auth }) => {
     betOn,
     category,
     odd,
-    likes,
-    unLikes,
     probability,
     time,
     _id,
     user,
-    current
+    current,
+    votes
   } = tip;
-  let { voted } = tip;
+
+  let userId =
+    !auth.isAuthenticated || auth.user === null ? null : auth.user._id;
+
+  const voted =
+    userId === null
+      ? true
+      : tip.votes.likes.filter(like => like.user.toString() === userId).length >
+          0 ||
+        tip.votes.unLikes.filter(like => like.user.toString() === userId)
+          .length > 0
+      ? true
+      : false;
 
   return (
     <MediaQuery query="(max-device-width: 500px)">
@@ -153,7 +167,7 @@ const MobileTipCard = ({ tip, vote, action, status, updateTip, auth }) => {
             {firstTeam} - {secondTeam}
             <StyledDate>
               <i>
-                {date} - {time}
+                <Moment format="DD-MM-YYYY">{date}</Moment> - {time}
               </i>
             </StyledDate>
           </StyledTeamsContainer>
@@ -169,20 +183,28 @@ const MobileTipCard = ({ tip, vote, action, status, updateTip, auth }) => {
 
           {current ? (
             <StyledVoteContainer>
-              {" "}
               <StyledThumbContainer>
-                <Vote>{likes}</Vote>
+                <Vote>{votes.likes.length}</Vote>
                 <UpThumb
-                // onClick={!voted ? () => vote(id, (action = "like")) : null}
-                // style={!voted ? { color: "green" } : { color: "grey" }}
+                  onClick={() => addLike(_id)}
+                  style={
+                    !voted
+                      ? { color: "green" }
+                      : { color: "grey", cursor: "auto" }
+                  }
                 />
                 <DownThumb
-                // onClick={!voted ? () => vote(id, (action = "unLike")) : null}
-                // style={!voted ? { color: "red" } : { color: "grey" }}
+                  onClick={() => unLike(_id)}
+                  // onClick={!voted ? () => vote(id, (action = "unLike")) : null}
+                  style={
+                    !voted
+                      ? { color: "red" }
+                      : { color: "grey", cursor: "auto" }
+                  }
                 />
 
-                <Vote red>{unLikes}</Vote>
-              </StyledThumbContainer>{" "}
+                <Vote red>{votes.unLikes.length}</Vote>
+              </StyledThumbContainer>
             </StyledVoteContainer>
           ) : null}
 
@@ -215,8 +237,10 @@ const MobileTipCard = ({ tip, vote, action, status, updateTip, auth }) => {
 };
 MobileTipCard.propTypes = {
   tip: PropTypes.object.isRequired,
-  vote: PropTypes.func.isRequired,
-  action: PropTypes.string
+  addLike: PropTypes.func.isRequired,
+  unLike: PropTypes.func.isRequired,
+  updateTip: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -225,5 +249,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { updateTip }
+  { updateTip, addLike, unLike }
 )(MobileTipCard);

@@ -2,7 +2,8 @@ import { combineReducers } from "redux";
 import alert from "./alert";
 import auth from "./auth";
 import tips from "./tips";
-export default combineReducers({ alert, tips,auth });
+import user from "./user";
+export default combineReducers({ alert, tips, auth, user });
 
 // const initialState = {};
 // const middleware = [thunk];

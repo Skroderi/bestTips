@@ -1,7 +1,6 @@
 import {
   ADD_TIP,
   GET_TIPS,
-  GET_TIP,
   UPDATE_TIP,
   GET_USERTIPS,
   UPDATE_LIKES,
@@ -10,11 +9,7 @@ import {
 
 const initialState = {
   current: [],
-  loading: true,
-  userTips: {
-    tips: [],
-    loading: true
-  }
+  loading: true
 };
 
 const rootReducer = (state = initialState, action) => {

@@ -11,6 +11,7 @@ import { Provider } from "react-redux";
 import store from "store/store";
 import { loadUser } from "../actions/auth";
 import setAuthToken from "../utlis/setAuthToken";
+import UserProfile from "./UserProfile";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -19,7 +20,6 @@ function Root() {
   useEffect(() => {
     store.dispatch(loadUser());
   });
-  console.log(store);
 
   return (
     <Provider store={store}>
@@ -32,6 +32,7 @@ function Root() {
               <Route exact path="/tips" component={Tips} />
               <Route exact path="/:id/tips" component={UserTips} />
               <Route exact path="/:id/stats" component={Statistics} />
+              <Route exact path="/user/:id" component={UserProfile} />
             </Switch>
           </>
         </Layout>

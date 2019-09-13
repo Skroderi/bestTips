@@ -1,6 +1,4 @@
-import React from "react";
 import styled from "styled-components";
-import ThreadsTable from "./ThreadsTable";
 
 const TableTemplate = styled.table`
   width: 100%;

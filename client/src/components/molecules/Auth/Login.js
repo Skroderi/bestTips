@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+import React from "react";
 import styled from "styled-components";
 import LoginButton from "components/atoms/Button/LoginButton";
 import Input from "components/atoms/Input/Input";

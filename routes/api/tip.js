@@ -4,7 +4,6 @@ const { check, validationResult } = require("express-validator");
 const auth = require("../../middleware/auth");
 const config = require("config");
 const Tip = require("../../models/Tip");
-
 // @route POST api/tip
 // @desc Add tip
 // @access Private
@@ -41,6 +40,8 @@ router.post(
       current,
       status
     } = req.body;
+    const formatDate = new Date(date).toISOString();
+    console.log(formatDate);
 
     //Build tip object
     const tipFields = {};
@@ -48,7 +49,7 @@ router.post(
     if (category) tipFields.category = category;
     if (firstTeam) tipFields.firstTeam = firstTeam;
     if (secondTeam) tipFields.secondTeam = secondTeam;
-    if (date) tipFields.date = date;
+    if (date) tipFields.date = formatDate;
     if (time) tipFields.time = time;
     if (betOn) tipFields.betOn = betOn;
     if (odd) tipFields.odd = odd;

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import TableTemplate from "templates/TableTemplate";
 import { connect } from "react-redux";
 import ThreadsTable from "templates/ThreadsTable";
@@ -38,7 +38,7 @@ const AllTips = ({ getTips, tips }) => {
 
   useEffect(() => {
     getTips();
-  }, []);
+  }, [getTips]);
   console.log();
 
   return (

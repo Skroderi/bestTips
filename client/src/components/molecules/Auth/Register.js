@@ -4,7 +4,6 @@ import LoginButton from "components/atoms/Button/LoginButton";
 import Input from "components/atoms/Input/Input";
 import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
 import { connect } from "react-redux";
 import { setAlert } from "../../../actions/alert";
 import { register } from "../../../actions/auth";
@@ -61,8 +60,6 @@ const Register = ({ setAlert, loginAfterRegister, register, switchFunc }) => {
           email,
           password
         };
-
-        console.log(newUser);
         register({ newUser, loginAfterRegister });
 
         //////////////////////////////// USER REGISTRATION ////////////////////////////

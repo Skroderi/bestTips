@@ -110,7 +110,7 @@ router.post(
 router.get("/:user_Name", async (req, res) => {
   try {
     const user = await User.find({ name: req.params.user_Name }).select(
-      "-password"
+      "-password -date -_id -email"
     ); // return user without password
     res.json(user);
     console.log(user);

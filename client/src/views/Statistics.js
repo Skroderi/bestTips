@@ -2,9 +2,8 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { log } from "util";
 import { getUserTips, getTips } from "../actions/tip";
-import Spinner from "../components/atoms/Spinner/Spinner";
+import UserStats from "../components/molecules/UserProfile/UserStats";
 
 const MainWrapper = styled.div`
   width: 70%;
@@ -17,72 +16,32 @@ const MainWrapper = styled.div`
     width: 90%;
   }
 `;
-const InnerWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  @media (max-width: 500px) {
-    width: 90%;
-  }
-`;
-const StyledParagraph = styled.p`
-  font-size: 22px;
-`;
 
-const StyledNumber = styled.p`
-  display: block;
-  font-size: 18px;
-  text-align: Center;
-`;
-const Statistics = props => {
-  const { getUserTips, getTips, userTips, loading } = props;
-  const userName = props.match.params.id;
+const Statistics = ({ tips, getTips, match, loading }) => {
   useEffect(() => {
-    getUserTips(userName);
     getTips();
-  }, [getUserTips, getTips]);
-
-  const win = userTips.filter(
-    tip => tip.author === userName && tip.status === "win"
-  );
-  const returns = userTips.filter(
-    tip => tip.author === userName && tip.status === "return"
-  );
-  const lose = userTips.filter(
-    tip => tip.author === userName && tip.status === "lose"
-  );
+  }, [getTips]);
+  const userName = match.params.id;
 
   return (
     <MainWrapper>
       <h1>{userName} stats</h1>
-      {!loading ? (
-        <InnerWrapper>
-          <div>
-            <StyledParagraph>
-              Win:<StyledNumber>{win.length}</StyledNumber>
-            </StyledParagraph>
-          </div>
-          <div>
-            <StyledParagraph>
-              Return:<StyledNumber>{returns.length}</StyledNumber>
-            </StyledParagraph>
-          </div>
-          <div>
-            <StyledParagraph>
-              Lose:<StyledNumber>{lose.length}</StyledNumber>
-            </StyledParagraph>
-          </div>
-        </InnerWrapper>
-      ) : (
-        <Spinner />
+      {loading ? null : (
+        <UserStats userName={userName} tips={tips} loading={loading} />
       )}
     </MainWrapper>
   );
 };
 
-Statistics.propTypes = {};
+Statistics.propTypes = {
+  tips: PropTypes.object.isRequired,
+  getTips: PropTypes.func.isRequired,
+  match: PropTypes.object.isRequired,
+  loading: PropTypes.bool
+};
 
 const mapStateToProps = state => ({
-  userTips: state.tips.current,
+  tips: state.tips,
   loading: state.tips.loading
 });
 

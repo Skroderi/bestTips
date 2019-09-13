@@ -1,13 +1,10 @@
 import React, { useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import TableTemplate from "../templates/TableTemplate";
-import MediaQuery from "react-responsive";
-import ThreadsTable from "../templates/ThreadsTable";
 import { getUserTips, addTip, getTips } from "../actions/tip";
 import { connect } from "react-redux";
-import TipCard from "..//components/molecules/TipCard/TipCard";
 import Spinner from "../components/atoms/Spinner/Spinner";
+import ProfileTips from "../components/molecules/UserProfile/ProfileTips";
 
 const MainWrapper = styled.div`
   margin-top: 120px;
@@ -28,20 +25,8 @@ const InnerWrapper = styled.div`
   }
 `;
 
-const StyledTr = styled.tr`
-  background: ${({ theme }) => theme.colors.black};
-  border: 30px solid black;
-`;
-
-const StyledTh = styled.th`
-  font-size: 12px;
-  padding: 10px;
-  color: hsl(49, 100%, 58%);
-`;
-
-function UserTips(props) {
-  const userName = props.match.params.id;
-  const { getUserTips, tips, getTips } = props;
+function UserTips({ tips, getTips, match }) {
+  const userName = match.params.id;
 
   useEffect(() => {
     getTips();
@@ -50,48 +35,24 @@ function UserTips(props) {
   return (
     <MainWrapper>
       <h1>{userName} tips</h1>
-      <InnerWrapper>
-        {tips.loading === true ? (
-          <Fragment>
-            <Spinner />
-          </Fragment>
-        ) : (
-          <Fragment>
-            <div>
-              <h2>Current</h2>
-              <TableTemplate>
-                <ThreadsTable />
-                {tips.current
-                  .filter(
-                    tip => tip.author === userName && tip.current === true
-                  )
-                  .map((tip, id) => {
-                    return <TipCard tip={tip} key={id} />;
-                  })}
-              </TableTemplate>
-            </div>
-
-            <div>
-              <h2>History</h2>
-              <TableTemplate>
-                <ThreadsTable />
-                {tips.current
-                  .filter(
-                    tip => tip.author === userName && tip.current === false
-                  )
-                  .map((tip, id) => {
-                    return <TipCard tip={tip} key={id} />;
-                  })}
-              </TableTemplate>
-            </div>
-          </Fragment>
-        )}
-      </InnerWrapper>
+      {tips.loading === true ? (
+        <Fragment>
+          <Spinner />
+        </Fragment>
+      ) : (
+        <InnerWrapper>
+          <ProfileTips userName={userName} tips={tips} />
+        </InnerWrapper>
+      )}
     </MainWrapper>
   );
 }
 
-UserTips.propTypes = {};
+UserTips.propTypes = {
+  tips: PropTypes.object.isRequired,
+  getTips: PropTypes.func.isRequired,
+  match: PropTypes.object.isRequired
+};
 
 const mapStateToProps = state => ({
   tips: state.tips

@@ -4,14 +4,7 @@ import LeftSideBar from "components/organisms/NavBars/LeftSideBar/LeftSideBar";
 import NewTipBar from "components/organisms/NavBars/NewTipBar/NewTipBar";
 import AddTipButton from "components/atoms/AddTipButton/AddTipButton";
 import plus from "assets/icons/plus.svg";
-import Buttons from "components/atoms/Button/Buttons";
 import { connect } from "react-redux";
-import styled from "styled-components";
-import { ThemeProvider } from "styled-components";
-import store from "store/store";
-import { theme } from "theme/mainTheme";
-import GlobalStye from "theme/GlobalStyle";
-
 class UserPageTemplate extends Component {
   state = {
     isActive: false,
@@ -32,7 +25,6 @@ class UserPageTemplate extends Component {
 
   render() {
     const { isActive, loginActive } = this.state;
-    const id = this.props.id;
     const { children } = this.props;
 
     const {

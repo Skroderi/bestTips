@@ -5,9 +5,7 @@ import { ThumbsUp } from "styled-icons/fa-solid/ThumbsUp";
 import { ThumbsDown } from "styled-icons/fa-solid/ThumbsDown";
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
-import { updateTip } from "../../../actions/tip";
-import { addLike } from "../../../actions/tip";
-import { unLike } from "../../../actions/tip";
+import { updateTip, addLike, unLike } from "../../../actions/tip";
 import { Check } from "styled-icons/boxicons-regular/Check";
 import { Equals } from "styled-icons/typicons/Equals";
 import { Cross } from "styled-icons/icomoon/Cross";
@@ -109,33 +107,8 @@ const ResultVote = styled.div`
   font-weight: bold;
   color: green;
 `;
-const StyledMatch = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  padding: 10px 0;
-`;
-const StyledDiv = styled.div`
-  display: flex;
-  width: 50%;
-  justify-content: space-between;
-  margin: 5px 0;
-`;
-const WrapperStyledDiv = styled.div`
-  text-align: center;
-  font-weight: bold;
-`;
 
-const DeskoptTipCard = ({
-  tip,
-  vote,
-  action,
-  status,
-  updateTip,
-  auth,
-  addLike,
-  unLike
-}) => {
+const DeskoptTipCard = ({ tip, status, updateTip, auth, addLike, unLike }) => {
   const {
     firstTeam,
     secondTeam,
@@ -151,18 +124,19 @@ const DeskoptTipCard = ({
     current,
     votes
   } = tip;
-  console.log(auth.user._id);
+
+  let userId =
+    !auth.isAuthenticated || auth.user === null ? null : auth.user._id;
 
   const voted =
-    (!auth.loading &&
-      tip.votes.likes.filter(like => like.user.toString() === auth.user._id)
-        .length > 0) ||
-    tip.votes.unLikes.filter(like => like.user.toString() === auth.user._id)
-      .length > 0
+    userId === null
+      ? true
+      : tip.votes.likes.filter(like => like.user.toString() === userId).length >
+          0 ||
+        tip.votes.unLikes.filter(like => like.user.toString() === userId)
+          .length > 0
       ? true
       : false;
-
-  console.log(voted);
 
   return (
     <MediaQuery query="(min-device-width: 501px)">
@@ -174,7 +148,7 @@ const DeskoptTipCard = ({
           {firstTeam} - {secondTeam}
           <StyledDate>
             <i>
-              <Moment format="DD/MM/YYYY">{date}</Moment> - {time}
+              <Moment format="DD-MM-YYYY">{date}</Moment> - {time}
             </i>
           </StyledDate>
         </StyledTeamsContainer>
@@ -244,10 +218,10 @@ const DeskoptTipCard = ({
 
 DeskoptTipCard.propTypes = {
   tip: PropTypes.object.isRequired,
-  vote: PropTypes.func.isRequired,
-  action: PropTypes.string,
   addLike: PropTypes.func.isRequired,
-  unLike: PropTypes.func.isRequired
+  unLike: PropTypes.func.isRequired,
+  updateTip: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({

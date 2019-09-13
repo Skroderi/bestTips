@@ -3,7 +3,6 @@ import axios from "axios";
 import {
   ADD_TIP,
   GET_TIPS,
-  LOGOUT,
   UPDATE_TIP,
   GET_USERTIPS,
   UPDATE_LIKES,
@@ -43,7 +42,6 @@ export const getTips = () => async dispatch => {
 export const getUserTips = userName => async dispatch => {
   try {
     const res = await axios.get(`/api/tip/user/${userName}`);
-    console.log(res.data);
     dispatch({
       type: GET_USERTIPS,
       payload: res.data
