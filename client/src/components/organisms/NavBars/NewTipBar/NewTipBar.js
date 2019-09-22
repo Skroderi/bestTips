@@ -10,21 +10,21 @@ import Input from "components/atoms/Input/Input";
 
 const StyledWrapper = styled.div`
   position: fixed;
-  top: 70px;
+  top: ${({ theme }) => theme.topNavHeight};
   right: 0;
   display: flex;
   flex-direction: column;
   text-align: center;
   align-items: center;
   width: 100vw;
-  height: calc(100vh - 70px);
+  height: calc(100% - 70px);
   padding: 10px;
   background-color: white;
   font-weight: ${({ theme }) => theme.bold};
   border-left: 10px solid black;
   box-shadow: -20px 0 25px rgba(0, 0, 0, 0.3);
   transform: translate(${({ isActive }) => (isActive ? "0%" : "120%")});
-  transition: transform 0.25s ease-in-out;
+  transition: transform 0.25s ease-in;
   overflow-y: auto;
   ${({ theme }) => theme.media.tablet} {
     width: 350px;
@@ -104,6 +104,7 @@ const NewTipBar = ({
   auth: { user }
 }) => {
   const minDate = new Date().toISOString().slice(0, 10);
+  console.log(isActive);
 
   return (
     <Formik

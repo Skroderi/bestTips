@@ -25,13 +25,14 @@ const StyledLeftSideBar = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  align-self: center;
   justify-content: center;
   width: 100vw;
-  height: calc(100vh - 70px);
+  height: 100%;
   color: ${({ theme }) => theme.colors.white};
   box-shadow: 10px 0px 15px rgba(0, 0, 0, 0.3);
   transform: translate(-120%);
-  z-index: 10000;
+  z-index: 999;
   overflow: auto;
   animation: ${({ isLoginBarVisible }) =>
     isLoginBarVisible
@@ -82,16 +83,6 @@ const LeftSideBar = ({
           )}
         </Fragment>
       )}
-
-      {/* {!loading && (
-        <Fragment>
-          {isAuthenticated ? (
-            <NavProfile toggleLeftSideBar={toggleLeftSideBar} />
-          ) : (
-            <Auth />
-          )}
-        </Fragment>
-      )} */}
     </StyledLeftSideBar>
   );
 };

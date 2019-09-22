@@ -12,20 +12,17 @@ import { logout } from "../../../actions/auth";
 const StyledWrapper = styled.div`
   display: flex;
   position: absolute;
-  top: 5vh;
   flex-direction: column;
   align-items: center;
   align-self: center;
   width: 80%;
-/* 
-  ${({ theme }) => theme.media.tablet} {
-    position: static;
-  } */
+  height: 100%;
 `;
 const StyledNavList = styled.ul`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   width: 100%;
   list-style-type: none;
 `;
@@ -33,8 +30,8 @@ const StyledNavList = styled.ul`
 const StyledNavItem = styled.li`
   margin: 10px 0;
   width: 100%;
-  /* justify-content: center; */
 `;
+
 const StyledNavLink = styled(NavLink)`
   display: grid;
   grid-template-columns: 1fr 3fr;
@@ -69,7 +66,7 @@ const NavProfile = ({ logout, user, toggleLeftSideBar }) => {
   return (
     <StyledWrapper>
       <Image src={user ? user.avatar : null} alt="User avatar" />
-      <h2>Hi {user ? user.name : null}</h2>
+      <h2>Hello {user ? user.name : null}</h2>
       <StyledNavList>
         <StyledNavItem>
           <StyledNavLink
@@ -92,7 +89,7 @@ const NavProfile = ({ logout, user, toggleLeftSideBar }) => {
           </StyledNavLink>
         </StyledNavItem>
         <StyledNavItem>
-          <StyledNavLink to="/" onClick={logout}>
+          <StyledNavLink to="#" onClick={logout}>
             <LogOut size="35" /> Logout
           </StyledNavLink>
         </StyledNavItem>

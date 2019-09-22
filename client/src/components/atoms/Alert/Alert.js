@@ -6,10 +6,11 @@ import styled from "styled-components";
 const StyledAlert = styled.div`
   font-size: 15px;
   padding: 1.1rem;
+  margin: 1rem;
   opacity: 0.9;
   background: ${({ color }) => (color === "fail" ? "red" : "green")};
   color: ${({ theme }) => theme.colors.white};
-  border-radius: 20px;
+  border-radius: 2px;
 `;
 
 const Alert = ({ alerts }) =>

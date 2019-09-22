@@ -17,12 +17,12 @@ const ThreadsTable = () => {
   return (
     <StyledTr>
       <MediaQuery query="(max-device-width: 500px)">
-        <StyledTh style={{ width: "50px" }} />
-        <StyledTh>MATCH</StyledTh>
+        <StyledTh />
+        <StyledTh>EVENT</StyledTh>
       </MediaQuery>
       <MediaQuery query="(min-device-width: 501px)">
         <StyledTh>CATEGORY</StyledTh>
-        <StyledTh>MATCH</StyledTh>
+        <StyledTh>EVENT</StyledTh>
         <StyledTh>BET ON</StyledTh>
         <StyledTh>ODD</StyledTh>
         <StyledTh>VOTES</StyledTh>

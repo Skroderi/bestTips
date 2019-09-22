@@ -4,6 +4,20 @@ import Register from "components/molecules/Auth/Register";
 import styled, { css } from "styled-components";
 import Alert from "components/atoms/Alert/Alert";
 
+const MainWrapper = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-height: 80%;
+  overflow-y: auto;
+  margin: 10px 0;
+`;
 const SwitchButton = styled.button`
   font-size: 18px;
   text-align: left;
@@ -37,16 +51,7 @@ const StyledButtons = styled.div`
   border-radius: 30px;
   margin-bottom: 15px;
 `;
-const InnerWrapper = styled.div`
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90%;
-`;
+
 const Auth = () => {
   const [firstButton, toggleFirstBtn] = useState(true);
   const [secondButton, toggleSecondBtn] = useState(false);
@@ -66,7 +71,7 @@ const Auth = () => {
   };
 
   return (
-    <InnerWrapper>
+    <MainWrapper>
       <Alert />
       <StyledButtons>
         <SwitchButton
@@ -89,7 +94,7 @@ const Auth = () => {
       ) : (
         <Register loginAfterRegister={loginAfterRegister} />
       )}
-    </InnerWrapper>
+    </MainWrapper>
   );
 };
 
