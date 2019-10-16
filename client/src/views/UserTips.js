@@ -16,7 +16,7 @@ const InnerWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   width: 90%;
-  max-width: 1000px;
+  max-width: 1100px;
   grid-gap: 20px;
   margin-left: auto;
   margin-right: auto;

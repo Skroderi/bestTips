@@ -132,7 +132,7 @@ router.put("/:tip_id", async (req, res) => {
 router.put("/like/:id", auth, async (req, res) => {
   try {
     const tip = await Tip.findById(req.params.id);
-
+    console.log(tip);
     // Check if the tip has already been liked
     if (
       tip.votes.likes.filter(like => like.user.toString() === req.user.id)
@@ -146,6 +146,7 @@ router.put("/like/:id", auth, async (req, res) => {
     tip.votes.likes.unshift({ user: req.user.id });
 
     await tip.save();
+    res.json(tip.votes.likes);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -158,6 +159,7 @@ router.put("/like/:id", auth, async (req, res) => {
 router.put("/unlike/:id", auth, async (req, res) => {
   try {
     const tip = await Tip.findById(req.params.id);
+    console.log(tip);
 
     // Check if the tip has already been liked
     if (
@@ -168,13 +170,6 @@ router.put("/unlike/:id", auth, async (req, res) => {
     ) {
       return res.status(400).json({ msg: "tip has not yet been liked" });
     }
-
-    // Get remove index
-    // const removeIndex = post.likes
-    //   .map(like => like.user.toString())
-    //   .indexOf(req.user.id);
-
-    // post.likes.splice(removeIndex, 1);
 
     tip.votes.unLikes.unshift({ user: req.user.id });
 

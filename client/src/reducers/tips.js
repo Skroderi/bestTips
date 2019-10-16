@@ -35,7 +35,6 @@ const rootReducer = (state = initialState, action) => {
         })
       };
     case UPDATE_LIKES:
-      console.log(payload);
       return {
         ...state,
         current: state.current.map(tip =>
@@ -51,7 +50,6 @@ const rootReducer = (state = initialState, action) => {
         )
       };
     case UPDATE_UNLIKES:
-      console.log(payload);
       return {
         ...state,
         current: state.current.map(tip =>

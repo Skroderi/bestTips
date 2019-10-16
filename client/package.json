@@ -48,7 +48,8 @@
   "devDependencies": {
     "@storybook/addon-actions": "^5.1.9",
     "@storybook/addon-links": "^5.1.9",
-    "@storybook/react": "^5.1.9"
+    "@storybook/react": "^5.1.9",
+    "@testing-library/react": "^9.1.4"
   },
   "proxy": "http://localhost:5000"
 }

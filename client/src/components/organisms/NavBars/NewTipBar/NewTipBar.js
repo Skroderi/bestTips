@@ -104,7 +104,6 @@ const NewTipBar = ({
   auth: { user }
 }) => {
   const minDate = new Date().toISOString().slice(0, 10);
-  console.log(isActive);
 
   return (
     <Formik
