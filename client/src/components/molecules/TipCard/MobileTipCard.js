@@ -49,6 +49,7 @@ const StyledCategoryTip = styled.div`
   background-size: 35px;
   background-position: 50% 50%;
   margin: 0 auto;
+  margin-left: 5px;
 `;
 
 const StyledTeamsContainer = styled.div`
@@ -217,15 +218,18 @@ const MobileTipCard = ({ tip, updateTip, status, auth, addLike, unLike }) => {
               <StyledActions>
                 <StyledCheck
                   size="20"
-                  onClick={() => updateTip(_id, (status = "win"))}
+                  title="Win"
+                  onClick={() => updateTip(_id, "win")}
                 />
                 <StyledEquals
                   size="20"
-                  onClick={() => updateTip(_id, (status = "return"))}
+                  title="Return"
+                  onClick={() => updateTip(_id, "return")}
                 />
                 <StyledCross
                   size="20"
-                  onClick={() => updateTip(_id, (status = "lose"))}
+                  title="Lose"
+                  onClick={() => updateTip(_id, "lose")}
                 />
               </StyledActions>
             ) : null}
@@ -247,7 +251,6 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(
-  mapStateToProps,
-  { updateTip, addLike, unLike }
-)(MobileTipCard);
+export default connect(mapStateToProps, { updateTip, addLike, unLike })(
+  MobileTipCard
+);

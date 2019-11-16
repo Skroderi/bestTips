@@ -38,17 +38,17 @@ function UserStats({ tips, userName }) {
     <InnerWrapper>
       <div>
         <StyledParagraph style={{ color: "green" }}>
-          Win:<StyledNumber>{win.length}</StyledNumber>
+          Wins:<StyledNumber>{win.length}</StyledNumber>
         </StyledParagraph>
       </div>
       <div>
         <StyledParagraph style={{ color: "orange" }}>
-          Return:<StyledNumber>{returns.length}</StyledNumber>
+          Returns:<StyledNumber>{returns.length}</StyledNumber>
         </StyledParagraph>
       </div>
       <div>
         <StyledParagraph style={{ color: "red" }}>
-          Lose:<StyledNumber>{lose.length}</StyledNumber>
+          Loses:<StyledNumber>{lose.length}</StyledNumber>
         </StyledParagraph>
       </div>
     </InnerWrapper>

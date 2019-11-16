@@ -159,8 +159,9 @@ const DeskoptTipCard = ({ tip, status, updateTip, auth, addLike, unLike }) => {
       <td>
         <StyledParagraph>{odd}</StyledParagraph>
       </td>
-      <td>
-        {current ? (
+
+      {current ? (
+        <td>
           <StyledVoteContainer>
             <StyledThumbContainer>
               <Vote>{votes.likes.length}</Vote>
@@ -183,10 +184,10 @@ const DeskoptTipCard = ({ tip, status, updateTip, auth, addLike, unLike }) => {
               <Vote red>{votes.unLikes.length}</Vote>
             </StyledThumbContainer>
           </StyledVoteContainer>
-        ) : null}
+          <ResultVote>{probability}</ResultVote>
+        </td>
+      ) : null}
 
-        <ResultVote>{probability}</ResultVote>
-      </td>
       <td>
         <StyledParagraph>
           <Link to={"/user/" + author}>{author}</Link>
@@ -199,15 +200,18 @@ const DeskoptTipCard = ({ tip, status, updateTip, auth, addLike, unLike }) => {
           <StyledActions>
             <StyledCheck
               size="20"
-              onClick={() => updateTip(_id, (status = "win"))}
+              title="Win"
+              onClick={() => updateTip(_id, "win")}
             />
             <StyledEquals
               size="20"
-              onClick={() => updateTip(_id, (status = "return"))}
+              title="Return"
+              onClick={() => updateTip(_id, "return")}
             />
             <StyledCross
               size="20"
-              onClick={() => updateTip(_id, (status = "lose"))}
+              title="Lose"
+              onClick={() => updateTip(_id, "lose")}
             />
           </StyledActions>
         ) : null}
@@ -228,7 +232,6 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(
-  mapStateToProps,
-  { updateTip, addLike, unLike }
-)(DeskoptTipCard);
+export default connect(mapStateToProps, { updateTip, addLike, unLike })(
+  DeskoptTipCard
+);

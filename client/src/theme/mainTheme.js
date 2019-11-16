@@ -21,7 +21,8 @@ export const theme = {
     red: "red",
     lightBlue: "#04da97",
     orange: "hsl(49, 100%, 58%)",
-    black: "hsl(0, 0%, 0%)"
+    black: "hsl(0, 0%, 0%)",
+    tableTh: "rgba(0, 0, 0, 0.08)"
   },
   fontSize: {
     xxs: "1rem",

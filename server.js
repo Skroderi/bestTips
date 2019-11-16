@@ -1,9 +1,11 @@
 const express = require("express");
 const connectDB = require("./config/db");
 const path = require("path");
-
+const dotenv = require("dotenv");
 const app = express();
+// load env vars
 
+dotenv.config({ path: "./config/config.env" });
 //connectDB
 connectDB();
 //Init Middleware to allow to get the data from request body

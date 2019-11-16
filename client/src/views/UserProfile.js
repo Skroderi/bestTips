@@ -5,12 +5,12 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { getUser } from "../actions/user";
 import ProfileTips from "../components/molecules/UserProfile/ProfileTips";
-import Spinner from "../components/atoms/Spinner/Spinner";
+import CircleSpinner from "../components/atoms/Spinner/CircleSpinner";
 import { getTips } from "../actions/tip";
 
 const MainWrapper = styled.div`
   width: 80%;
-  max-width: 1000px;
+  max-width: 700px;
   margin-top: 120px;
   margin-left: auto;
   margin-right: auto;
@@ -43,12 +43,12 @@ const Paragraph = styled.p`
 
 const InnerWrapper = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   width: 100%;
   grid-gap: 20px;
-  @media (max-width: 500px) {
+  /* @media (max-width: 500px) {
     grid-template-columns: 1fr;
-  }
+  } */
 `;
 
 function UserProfile({ getUser, user, loading, getTips, tips, match }) {
@@ -61,7 +61,7 @@ function UserProfile({ getUser, user, loading, getTips, tips, match }) {
   return (
     <MainWrapper>
       {loading ? (
-        <Spinner />
+        <CircleSpinner />
       ) : (
         <Fragment>
           <StyledAvatarContainer>
@@ -93,7 +93,4 @@ const mapStateToProps = state => ({
   loading: state.user.loading
 });
 
-export default connect(
-  mapStateToProps,
-  { getUser, getTips }
-)(UserProfile);
+export default connect(mapStateToProps, { getUser, getTips })(UserProfile);

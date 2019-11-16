@@ -1,14 +1,4 @@
-import styled, { keyframes, css } from "styled-components";
-
-const RotateAddTipButton = keyframes`
-  0% {
-    transform:rotate(0deg)
-  }
- 
-  100% {
-    transform:rotate(225deg)
-  }
-`;
+import styled from "styled-components";
 
 const AddTipButton = styled.button`
   display: block;

@@ -2,13 +2,16 @@ import React, { useEffect, useState } from "react";
 import TableTemplate from "templates/TableTemplate";
 import { connect } from "react-redux";
 import ThreadsTable from "templates/ThreadsTable";
+import HistoryThreadsTable from "templates/HistoryThreadsTable";
 import styled from "styled-components";
 import { getTips } from "../actions/tip";
 import History from "./History";
 import Incoming from "./Incoming";
 
 const Styledtbody = styled.tbody`
-  width: 200px;
+  tr:nth-child(even) {
+    background-color: ${({ theme }) => theme.colors.tableTh};
+  }
 `;
 const MainWrapper = styled.div`
   width: 90vw;
@@ -62,14 +65,21 @@ const AllTips = ({ getTips, tips }) => {
         <option value="hockey">Hockey</option>
       </StyledSelect>
       <TableTemplate>
-        <Styledtbody>
-          <ThreadsTable />
-          {status === "incoming" ? (
-            <Incoming tips={tips} category={category} />
-          ) : (
-            <History tips={tips} category={category} />
-          )}
-        </Styledtbody>
+        {status === "incoming" ? (
+          <>
+            <Styledtbody>
+              <ThreadsTable />
+              <Incoming tips={tips} category={category} />
+            </Styledtbody>
+          </>
+        ) : (
+          <>
+            <tbody>
+              <HistoryThreadsTable />
+              <History tips={tips} category={category} />
+            </tbody>
+          </>
+        )}
       </TableTemplate>
     </MainWrapper>
   );
@@ -77,7 +87,4 @@ const AllTips = ({ getTips, tips }) => {
 const mapStateToProps = state => ({
   tips: state.tips
 });
-export default connect(
-  mapStateToProps,
-  { getTips }
-)(AllTips);
+export default connect(mapStateToProps, { getTips })(AllTips);
