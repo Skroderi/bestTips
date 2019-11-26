@@ -1,5 +1,11 @@
 import React, { useEffect } from "react";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import {
+  BrowserRouter,
+  Route,
+  Switch,
+  Redirect,
+  HashRouter
+} from "react-router-dom";
 import Layout from "../templates/Layout";
 import Tips from "views/Tips";
 import UserTips from "views/UserTips";
@@ -23,7 +29,7 @@ function Root() {
 
   return (
     <Provider store={store}>
-      <BrowserRouter>
+      <HashRouter>
         <Layout>
           <>
             <UserPageTemplate />
@@ -36,7 +42,7 @@ function Root() {
             </Switch>
           </>
         </Layout>
-      </BrowserRouter>
+      </HashRouter>
     </Provider>
   );
 }
