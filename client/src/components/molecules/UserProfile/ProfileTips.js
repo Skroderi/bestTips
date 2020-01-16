@@ -6,21 +6,19 @@ import ThreadsTable from "../../../templates/ThreadsTable";
 import HistoryThreadsTable from "../../../templates/HistoryThreadsTable";
 import TipCard from "../TipCard/TipCard";
 
-function ProfileTips({ userTips }) {
-  console.log(userTips);
+const Styledtbody = styled.tbody`
+  tr:nth-child(even) {
+    background-color: ${({ theme }) => theme.colors.tableTh};
+  }
+`;
 
+const StyledParagraph = styled.p`
+  margin-bottom: 40px;
+`;
+
+function ProfileTips({ userTips }) {
   const historyTips = userTips.tips.filter(tip => !tip.current);
   const currentTips = userTips.tips.filter(tip => tip.current);
-
-  const Styledtbody = styled.tbody`
-    tr:nth-child(even) {
-      background-color: ${({ theme }) => theme.colors.tableTh};
-    }
-  `;
-
-  const StyledParagraph = styled.p`
-    margin-bottom: 40px;
-  `;
 
   return (
     <Fragment>
@@ -62,7 +60,7 @@ function ProfileTips({ userTips }) {
   );
 }
 ProfileTips.propTypes = {
-  tips: PropTypes.object.isRequired,
+  userTips: PropTypes.object.isRequired,
   userName: PropTypes.string.isRequired
 };
 

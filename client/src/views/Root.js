@@ -1,11 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  BrowserRouter,
-  Route,
-  Switch,
-  Redirect,
-  HashRouter
-} from "react-router-dom";
+import { Route, Switch, Redirect, HashRouter } from "react-router-dom";
 import Layout from "../templates/Layout";
 import Tips from "views/Tips";
 import UserTips from "views/UserTips";

@@ -5,7 +5,7 @@ import { ThumbsUp } from "styled-icons/fa-solid/ThumbsUp";
 import { ThumbsDown } from "styled-icons/fa-solid/ThumbsDown";
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
-import { updateTip, addLike, unLike } from "../../../actions/tip";
+import { updateTip, vote } from "../../../actions/tip";
 import { Check } from "styled-icons/boxicons-regular/Check";
 import { Equals } from "styled-icons/typicons/Equals";
 import { Cross } from "styled-icons/icomoon/Cross";
@@ -108,7 +108,7 @@ const ResultVote = styled.div`
   color: green;
 `;
 
-const DeskoptTipCard = ({ tip, status, updateTip, auth, addLike, unLike }) => {
+const DeskoptTipCard = ({ tip, status, updateTip, auth, vote }) => {
   const {
     firstTeam,
     secondTeam,
@@ -127,6 +127,9 @@ const DeskoptTipCard = ({ tip, status, updateTip, auth, addLike, unLike }) => {
 
   let userId =
     !auth.isAuthenticated || auth.user === null ? null : auth.user._id;
+
+  const like = "like";
+  const disLike = "unLike";
 
   const voted =
     userId === null
@@ -166,7 +169,7 @@ const DeskoptTipCard = ({ tip, status, updateTip, auth, addLike, unLike }) => {
             <StyledThumbContainer>
               <Vote>{votes.likes.length}</Vote>
               <UpThumb
-                onClick={() => addLike(_id)}
+                onClick={() => vote(_id, like)}
                 style={
                   !voted
                     ? { color: "green" }
@@ -174,7 +177,7 @@ const DeskoptTipCard = ({ tip, status, updateTip, auth, addLike, unLike }) => {
                 }
               />
               <DownThumb
-                onClick={() => unLike(_id)}
+                onClick={() => vote(_id, disLike)}
                 // onClick={!voted ? () => vote(id, (action = "unLike")) : null}
                 style={
                   !voted ? { color: "red" } : { color: "grey", cursor: "auto" }
@@ -222,8 +225,7 @@ const DeskoptTipCard = ({ tip, status, updateTip, auth, addLike, unLike }) => {
 
 DeskoptTipCard.propTypes = {
   tip: PropTypes.object.isRequired,
-  addLike: PropTypes.func.isRequired,
-  unLike: PropTypes.func.isRequired,
+  vote: PropTypes.func.isRequired,
   updateTip: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
 };
@@ -232,6 +234,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { updateTip, addLike, unLike })(
-  DeskoptTipCard
-);
+export default connect(mapStateToProps, { updateTip, vote })(DeskoptTipCard);

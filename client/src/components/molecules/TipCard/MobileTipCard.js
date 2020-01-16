@@ -6,7 +6,7 @@ import { ThumbsDown } from "styled-icons/fa-solid/ThumbsDown";
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 import { updateTip } from "../../../actions/tip";
-import { addLike } from "../../../actions/tip";
+import { vote } from "../../../actions/tip";
 import { unLike } from "../../../actions/tip";
 import { Check } from "styled-icons/boxicons-regular/Check";
 import { Equals } from "styled-icons/typicons/Equals";
@@ -127,7 +127,7 @@ const WrapperStyledDiv = styled.div`
   font-weight: bold;
 `;
 
-const MobileTipCard = ({ tip, updateTip, status, auth, addLike, unLike }) => {
+const MobileTipCard = ({ tip, updateTip, status, auth, vote }) => {
   const {
     firstTeam,
     secondTeam,
@@ -143,6 +143,8 @@ const MobileTipCard = ({ tip, updateTip, status, auth, addLike, unLike }) => {
     current,
     votes
   } = tip;
+  const like = "like";
+  const disLike = "unLike";
 
   let userId =
     !auth.isAuthenticated || auth.user === null ? null : auth.user._id;
@@ -187,7 +189,7 @@ const MobileTipCard = ({ tip, updateTip, status, auth, addLike, unLike }) => {
               <StyledThumbContainer>
                 <Vote>{votes.likes.length}</Vote>
                 <UpThumb
-                  onClick={() => addLike(_id)}
+                  onClick={() => vote(_id, like)}
                   style={
                     !voted
                       ? { color: "green" }
@@ -195,7 +197,7 @@ const MobileTipCard = ({ tip, updateTip, status, auth, addLike, unLike }) => {
                   }
                 />
                 <DownThumb
-                  onClick={() => unLike(_id)}
+                  onClick={() => vote(_id, disLike)}
                   // onClick={!voted ? () => vote(id, (action = "unLike")) : null}
                   style={
                     !voted
@@ -241,7 +243,7 @@ const MobileTipCard = ({ tip, updateTip, status, auth, addLike, unLike }) => {
 };
 MobileTipCard.propTypes = {
   tip: PropTypes.object.isRequired,
-  addLike: PropTypes.func.isRequired,
+  vote: PropTypes.func.isRequired,
   unLike: PropTypes.func.isRequired,
   updateTip: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
@@ -251,6 +253,6 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { updateTip, addLike, unLike })(
+export default connect(mapStateToProps, { updateTip, vote, unLike })(
   MobileTipCard
 );

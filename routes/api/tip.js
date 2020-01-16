@@ -60,9 +60,6 @@ router.post(
     // Create
     try {
       tip = new Tip(tipFields);
-      console.log(tipFields);
-      console.log(tip);
-
       await tip.save();
       res.json(tip);
     } catch (error) {
@@ -130,6 +127,10 @@ router.put("/:tip_id", async (req, res) => {
 // @desc     Like a tip
 // @access   Private
 router.put("/like/:id", auth, async (req, res) => {
+  console.log(req.params);
+  console.log(req.body);
+  console.log(req.body.type);
+
   try {
     const tip = await Tip.findById(req.params.id);
 
@@ -143,10 +144,15 @@ router.put("/like/:id", auth, async (req, res) => {
       return res.status(400).json({ msg: "tip already liked" });
     }
 
-    tip.votes.likes.unshift({ user: req.user.id });
-
-    await tip.save();
-    res.json(tip.votes.likes);
+    if (req.body.type === "like") {
+      tip.votes.likes.unshift({ user: req.user.id });
+      await tip.save();
+      res.json(tip.votes.likes);
+    } else {
+      tip.votes.unLikes.unshift({ user: req.user.id });
+      await tip.save();
+      res.json(tip.votes.unLikes);
+    }
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -156,29 +162,29 @@ router.put("/like/:id", auth, async (req, res) => {
 // @route    PUT api/tips/unlike/:id
 // @desc     Like a tip
 // @access   Private
-router.put("/unlike/:id", auth, async (req, res) => {
-  try {
-    const tip = await Tip.findById(req.params.id);
+// router.put("/unlike/:id", auth, async (req, res) => {
+//   try {
+//     const tip = await Tip.findById(req.params.id);
 
-    // Check if the tip has already been liked
-    if (
-      tip.votes.likes.filter(like => like.user.toString() === req.user.id)
-        .length > 0 ||
-      tip.votes.unLikes.filter(like => like.user.toString() === req.user.id)
-        .length > 0
-    ) {
-      return res.status(400).json({ msg: "tip has not yet been liked" });
-    }
+//     // Check if the tip has already been liked
+//     if (
+//       tip.votes.likes.filter(like => like.user.toString() === req.user.id)
+//         .length > 0 ||
+//       tip.votes.unLikes.filter(like => like.user.toString() === req.user.id)
+//         .length > 0
+//     ) {
+//       return res.status(400).json({ msg: "tip has not yet been liked" });
+//     }
 
-    tip.votes.unLikes.unshift({ user: req.user.id });
+//     tip.votes.unLikes.unshift({ user: req.user.id });
 
-    await tip.save();
+//     await tip.save();
 
-    res.json(tip.votes.unLikes);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
-  }
-});
+//     res.json(tip.votes.unLikes);
+//   } catch (err) {
+//     console.error(err.message);
+//     res.status(500).send("Server Error");
+//   }
+// });
 
 module.exports = router;

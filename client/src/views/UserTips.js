@@ -27,7 +27,7 @@ function UserTips({ tips, getTips, match, getUserTips }) {
 
   useEffect(() => {
     getUserTips(userName);
-  }, [getTips]);
+  }, [getUserTips, userName]);
 
   return (
     <MainWrapper>

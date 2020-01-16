@@ -21,7 +21,7 @@ const Statistics = ({ tips, getUserTips, match }) => {
   const userName = match.params.id;
   useEffect(() => {
     getUserTips(userName);
-  }, [getUserTips]);
+  }, [getUserTips, userName]);
 
   return (
     <MainWrapper>

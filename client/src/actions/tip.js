@@ -50,19 +50,7 @@ export const getUserTips = userName => async dispatch => {
     console.error(err);
   }
 };
-// export const getUser = userName => async dispatch => {
-//   try {
-//     const res = await axios.get(`/api/users/${userName}`);
-//     console.log(res.data);
 
-//     dispatch({
-//       // type: GET_USERTIPS,
-//       payload: res.data
-//     });
-//   } catch (err) {
-//     console.error(err);
-//   }
-// };
 export const updateTip = (id, status) => async dispatch => {
   const item = {
     status: status
@@ -80,22 +68,24 @@ export const updateTip = (id, status) => async dispatch => {
   getTips();
 };
 
-export const vote = (id, action) => {
-  return {
-    type: "VOTE",
-    payload: { id: id, operation: action }
+export const vote = (id, type) => async dispatch => {
+  const action = {
+    type
   };
-};
 
-// ADD like
-
-export const addLike = id => async dispatch => {
   try {
-    const res = await axios.put(`/api/tip/like/${id}`);
-    dispatch({
-      type: UPDATE_LIKES,
-      payload: { id, likes: res.data }
-    });
+    const res = await axios.put(`/api/tip/like/${id}`, action);
+    if (type === "like") {
+      dispatch({
+        type: UPDATE_LIKES,
+        payload: { id, likes: res.data }
+      });
+    } else {
+      dispatch({
+        type: UPDATE_UNLIKES,
+        payload: { id, unLikes: res.data }
+      });
+    }
   } catch (err) {
     console.error(err);
   }
