@@ -6,13 +6,11 @@ import ThreadsTable from "../../../templates/ThreadsTable";
 import HistoryThreadsTable from "../../../templates/HistoryThreadsTable";
 import TipCard from "../TipCard/TipCard";
 
-function ProfileTips({ tips, userName }) {
-  const historyTips = tips.current.filter(
-    tip => tip.author === userName && !tip.current
-  );
-  const currentTips = tips.current.filter(
-    tip => tip.author === userName && tip.current
-  );
+function ProfileTips({ userTips }) {
+  console.log(userTips);
+
+  const historyTips = userTips.tips.filter(tip => !tip.current);
+  const currentTips = userTips.tips.filter(tip => tip.current);
 
   const Styledtbody = styled.tbody`
     tr:nth-child(even) {
@@ -23,7 +21,6 @@ function ProfileTips({ tips, userName }) {
   const StyledParagraph = styled.p`
     margin-bottom: 40px;
   `;
-  console.log(tips);
 
   return (
     <Fragment>

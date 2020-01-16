@@ -4,6 +4,7 @@ const { check, validationResult } = require("express-validator");
 const auth = require("../../middleware/auth");
 const config = require("config");
 const Tip = require("../../models/Tip");
+
 // @route POST api/tip
 // @desc Add tip
 // @access Private
@@ -32,38 +33,36 @@ router.post(
       time,
       betOn,
       odd,
-      likes,
-      unLikes,
       probability,
       votes,
       author,
       current,
       status
     } = req.body;
-    const formatDate = new Date(date).toISOString();
-    console.log(formatDate);
 
     //Build tip object
-    const tipFields = {};
-    tipFields.user = req.user.id;
-    if (category) tipFields.category = category;
-    if (firstTeam) tipFields.firstTeam = firstTeam;
-    if (secondTeam) tipFields.secondTeam = secondTeam;
-    if (date) tipFields.date = formatDate;
-    if (time) tipFields.time = time;
-    if (betOn) tipFields.betOn = betOn;
-    if (odd) tipFields.odd = odd;
-    if (likes) tipFields.likes = likes;
-    if (unLikes) tipFields.unLikes = unLikes;
-    if (probability) tipFields.probability = probability;
-    if (votes) tipFields.votes = votes;
-    if (author) tipFields.author = author;
-    if (status) tipFields.status = status;
-    if (current) tipFields.current = current;
+    const tipFields = {
+      user: req.user.id,
+      category,
+      firstTeam,
+      secondTeam,
+      date,
+      time,
+      betOn,
+      odd,
+      probability,
+      votes,
+      author,
+      current,
+      status
+    };
 
     // Create
     try {
       tip = new Tip(tipFields);
+      console.log(tipFields);
+      console.log(tip);
+
       await tip.save();
       res.json(tip);
     } catch (error) {
@@ -87,13 +86,14 @@ router.get("/", async (req, res) => {
   }
 });
 
-// @route GET api/tip/user/:user_Name
+// @route GET api/tip/user/:name
 // @desc Get tips by user Name
 // @access Public
 
-router.get("/user/:user_Name", async (req, res) => {
+router.get("/user/:name", async (req, res) => {
   try {
-    const tips = await Tip.find({ author: req.params.user_Name });
+    const tips = await Tip.find({ author: req.params.name });
+
     if (!tips) return res.status(400).json({ msg: "User dont have any tips." });
     res.json(tips);
   } catch (err) {
@@ -132,7 +132,7 @@ router.put("/:tip_id", async (req, res) => {
 router.put("/like/:id", auth, async (req, res) => {
   try {
     const tip = await Tip.findById(req.params.id);
-    console.log(tip);
+
     // Check if the tip has already been liked
     if (
       tip.votes.likes.filter(like => like.user.toString() === req.user.id)
@@ -159,7 +159,6 @@ router.put("/like/:id", auth, async (req, res) => {
 router.put("/unlike/:id", auth, async (req, res) => {
   try {
     const tip = await Tip.findById(req.params.id);
-    console.log(tip);
 
     // Check if the tip has already been liked
     if (

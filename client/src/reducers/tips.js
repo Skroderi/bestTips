@@ -9,7 +9,11 @@ import {
 
 const initialState = {
   current: [],
-  loading: true
+  loading: true,
+  userTips: {
+    tips: [],
+    loading: true
+  }
 };
 
 const rootReducer = (state = initialState, action) => {

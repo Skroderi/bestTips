@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { getUser } from "../actions/user";
 import ProfileTips from "../components/molecules/UserProfile/ProfileTips";
 import CircleSpinner from "../components/atoms/Spinner/CircleSpinner";
-import { getTips } from "../actions/tip";
+import { getUserTips } from "../actions/tip";
 
 const MainWrapper = styled.div`
   width: 80%;
@@ -51,12 +51,12 @@ const InnerWrapper = styled.div`
   } */
 `;
 
-function UserProfile({ getUser, user, loading, getTips, tips, match }) {
+function UserProfile({ getUser, user, loading, tips, match, getUserTips }) {
   const userName = match.params.id;
   useEffect(() => {
     getUser(userName);
-    getTips();
-  }, [getUser, getTips, userName]);
+    getUserTips(userName);
+  }, [getUser, userName, getUserTips]);
 
   return (
     <MainWrapper>
@@ -68,9 +68,9 @@ function UserProfile({ getUser, user, loading, getTips, tips, match }) {
             <Avatar src={user ? user.avatar : null} alt="User avatar" />
             <Paragraph>{user.name}</Paragraph>
           </StyledAvatarContainer>
-          <UserStats userName={userName} tips={tips} />
+          <UserStats userName={userName} userTips={tips} />
           <InnerWrapper>
-            <ProfileTips userName={userName} tips={tips} />
+            <ProfileTips userName={userName} userTips={tips} />
           </InnerWrapper>{" "}
         </Fragment>
       )}
@@ -82,15 +82,15 @@ UserProfile.propTypes = {
   getUser: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
   loading: PropTypes.bool,
-  getTips: PropTypes.func.isRequired,
+  getUserTips: PropTypes.func.isRequired,
   tips: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   user: state.user,
-  tips: state.tips,
+  tips: state.tips.userTips,
   loading: state.user.loading
 });
 
-export default connect(mapStateToProps, { getUser, getTips })(UserProfile);
+export default connect(mapStateToProps, { getUser, getUserTips })(UserProfile);

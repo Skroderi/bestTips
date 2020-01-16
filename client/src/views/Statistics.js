@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { getUserTips, getTips } from "../actions/tip";
+import { getUserTips } from "../actions/tip";
 import UserStats from "../components/molecules/UserProfile/UserStats";
 
 const MainWrapper = styled.div`
@@ -17,35 +17,29 @@ const MainWrapper = styled.div`
   }
 `;
 
-const Statistics = ({ tips, getTips, match, loading }) => {
-  useEffect(() => {
-    getTips();
-  }, [getTips]);
+const Statistics = ({ tips, getUserTips, match }) => {
   const userName = match.params.id;
+  useEffect(() => {
+    getUserTips(userName);
+  }, [getUserTips]);
 
   return (
     <MainWrapper>
       <h1>{userName} stats</h1>
-      {loading ? null : (
-        <UserStats userName={userName} tips={tips} loading={loading} />
-      )}
+      {tips.loading ? false : <UserStats userName={userName} userTips={tips} />}
     </MainWrapper>
   );
 };
 
 Statistics.propTypes = {
   tips: PropTypes.object.isRequired,
-  getTips: PropTypes.func.isRequired,
+  getUserTips: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
   loading: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
-  tips: state.tips,
-  loading: state.tips.loading
+  tips: state.tips.userTips
 });
 
-export default connect(
-  mapStateToProps,
-  { getUserTips, getTips }
-)(Statistics);
+export default connect(mapStateToProps, { getUserTips })(Statistics);

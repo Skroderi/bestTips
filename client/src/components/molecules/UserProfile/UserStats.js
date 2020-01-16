@@ -23,16 +23,10 @@ const StyledNumber = styled.span`
   text-align: Center;
 `;
 
-function UserStats({ tips, userName }) {
-  const win = tips.current.filter(
-    tip => tip.author === userName && tip.status === "win"
-  );
-  const returns = tips.current.filter(
-    tip => tip.author === userName && tip.status === "return"
-  );
-  const lose = tips.current.filter(
-    tip => tip.author === userName && tip.status === "lose"
-  );
+function UserStats({ userTips, userName }) {
+  const win = userTips.tips.filter(tip => tip.status === "win");
+  const returns = userTips.tips.filter(tip => tip.status === "return");
+  const lose = userTips.tips.filter(tip => tip.status === "lose");
 
   return (
     <InnerWrapper>
@@ -57,7 +51,7 @@ function UserStats({ tips, userName }) {
 
 UserStats.propTypes = {
   userName: PropTypes.string.isRequired,
-  tips: PropTypes.object.isRequired
+  userTips: PropTypes.object.isRequired
 };
 
 export default UserStats;

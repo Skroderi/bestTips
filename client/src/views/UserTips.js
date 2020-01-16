@@ -1,7 +1,7 @@
 import React, { useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { getUserTips, addTip, getTips } from "../actions/tip";
+import { getUserTips, addTip } from "../actions/tip";
 import { connect } from "react-redux";
 import CircleSpinner from "../components/atoms/Spinner/CircleSpinner";
 import ProfileTips from "../components/molecules/UserProfile/ProfileTips";
@@ -20,28 +20,25 @@ const InnerWrapper = styled.div`
   grid-gap: 20px;
   margin-left: auto;
   margin-right: auto;
-  /* @media (max-width: 500px) {
-    grid-template-columns: 1fr;
-  } */
 `;
 
-function UserTips({ tips, getTips, match }) {
+function UserTips({ tips, getTips, match, getUserTips }) {
   const userName = match.params.id;
 
   useEffect(() => {
-    getTips();
+    getUserTips(userName);
   }, [getTips]);
 
   return (
     <MainWrapper>
       <h1>{userName} tips</h1>
-      {tips.loading === true ? (
+      {tips.loading ? (
         <Fragment>
           <CircleSpinner />
         </Fragment>
       ) : (
         <InnerWrapper>
-          <ProfileTips userName={userName} tips={tips} />
+          <ProfileTips userName={userName} userTips={tips} />
         </InnerWrapper>
       )}
     </MainWrapper>
@@ -50,14 +47,12 @@ function UserTips({ tips, getTips, match }) {
 
 UserTips.propTypes = {
   tips: PropTypes.object.isRequired,
-  getTips: PropTypes.func.isRequired,
+  getUserTips: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  tips: state.tips
+  tips: state.tips.userTips
 });
 
-export default connect(mapStateToProps, { getUserTips, addTip, getTips })(
-  UserTips
-);
+export default connect(mapStateToProps, { getUserTips, addTip })(UserTips);
