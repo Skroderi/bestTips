@@ -12,16 +12,11 @@ const User = require("../../models/User");
 // @acces Public
 
 router.get("/", auth, async (req, res) => {
-  console.log(auth);
-  console.log("api auth");
-
   try {
     const user = await User.findById(req.user.id).select("-password"); // return user without password
     res.json(user);
   } catch (err) {
     console.error(err.message);
-    console.log("get tutaj");
-
     res.status(500).sed("Server Error");
   }
 });
@@ -37,7 +32,6 @@ router.post(
     check("password", "Password id required").exists()
   ],
   async (req, res) => {
-    console.log(req.body);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });

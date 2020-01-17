@@ -25,7 +25,6 @@ router.post(
     ).isLength({ min: 5 })
   ],
   async (req, res) => {
-    console.log(req.body);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -113,7 +112,6 @@ router.get("/:name", async (req, res) => {
       "-password -date -_id -email"
     ); // return user without password
     res.json(user);
-    console.log(user);
   } catch (err) {
     console.error(err.message);
     res.status(500).sed("Server Error");

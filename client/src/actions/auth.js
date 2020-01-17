@@ -30,8 +30,6 @@ export const loadUser = () => async dispatch => {
 };
 // REGISTER USER
 export const register = ({ newUser, loginAfterRegister }) => async dispatch => {
-  // console.log(props);
-
   const config = {
     headers: {
       "Content-type": "Application/json"
