@@ -107,9 +107,9 @@ router.post(
 // @desc Get user
 // @access Public
 
-router.get("/:user_Name", async (req, res) => {
+router.get("/:name", async (req, res) => {
   try {
-    const user = await User.find({ name: req.params.user_Name }).select(
+    const user = await User.find({ name: req.params.name }).select(
       "-password -date -_id -email"
     ); // return user without password
     res.json(user);
