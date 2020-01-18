@@ -9,9 +9,8 @@ import {
 } from "../actions/types";
 
 const initialState = {
-  token: localStorage.getItem("token"),
   isAuthenticated: null,
-  loading: true,
+  loading: false,
   user: null
 };
 
@@ -34,10 +33,9 @@ export default function(state = initialState, action) {
         loading: false
       };
     case LOGIN_SUCCESS:
-      localStorage.setItem("token", payload.token);
+      localStorage.setItem("token", `Bearer ${payload.token}`);
       return {
         ...state,
-        ...payload,
         isAuthenticated: true,
         loading: true
       };

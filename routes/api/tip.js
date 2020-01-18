@@ -39,6 +39,7 @@ router.post(
       current,
       status
     } = req.body;
+    console.log(req.body);
 
     //Build tip object
     const tipFields = {
