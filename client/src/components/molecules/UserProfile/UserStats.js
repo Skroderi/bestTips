@@ -6,7 +6,7 @@ const InnerWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 350px;
+  max-width: 400px;
   margin: 0 auto;
   @media (max-width: 500px) {
     width: 90%;
@@ -24,25 +24,33 @@ const StyledNumber = styled.span`
 `;
 
 function UserStats({ userTips, userName }) {
-  const win = userTips.tips.filter(tip => tip.status === "win");
-  const returns = userTips.tips.filter(tip => tip.status === "return");
-  const lose = userTips.tips.filter(tip => tip.status === "lose");
+  const groupBy = userTips.tips.reduce((status, tip) => {
+    status[tip.status] = [...(status[tip.status] || []), tip];
+    return status;
+  }, {});
 
   return (
     <InnerWrapper>
       <div>
         <StyledParagraph style={{ color: "green" }}>
-          Wins:<StyledNumber>{win.length}</StyledNumber>
+          Wins:
+          <StyledNumber>{groupBy.win ? groupBy.win.length : "0"}</StyledNumber>
         </StyledParagraph>
       </div>
       <div>
         <StyledParagraph style={{ color: "orange" }}>
-          Returns:<StyledNumber>{returns.length}</StyledNumber>
+          Returns:
+          <StyledNumber>
+            {groupBy.return ? groupBy.return.length : "0"}
+          </StyledNumber>
         </StyledParagraph>
       </div>
       <div>
         <StyledParagraph style={{ color: "red" }}>
-          Loses:<StyledNumber>{lose.length}</StyledNumber>
+          Loses:
+          <StyledNumber>
+            {groupBy.lose ? groupBy.lose.length : "0"}
+          </StyledNumber>
         </StyledParagraph>
       </div>
     </InnerWrapper>
