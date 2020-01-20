@@ -42,7 +42,6 @@ const AllTips = ({ getTips, tips }) => {
   useEffect(() => {
     getTips();
   }, [getTips]);
-  console.log();
 
   return (
     <MainWrapper>

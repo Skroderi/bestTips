@@ -12,10 +12,12 @@ import store from "store/store";
 import { loadUser } from "../actions/auth";
 import setAuthToken from "../utlis/setAuthToken";
 import UserProfile from "./UserProfile";
+import Cookies from "js-cookie";
 
-if (localStorage.token) {
-  setAuthToken(localStorage.token);
+if (Cookies.get("token")) {
+  setAuthToken(Cookies.get("token"));
 }
+
 function Root() {
   useEffect(() => {
     store.dispatch(loadUser());

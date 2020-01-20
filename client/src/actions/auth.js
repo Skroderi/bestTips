@@ -10,11 +10,12 @@ import {
   LOGOUT
 } from "./types";
 import setAuthToken from "../utlis/setAuthToken";
+import Cookies from "js-cookie";
 
 // load user
 export const loadUser = () => async dispatch => {
-  if (localStorage.token) {
-    setAuthToken(localStorage.token);
+  if (Cookies.get("token")) {
+    setAuthToken(Cookies.get("token"));
 
     try {
       const res = await axios.get("/api/auth");
