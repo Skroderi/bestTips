@@ -3,6 +3,8 @@ const connectDB = require("./config/db");
 const path = require("path");
 const dotenv = require("dotenv");
 const app = express();
+var cookieParser = require("cookie-parser");
+
 // load env vars
 
 dotenv.config({ path: "./config/config.env" });
@@ -10,6 +12,7 @@ dotenv.config({ path: "./config/config.env" });
 connectDB();
 //Init Middleware to allow to get the data from request body
 app.use(express.json({ extends: false }));
+app.use(cookieParser());
 
 //Define Routes
 app.use("/api/users", require("./routes/api/users"));

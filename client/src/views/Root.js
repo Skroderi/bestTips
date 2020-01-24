@@ -10,13 +10,7 @@ import UserPageTemplate from "../templates/UserPageTemplate";
 import { Provider } from "react-redux";
 import store from "store/store";
 import { loadUser } from "../actions/auth";
-import setAuthToken from "../utlis/setAuthToken";
 import UserProfile from "./UserProfile";
-import Cookies from "js-cookie";
-
-if (Cookies.get("token")) {
-  setAuthToken(Cookies.get("token"));
-}
 
 function Root() {
   useEffect(() => {

@@ -9,27 +9,24 @@ import {
   LOGIN_SUCCESS,
   LOGOUT
 } from "./types";
-import setAuthToken from "../utlis/setAuthToken";
-import Cookies from "js-cookie";
 
 // load user
 export const loadUser = () => async dispatch => {
-  if (Cookies.get("token")) {
-    setAuthToken(Cookies.get("token"));
-
-    try {
-      const res = await axios.get("/api/auth");
+  try {
+    const res = await axios.get("/api/auth", { withCredentials: true });
+    setTimeout(() => {
       dispatch({
         type: USER_LOADED,
         payload: res.data
       });
-    } catch (err) {
-      dispatch({
-        type: AUTH_ERROR
-      });
-    }
+    }, 400);
+  } catch (err) {
+    dispatch({
+      type: AUTH_ERROR
+    });
   }
 };
+
 // REGISTER USER
 export const register = ({ newUser, loginAfterRegister }) => async dispatch => {
   const config = {
@@ -70,12 +67,14 @@ export const login = (email, password) => async dispatch => {
   const body = JSON.stringify({ email, password });
 
   try {
-    const res = await axios.post("/api/auth", body, config);
-    dispatch({
-      type: LOGIN_SUCCESS,
-      payload: res.data
+    const res = await axios.post("/api/auth", body, config, {
+      withCredentials: true
     });
 
+    dispatch({
+      type: LOGIN_SUCCESS,
+      payload: res
+    });
     dispatch(loadUser());
   } catch (err) {
     const errors = err.response.data.errors;

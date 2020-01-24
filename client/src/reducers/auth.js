@@ -1,4 +1,3 @@
-import Cookies from "js-cookie";
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
@@ -34,21 +33,21 @@ export default function(state = initialState, action) {
         loading: false
       };
     case LOGIN_SUCCESS:
-      Cookies.set("token", `Bearer ${payload.token}`);
+      // Cookies.set("token", `Bearer ${payload.token}`);
       return {
         ...state,
-        isAuthenticated: true,
         loading: true
       };
     case REGISTER_FAIL:
     case AUTH_ERROR:
     case LOGIN_FAIL:
     case LOGOUT:
-      Cookies.remove("token");
+      // Cookies.remove("token");
       return {
         ...state,
         ...payload,
         isAuthenticated: false,
+        user: null,
         loading: false
       };
     default:
